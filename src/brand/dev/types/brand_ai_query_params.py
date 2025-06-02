@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["BrandAIQueryParams", "DataToExtract"]
+__all__ = ["BrandAIQueryParams", "DataToExtract", "SpecificPages"]
 
 
 class BrandAIQueryParams(TypedDict, total=False):
@@ -15,8 +15,8 @@ class BrandAIQueryParams(TypedDict, total=False):
     domain: Required[str]
     """The domain name to analyze"""
 
-    specific_pages: List[str]
-    """Optional array of specific pages to analyze"""
+    specific_pages: SpecificPages
+    """Optional object specifying which pages to analyze"""
 
 
 class DataToExtract(TypedDict, total=False):
@@ -31,3 +31,29 @@ class DataToExtract(TypedDict, total=False):
 
     datapoint_type: Required[Literal["text", "number", "date", "boolean", "list", "url"]]
     """Type of the data point"""
+
+
+class SpecificPages(TypedDict, total=False):
+    about_us: bool
+    """Whether to analyze the about us page"""
+
+    blog: bool
+    """Whether to analyze the blog"""
+
+    careers: bool
+    """Whether to analyze the careers page"""
+
+    contact_us: bool
+    """Whether to analyze the contact us page"""
+
+    faq: bool
+    """Whether to analyze the FAQ page"""
+
+    home_page: bool
+    """Whether to analyze the home page"""
+
+    privacy_policy: bool
+    """Whether to analyze the privacy policy page"""
+
+    terms_and_conditions: bool
+    """Whether to analyze the terms and conditions page"""

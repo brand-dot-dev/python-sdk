@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -161,7 +161,7 @@ class BrandResource(SyncAPIResource):
         *,
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
-        specific_pages: List[str] | NotGiven = NOT_GIVEN,
+        specific_pages: brand_ai_query_params.SpecificPages | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,7 +180,7 @@ class BrandResource(SyncAPIResource):
 
           domain: The domain name to analyze
 
-          specific_pages: Optional array of specific pages to analyze
+          specific_pages: Optional object specifying which pages to analyze
 
           extra_headers: Send extra headers
 
@@ -487,7 +487,7 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
-        specific_pages: List[str] | NotGiven = NOT_GIVEN,
+        specific_pages: brand_ai_query_params.SpecificPages | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -506,7 +506,7 @@ class AsyncBrandResource(AsyncAPIResource):
 
           domain: The domain name to analyze
 
-          specific_pages: Optional array of specific pages to analyze
+          specific_pages: Optional object specifying which pages to analyze
 
           extra_headers: Send extra headers
 
