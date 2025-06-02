@@ -11,6 +11,7 @@ from brand.dev import BrandDev, AsyncBrandDev
 from tests.utils import assert_matches_type
 from brand.dev.types import (
     BrandSearchResponse,
+    BrandAIQueryResponse,
     BrandRetrieveResponse,
     BrandRetrieveNaicsResponse,
     BrandRetrieveByTickerResponse,
@@ -63,6 +64,81 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_ai_query(self, client: BrandDev) -> None:
+        brand = client.brand.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+        )
+        assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_ai_query_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+            specific_pages=["string"],
+        )
+        assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_ai_query(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_ai_query(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -246,6 +322,81 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_ai_query(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+        )
+        assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_ai_query_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+            specific_pages=["string"],
+        )
+        assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_ai_query(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_ai_query(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.ai_query(
+            data_to_extract=[
+                {
+                    "datapoint_description": "datapoint_description",
+                    "datapoint_example": "datapoint_example",
+                    "datapoint_name": "datapoint_name",
+                    "datapoint_type": "text",
+                }
+            ],
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
