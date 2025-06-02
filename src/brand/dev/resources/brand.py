@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from typing import List, Iterable
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import (
     brand_search_params,
+    brand_ai_query_params,
     brand_retrieve_params,
     brand_retrieve_naics_params,
     brand_retrieve_by_ticker_params,
@@ -25,6 +27,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.brand_search_response import BrandSearchResponse
+from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_retrieve_by_ticker_response import BrandRetrieveByTickerResponse
@@ -151,6 +154,56 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveResponse,
+        )
+
+    def ai_query(
+        self,
+        *,
+        data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
+        domain: str,
+        specific_pages: List[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandAIQueryResponse:
+        """Beta feature: Use AI to extract specific data points from a brand's website.
+
+        The
+        AI will crawl the website and extract the requested information based on the
+        provided data points.
+
+        Args:
+          data_to_extract: Array of data points to extract from the website
+
+          domain: The domain name to analyze
+
+          specific_pages: Optional array of specific pages to analyze
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/ai/query",
+            body=maybe_transform(
+                {
+                    "data_to_extract": data_to_extract,
+                    "domain": domain,
+                    "specific_pages": specific_pages,
+                },
+                brand_ai_query_params.BrandAIQueryParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIQueryResponse,
         )
 
     def identify_from_transaction(
@@ -429,6 +482,56 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveResponse,
         )
 
+    async def ai_query(
+        self,
+        *,
+        data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
+        domain: str,
+        specific_pages: List[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandAIQueryResponse:
+        """Beta feature: Use AI to extract specific data points from a brand's website.
+
+        The
+        AI will crawl the website and extract the requested information based on the
+        provided data points.
+
+        Args:
+          data_to_extract: Array of data points to extract from the website
+
+          domain: The domain name to analyze
+
+          specific_pages: Optional array of specific pages to analyze
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/ai/query",
+            body=await async_maybe_transform(
+                {
+                    "data_to_extract": data_to_extract,
+                    "domain": domain,
+                    "specific_pages": specific_pages,
+                },
+                brand_ai_query_params.BrandAIQueryParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIQueryResponse,
+        )
+
     async def identify_from_transaction(
         self,
         *,
@@ -596,6 +699,9 @@ class BrandResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             brand.retrieve,
         )
+        self.ai_query = to_raw_response_wrapper(
+            brand.ai_query,
+        )
         self.identify_from_transaction = to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -616,6 +722,9 @@ class AsyncBrandResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             brand.retrieve,
+        )
+        self.ai_query = async_to_raw_response_wrapper(
+            brand.ai_query,
         )
         self.identify_from_transaction = async_to_raw_response_wrapper(
             brand.identify_from_transaction,
@@ -638,6 +747,9 @@ class BrandResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             brand.retrieve,
         )
+        self.ai_query = to_streamed_response_wrapper(
+            brand.ai_query,
+        )
         self.identify_from_transaction = to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -658,6 +770,9 @@ class AsyncBrandResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             brand.retrieve,
+        )
+        self.ai_query = async_to_streamed_response_wrapper(
+            brand.ai_query,
         )
         self.identify_from_transaction = async_to_streamed_response_wrapper(
             brand.identify_from_transaction,
