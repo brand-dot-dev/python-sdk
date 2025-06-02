@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from .brand_search_params import BrandSearchParams as BrandSearchParams
+from .brand_ai_query_params import BrandAIQueryParams as BrandAIQueryParams
 from .brand_retrieve_params import BrandRetrieveParams as BrandRetrieveParams
 from .brand_search_response import BrandSearchResponse as BrandSearchResponse
+from .brand_ai_query_response import BrandAIQueryResponse as BrandAIQueryResponse
 from .brand_retrieve_response import BrandRetrieveResponse as BrandRetrieveResponse
 from .brand_retrieve_naics_params import BrandRetrieveNaicsParams as BrandRetrieveNaicsParams
 from .brand_retrieve_naics_response import BrandRetrieveNaicsResponse as BrandRetrieveNaicsResponse
