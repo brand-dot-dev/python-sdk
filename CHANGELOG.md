@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 (2025-06-03)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* **api:** manual updates ([fa44a02](https://github.com/brand-dot-dev/python-sdk/commit/fa44a02f3397ae35b14ce65f8cacb60b4cc76b33))
+* **client:** add follow_redirects request option ([7a9a565](https://github.com/brand-dot-dev/python-sdk/commit/7a9a5654ef7f84e4b8231ec5c50b972dc2241dba))
+
+
+### Chores
+
+* **docs:** remove reference to rye shell ([5d1533b](https://github.com/brand-dot-dev/python-sdk/commit/5d1533ba7fd39e6d1b0cc4cd44793e4de4233d64))
+* **docs:** remove unnecessary param examples ([93f2f3f](https://github.com/brand-dot-dev/python-sdk/commit/93f2f3f95c7ebaa648a16c752d4d81c48929c39c))
+* **internal:** version bump ([7a15a0a](https://github.com/brand-dot-dev/python-sdk/commit/7a15a0aceaca0cd700f7aab8282e5bdef8cbf31f))
+
 ## 1.0.0 (2025-06-02)
 
 Full Changelog: [v0.0.1-alpha.1...v1.0.0](https://github.com/brand-dot-dev/python-sdk/compare/v0.0.1-alpha.1...v1.0.0)
