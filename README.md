@@ -96,16 +96,7 @@ response = client.brand.ai_query(
         }
     ],
     domain="domain",
-    specific_pages={
-        "about_us": True,
-        "blog": True,
-        "careers": True,
-        "contact_us": True,
-        "faq": True,
-        "home_page": True,
-        "privacy_policy": True,
-        "terms_and_conditions": True,
-    },
+    specific_pages={},
 )
 print(response.specific_pages)
 ```
