@@ -77,6 +77,30 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from brand.dev import BrandDev
+
+client = BrandDev()
+
+response = client.brand.ai_query(
+    data_to_extract=[
+        {
+            "datapoint_description": "datapoint_description",
+            "datapoint_example": "datapoint_example",
+            "datapoint_name": "datapoint_name",
+            "datapoint_type": "text",
+        }
+    ],
+    domain="domain",
+    specific_pages={},
+)
+print(response.specific_pages)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `brand.dev.APIConnectionError` is raised.

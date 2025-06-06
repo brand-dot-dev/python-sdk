@@ -96,7 +96,16 @@ class TestBrand:
                 }
             ],
             domain="domain",
-            specific_pages=["string"],
+            specific_pages={
+                "about_us": True,
+                "blog": True,
+                "careers": True,
+                "contact_us": True,
+                "faq": True,
+                "home_page": True,
+                "privacy_policy": True,
+                "terms_and_conditions": True,
+            },
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
@@ -354,7 +363,16 @@ class TestAsyncBrand:
                 }
             ],
             domain="domain",
-            specific_pages=["string"],
+            specific_pages={
+                "about_us": True,
+                "blog": True,
+                "careers": True,
+                "contact_us": True,
+                "faq": True,
+                "home_page": True,
+                "privacy_policy": True,
+                "terms_and_conditions": True,
+            },
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
