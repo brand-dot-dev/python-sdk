@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0 (2025-06-06)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* **api:** manual updates ([bb1bf90](https://github.com/brand-dot-dev/python-sdk/commit/bb1bf90daf24a834121f2656741b1bce3e611588))
+
 ## 1.2.0 (2025-06-06)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.1.0...v1.2.0)
