@@ -72,7 +72,6 @@ class BrandRetrieveParams(TypedDict, total=False):
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
-    When set to true, the API will skip social media data extraction and external
-    service calls (like Crunchbase) to return results faster with basic brand
-    information only.
+    When set to true, the API will skip time-consuming operations for faster
+    response at the cost of less comprehensive data.
     """
