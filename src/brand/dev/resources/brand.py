@@ -134,8 +134,8 @@ class BrandResource(SyncAPIResource):
           force_language: Optional parameter to force the language of the retrieved brand data
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
-              the API will skip social media data extraction and external service calls (like
-              Crunchbase) to return results faster with basic brand information only.
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
 
           extra_headers: Send extra headers
 
@@ -503,8 +503,8 @@ class AsyncBrandResource(AsyncAPIResource):
           force_language: Optional parameter to force the language of the retrieved brand data
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
-              the API will skip social media data extraction and external service calls (like
-              Crunchbase) to return results faster with basic brand information only.
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
 
           extra_headers: Send extra headers
 
