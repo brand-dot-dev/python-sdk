@@ -39,6 +39,7 @@ class TestBrand:
         brand = client.brand.retrieve(
             domain="domain",
             force_language="albanian",
+            max_speed=True,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
@@ -340,6 +341,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve(
             domain="domain",
             force_language="albanian",
+            max_speed=True,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 

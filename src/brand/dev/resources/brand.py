@@ -117,6 +117,7 @@ class BrandResource(SyncAPIResource):
             "welsh",
         ]
         | NotGiven = NOT_GIVEN,
+        max_speed: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,6 +132,10 @@ class BrandResource(SyncAPIResource):
           domain: Domain name to retrieve brand data for
 
           force_language: Optional parameter to force the language of the retrieved brand data
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip social media data extraction and external service calls (like
+              Crunchbase) to return results faster with basic brand information only.
 
           extra_headers: Send extra headers
 
@@ -151,6 +156,7 @@ class BrandResource(SyncAPIResource):
                     {
                         "domain": domain,
                         "force_language": force_language,
+                        "max_speed": max_speed,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
                 ),
@@ -480,6 +486,7 @@ class AsyncBrandResource(AsyncAPIResource):
             "welsh",
         ]
         | NotGiven = NOT_GIVEN,
+        max_speed: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -494,6 +501,10 @@ class AsyncBrandResource(AsyncAPIResource):
           domain: Domain name to retrieve brand data for
 
           force_language: Optional parameter to force the language of the retrieved brand data
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip social media data extraction and external service calls (like
+              Crunchbase) to return results faster with basic brand information only.
 
           extra_headers: Send extra headers
 
@@ -514,6 +525,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "domain": domain,
                         "force_language": force_language,
+                        "max_speed": max_speed,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
                 ),
