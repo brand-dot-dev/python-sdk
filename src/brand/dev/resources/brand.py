@@ -10,6 +10,7 @@ import httpx
 from ..types import (
     brand_search_params,
     brand_ai_query_params,
+    brand_prefetch_params,
     brand_retrieve_params,
     brand_retrieve_naics_params,
     brand_retrieve_by_ticker_params,
@@ -28,6 +29,7 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.brand_search_response import BrandSearchResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
+from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_retrieve_by_ticker_response import BrandRetrieveByTickerResponse
@@ -245,6 +247,43 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandIdentifyFromTransactionResponse,
+        )
+
+    def prefetch(
+        self,
+        *,
+        domain: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandPrefetchResponse:
+        """
+        Signal that you may fetch brand data for a particular domain soon to improve
+        latency. This endpoint does not charge credits and is available for paid
+        customers to optimize future requests. [You must be on a paid plan to use this
+        endpoint]
+
+        Args:
+          domain: Domain name to prefetch brand data for
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/prefetch",
+            body=maybe_transform({"domain": domain}, brand_prefetch_params.BrandPrefetchParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandPrefetchResponse,
         )
 
     def retrieve_by_ticker(
@@ -573,6 +612,43 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandIdentifyFromTransactionResponse,
         )
 
+    async def prefetch(
+        self,
+        *,
+        domain: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandPrefetchResponse:
+        """
+        Signal that you may fetch brand data for a particular domain soon to improve
+        latency. This endpoint does not charge credits and is available for paid
+        customers to optimize future requests. [You must be on a paid plan to use this
+        endpoint]
+
+        Args:
+          domain: Domain name to prefetch brand data for
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/prefetch",
+            body=await async_maybe_transform({"domain": domain}, brand_prefetch_params.BrandPrefetchParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandPrefetchResponse,
+        )
+
     async def retrieve_by_ticker(
         self,
         *,
@@ -705,6 +781,9 @@ class BrandResourceWithRawResponse:
         self.identify_from_transaction = to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
+        self.prefetch = to_raw_response_wrapper(
+            brand.prefetch,
+        )
         self.retrieve_by_ticker = to_raw_response_wrapper(
             brand.retrieve_by_ticker,
         )
@@ -728,6 +807,9 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.identify_from_transaction = async_to_raw_response_wrapper(
             brand.identify_from_transaction,
+        )
+        self.prefetch = async_to_raw_response_wrapper(
+            brand.prefetch,
         )
         self.retrieve_by_ticker = async_to_raw_response_wrapper(
             brand.retrieve_by_ticker,
@@ -753,6 +835,9 @@ class BrandResourceWithStreamingResponse:
         self.identify_from_transaction = to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
+        self.prefetch = to_streamed_response_wrapper(
+            brand.prefetch,
+        )
         self.retrieve_by_ticker = to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
         )
@@ -776,6 +861,9 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.identify_from_transaction = async_to_streamed_response_wrapper(
             brand.identify_from_transaction,
+        )
+        self.prefetch = async_to_streamed_response_wrapper(
+            brand.prefetch,
         )
         self.retrieve_by_ticker = async_to_streamed_response_wrapper(
             brand.retrieve_by_ticker,

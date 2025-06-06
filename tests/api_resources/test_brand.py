@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from brand.dev.types import (
     BrandSearchResponse,
     BrandAIQueryResponse,
+    BrandPrefetchResponse,
     BrandRetrieveResponse,
     BrandRetrieveNaicsResponse,
     BrandRetrieveByTickerResponse,
@@ -182,6 +183,40 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_prefetch(self, client: BrandDev) -> None:
+        brand = client.brand.prefetch(
+            domain="domain",
+        )
+        assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_prefetch(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.prefetch(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_prefetch(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.prefetch(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -449,6 +484,40 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_prefetch(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.prefetch(
+            domain="domain",
+        )
+        assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_prefetch(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.prefetch(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_prefetch(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.prefetch(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
