@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["BrandRetrieveParams"]
 
@@ -66,3 +68,11 @@ class BrandRetrieveParams(TypedDict, total=False):
         "welsh",
     ]
     """Optional parameter to force the language of the retrieved brand data"""
+
+    max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
+    """Optional parameter to optimize the API call for maximum speed.
+
+    When set to true, the API will skip social media data extraction and external
+    service calls (like Crunchbase) to return results faster with basic brand
+    information only.
+    """
