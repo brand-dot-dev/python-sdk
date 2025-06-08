@@ -40,6 +40,7 @@ class TestBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
+            timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
@@ -108,6 +109,7 @@ class TestBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
+            timeout_ms=1,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
@@ -163,6 +165,15 @@ class TestBrand:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_identify_from_transaction_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.identify_from_transaction(
+            transaction_info="transaction_info",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_identify_from_transaction(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.identify_from_transaction(
             transaction_info="transaction_info",
@@ -192,6 +203,15 @@ class TestBrand:
     def test_method_prefetch(self, client: BrandDev) -> None:
         brand = client.brand.prefetch(
             domain="domain",
+        )
+        assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_prefetch_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.prefetch(
+            domain="domain",
+            timeout_ms=1,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
@@ -231,6 +251,15 @@ class TestBrand:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_ticker(
+            ticker="ticker",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_retrieve_by_ticker(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_by_ticker(
             ticker="ticker",
@@ -265,6 +294,15 @@ class TestBrand:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_retrieve_naics_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_naics(
+            input="input",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_retrieve_naics(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_naics(
             input="input",
@@ -294,6 +332,15 @@ class TestBrand:
     def test_method_search(self, client: BrandDev) -> None:
         brand = client.brand.search(
             query="query",
+        )
+        assert_matches_type(BrandSearchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_search_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.search(
+            query="query",
+            timeout_ms=1,
         )
         assert_matches_type(BrandSearchResponse, brand, path=["response"])
 
@@ -342,6 +389,7 @@ class TestAsyncBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
+            timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
@@ -410,6 +458,7 @@ class TestAsyncBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
+            timeout_ms=1,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
@@ -465,6 +514,15 @@ class TestAsyncBrand:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_identify_from_transaction_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.identify_from_transaction(
+            transaction_info="transaction_info",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.identify_from_transaction(
             transaction_info="transaction_info",
@@ -494,6 +552,15 @@ class TestAsyncBrand:
     async def test_method_prefetch(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch(
             domain="domain",
+        )
+        assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_prefetch_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.prefetch(
+            domain="domain",
+            timeout_ms=1,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
@@ -533,6 +600,15 @@ class TestAsyncBrand:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_ticker(
+            ticker="ticker",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_by_ticker(
             ticker="ticker",
@@ -567,6 +643,15 @@ class TestAsyncBrand:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_retrieve_naics_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_naics(
+            input="input",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_naics(
             input="input",
@@ -596,6 +681,15 @@ class TestAsyncBrand:
     async def test_method_search(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.search(
             query="query",
+        )
+        assert_matches_type(BrandSearchResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_search_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.search(
+            query="query",
+            timeout_ms=1,
         )
         assert_matches_type(BrandSearchResponse, brand, path=["response"])
 

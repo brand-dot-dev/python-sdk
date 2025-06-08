@@ -75,3 +75,10 @@ class BrandRetrieveParams(TypedDict, total=False):
     When set to true, the API will skip time-consuming operations for faster
     response at the cost of less comprehensive data.
     """
+
+    timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
+    """Optional timeout in milliseconds for the request.
+
+    If the request takes longer than this value, it will be aborted with a 408
+    status code. Maximum allowed value is 300000ms (5 minutes).
+    """

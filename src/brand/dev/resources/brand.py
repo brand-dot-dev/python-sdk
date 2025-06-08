@@ -118,6 +118,7 @@ class BrandResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         max_speed: bool | NotGiven = NOT_GIVEN,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -136,6 +137,10 @@ class BrandResource(SyncAPIResource):
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -157,6 +162,7 @@ class BrandResource(SyncAPIResource):
                         "domain": domain,
                         "force_language": force_language,
                         "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
                 ),
@@ -170,6 +176,7 @@ class BrandResource(SyncAPIResource):
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
         specific_pages: brand_ai_query_params.SpecificPages | NotGiven = NOT_GIVEN,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,6 +197,10 @@ class BrandResource(SyncAPIResource):
 
           specific_pages: Optional object specifying which pages to analyze
 
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -205,6 +216,7 @@ class BrandResource(SyncAPIResource):
                     "data_to_extract": data_to_extract,
                     "domain": domain,
                     "specific_pages": specific_pages,
+                    "timeout_ms": timeout_ms,
                 },
                 brand_ai_query_params.BrandAIQueryParams,
             ),
@@ -218,6 +230,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         transaction_info: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -231,6 +244,10 @@ class BrandResource(SyncAPIResource):
 
         Args:
           transaction_info: Transaction information to identify the brand
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -248,7 +265,10 @@ class BrandResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"transaction_info": transaction_info},
+                    {
+                        "transaction_info": transaction_info,
+                        "timeout_ms": timeout_ms,
+                    },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
                 ),
             ),
@@ -259,6 +279,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,6 +296,10 @@ class BrandResource(SyncAPIResource):
         Args:
           domain: Domain name to prefetch brand data for
 
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -285,7 +310,13 @@ class BrandResource(SyncAPIResource):
         """
         return self._post(
             "/brand/prefetch",
-            body=maybe_transform({"domain": domain}, brand_prefetch_params.BrandPrefetchParams),
+            body=maybe_transform(
+                {
+                    "domain": domain,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_prefetch_params.BrandPrefetchParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -296,6 +327,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         ticker: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -309,6 +341,10 @@ class BrandResource(SyncAPIResource):
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g. AAPL, TSLA, etc.)
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -325,7 +361,13 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"ticker": ticker}, brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams),
+                query=maybe_transform(
+                    {
+                        "ticker": ticker,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams,
+                ),
             ),
             cast_to=BrandRetrieveByTickerResponse,
         )
@@ -334,6 +376,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         input: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -348,6 +391,10 @@ class BrandResource(SyncAPIResource):
           input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
               in `input`, it will be used for classification, otherwise, we will search for
               the brand using the provided title.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -364,7 +411,13 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"input": input}, brand_retrieve_naics_params.BrandRetrieveNaicsParams),
+                query=maybe_transform(
+                    {
+                        "input": input,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
+                ),
             ),
             cast_to=BrandRetrieveNaicsResponse,
         )
@@ -373,6 +426,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         query: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -385,6 +439,10 @@ class BrandResource(SyncAPIResource):
 
         Args:
           query: Query string to search brands
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -401,7 +459,13 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"query": query}, brand_search_params.BrandSearchParams),
+                query=maybe_transform(
+                    {
+                        "query": query,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_search_params.BrandSearchParams,
+                ),
             ),
             cast_to=BrandSearchResponse,
         )
@@ -487,6 +551,7 @@ class AsyncBrandResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         max_speed: bool | NotGiven = NOT_GIVEN,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -505,6 +570,10 @@ class AsyncBrandResource(AsyncAPIResource):
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -526,6 +595,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "domain": domain,
                         "force_language": force_language,
                         "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
                 ),
@@ -539,6 +609,7 @@ class AsyncBrandResource(AsyncAPIResource):
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
         specific_pages: brand_ai_query_params.SpecificPages | NotGiven = NOT_GIVEN,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -559,6 +630,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
           specific_pages: Optional object specifying which pages to analyze
 
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -574,6 +649,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     "data_to_extract": data_to_extract,
                     "domain": domain,
                     "specific_pages": specific_pages,
+                    "timeout_ms": timeout_ms,
                 },
                 brand_ai_query_params.BrandAIQueryParams,
             ),
@@ -587,6 +663,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         transaction_info: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -600,6 +677,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           transaction_info: Transaction information to identify the brand
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -617,7 +698,10 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"transaction_info": transaction_info},
+                    {
+                        "transaction_info": transaction_info,
+                        "timeout_ms": timeout_ms,
+                    },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
                 ),
             ),
@@ -628,6 +712,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -644,6 +729,10 @@ class AsyncBrandResource(AsyncAPIResource):
         Args:
           domain: Domain name to prefetch brand data for
 
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -654,7 +743,13 @@ class AsyncBrandResource(AsyncAPIResource):
         """
         return await self._post(
             "/brand/prefetch",
-            body=await async_maybe_transform({"domain": domain}, brand_prefetch_params.BrandPrefetchParams),
+            body=await async_maybe_transform(
+                {
+                    "domain": domain,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_prefetch_params.BrandPrefetchParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -665,6 +760,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         ticker: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -678,6 +774,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g. AAPL, TSLA, etc.)
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -695,7 +795,11 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"ticker": ticker}, brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams
+                    {
+                        "ticker": ticker,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams,
                 ),
             ),
             cast_to=BrandRetrieveByTickerResponse,
@@ -705,6 +809,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         input: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -719,6 +824,10 @@ class AsyncBrandResource(AsyncAPIResource):
           input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
               in `input`, it will be used for classification, otherwise, we will search for
               the brand using the provided title.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -736,7 +845,11 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"input": input}, brand_retrieve_naics_params.BrandRetrieveNaicsParams
+                    {
+                        "input": input,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
                 ),
             ),
             cast_to=BrandRetrieveNaicsResponse,
@@ -746,6 +859,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -758,6 +872,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           query: Query string to search brands
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -774,7 +892,13 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"query": query}, brand_search_params.BrandSearchParams),
+                query=await async_maybe_transform(
+                    {
+                        "query": query,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_search_params.BrandSearchParams,
+                ),
             ),
             cast_to=BrandSearchResponse,
         )
