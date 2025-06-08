@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["BrandAIQueryParams", "DataToExtract", "SpecificPages"]
 
@@ -17,6 +19,13 @@ class BrandAIQueryParams(TypedDict, total=False):
 
     specific_pages: SpecificPages
     """Optional object specifying which pages to analyze"""
+
+    timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
+    """Optional timeout in milliseconds for the request.
+
+    If the request takes longer than this value, it will be aborted with a 408
+    status code. Maximum allowed value is 300000ms (5 minutes).
+    """
 
 
 class DataToExtract(TypedDict, total=False):

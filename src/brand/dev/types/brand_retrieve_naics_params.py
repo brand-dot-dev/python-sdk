@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["BrandRetrieveNaicsParams"]
 
@@ -13,4 +15,11 @@ class BrandRetrieveNaicsParams(TypedDict, total=False):
 
     If a valid domain is provided in `input`, it will be used for classification,
     otherwise, we will search for the brand using the provided title.
+    """
+
+    timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
+    """Optional timeout in milliseconds for the request.
+
+    If the request takes longer than this value, it will be aborted with a 408
+    status code. Maximum allowed value is 300000ms (5 minutes).
     """
