@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.1 (2025-06-13)
+
+Full Changelog: [v1.5.0...v1.5.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.5.0...v1.5.1)
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([26be0c4](https://github.com/brand-dot-dev/python-sdk/commit/26be0c417636a9be6f5b52fd079038b3eeb11484))
+
+
+### Chores
+
+* **tests:** run tests in parallel ([b12584c](https://github.com/brand-dot-dev/python-sdk/commit/b12584c87749c3a9e06653418a9e3365f80cfee0))
+
 ## 1.5.0 (2025-06-08)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.4.0...v1.5.0)
