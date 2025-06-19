@@ -593,8 +593,7 @@ class BrandResource(SyncAPIResource):
         """
         Beta feature: Automatically extract comprehensive design system information from
         a brand's website including colors, typography, spacing, shadows, and UI
-        components. Uses AI-powered analysis of website screenshots to identify design
-        patterns and create a reusable styleguide.
+        components.
 
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
@@ -1180,8 +1179,7 @@ class AsyncBrandResource(AsyncAPIResource):
         """
         Beta feature: Automatically extract comprehensive design system information from
         a brand's website including colors, typography, spacing, shadows, and UI
-        components. Uses AI-powered analysis of website screenshots to identify design
-        patterns and create a reusable styleguide.
+        components.
 
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
