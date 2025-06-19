@@ -10,7 +10,9 @@ from brand.dev.types import (
     BrandPrefetchResponse,
     BrandRetrieveByTickerResponse,
     BrandRetrieveNaicsResponse,
+    BrandScreenshotResponse,
     BrandSearchResponse,
+    BrandStyleguideResponse,
 )
 ```
 
@@ -22,4 +24,6 @@ Methods:
 - <code title="post /brand/prefetch">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_response.py">BrandPrefetchResponse</a></code>
 - <code title="get /brand/retrieve-by-ticker">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_ticker</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_ticker_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_ticker_response.py">BrandRetrieveByTickerResponse</a></code>
 - <code title="get /brand/naics">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_naics</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_naics_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_naics_response.py">BrandRetrieveNaicsResponse</a></code>
+- <code title="get /brand/screenshot">client.brand.<a href="./src/brand/dev/resources/brand.py">screenshot</a>(\*\*<a href="src/brand/dev/types/brand_screenshot_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_screenshot_response.py">BrandScreenshotResponse</a></code>
 - <code title="get /brand/search">client.brand.<a href="./src/brand/dev/resources/brand.py">search</a>(\*\*<a href="src/brand/dev/types/brand_search_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_search_response.py">BrandSearchResponse</a></code>
+- <code title="get /brand/styleguide">client.brand.<a href="./src/brand/dev/resources/brand.py">styleguide</a>(\*\*<a href="src/brand/dev/types/brand_styleguide_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_styleguide_response.py">BrandStyleguideResponse</a></code>

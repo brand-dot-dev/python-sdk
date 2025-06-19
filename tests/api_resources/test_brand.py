@@ -14,6 +14,8 @@ from brand.dev.types import (
     BrandAIQueryResponse,
     BrandPrefetchResponse,
     BrandRetrieveResponse,
+    BrandScreenshotResponse,
+    BrandStyleguideResponse,
     BrandRetrieveNaicsResponse,
     BrandRetrieveByTickerResponse,
     BrandIdentifyFromTransactionResponse,
@@ -329,6 +331,49 @@ class TestBrand:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_screenshot(self, client: BrandDev) -> None:
+        brand = client.brand.screenshot(
+            domain="domain",
+        )
+        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_screenshot_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.screenshot(
+            domain="domain",
+            full_screenshot="true",
+        )
+        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_screenshot(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.screenshot(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_screenshot(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.screenshot(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_search(self, client: BrandDev) -> None:
         brand = client.brand.search(
             query="query",
@@ -367,6 +412,49 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandSearchResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_styleguide(self, client: BrandDev) -> None:
+        brand = client.brand.styleguide(
+            domain="domain",
+        )
+        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_styleguide_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.styleguide(
+            domain="domain",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_styleguide(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.styleguide(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_styleguide(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.styleguide(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -678,6 +766,49 @@ class TestAsyncBrand:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_screenshot(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.screenshot(
+            domain="domain",
+        )
+        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_screenshot_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.screenshot(
+            domain="domain",
+            full_screenshot="true",
+        )
+        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_screenshot(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.screenshot(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_screenshot(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.screenshot(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_search(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.search(
             query="query",
@@ -716,5 +847,48 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandSearchResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_styleguide(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.styleguide(
+            domain="domain",
+        )
+        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_styleguide_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.styleguide(
+            domain="domain",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_styleguide(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.styleguide(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_styleguide(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.styleguide(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
