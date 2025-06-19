@@ -12,8 +12,11 @@ from ..types import (
     brand_ai_query_params,
     brand_prefetch_params,
     brand_retrieve_params,
+    brand_screenshot_params,
+    brand_styleguide_params,
     brand_retrieve_naics_params,
     brand_retrieve_by_ticker_params,
+    brand_retrieve_simplified_params,
     brand_identify_from_transaction_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -31,8 +34,11 @@ from ..types.brand_search_response import BrandSearchResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
+from ..types.brand_screenshot_response import BrandScreenshotResponse
+from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_retrieve_by_ticker_response import BrandRetrieveByTickerResponse
+from ..types.brand_retrieve_simplified_response import BrandRetrieveSimplifiedResponse
 from ..types.brand_identify_from_transaction_response import BrandIdentifyFromTransactionResponse
 
 __all__ = ["BrandResource", "AsyncBrandResource"]
@@ -422,6 +428,108 @@ class BrandResource(SyncAPIResource):
             cast_to=BrandRetrieveNaicsResponse,
         )
 
+    def retrieve_simplified(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandRetrieveSimplifiedResponse:
+        """
+        Returns a simplified version of brand data containing only essential
+        information: domain, title, colors, logos, and backdrops. This endpoint is
+        optimized for faster responses and reduced data transfer.
+
+        Args:
+          domain: Domain name to retrieve simplified brand data for
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/retrieve-simplified",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "domain": domain,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_simplified_params.BrandRetrieveSimplifiedParams,
+                ),
+            ),
+            cast_to=BrandRetrieveSimplifiedResponse,
+        )
+
+    def screenshot(
+        self,
+        *,
+        domain: str,
+        full_screenshot: Literal["true", "false"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandScreenshotResponse:
+        """Beta feature: Capture a screenshot of a website.
+
+        Supports both viewport
+        (standard browser view) and full-page screenshots. Returns a URL to the uploaded
+        screenshot image hosted on our CDN.
+
+        Args:
+          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated.
+
+          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
+              screenshot capturing all content. If 'false' or not provided, takes a viewport
+              screenshot (standard browser view).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/screenshot",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "domain": domain,
+                        "full_screenshot": full_screenshot,
+                    },
+                    brand_screenshot_params.BrandScreenshotParams,
+                ),
+            ),
+            cast_to=BrandScreenshotResponse,
+        )
+
     def search(
         self,
         *,
@@ -468,6 +576,58 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandSearchResponse,
+        )
+
+    def styleguide(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandStyleguideResponse:
+        """
+        Beta feature: Automatically extract comprehensive design system information from
+        a brand's website including colors, typography, spacing, shadows, and UI
+        components. Uses AI-powered analysis of website screenshots to identify design
+        patterns and create a reusable styleguide.
+
+        Args:
+          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/styleguide",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "domain": domain,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_styleguide_params.BrandStyleguideParams,
+                ),
+            ),
+            cast_to=BrandStyleguideResponse,
         )
 
 
@@ -855,6 +1015,108 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveNaicsResponse,
         )
 
+    async def retrieve_simplified(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandRetrieveSimplifiedResponse:
+        """
+        Returns a simplified version of brand data containing only essential
+        information: domain, title, colors, logos, and backdrops. This endpoint is
+        optimized for faster responses and reduced data transfer.
+
+        Args:
+          domain: Domain name to retrieve simplified brand data for
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/retrieve-simplified",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "domain": domain,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_simplified_params.BrandRetrieveSimplifiedParams,
+                ),
+            ),
+            cast_to=BrandRetrieveSimplifiedResponse,
+        )
+
+    async def screenshot(
+        self,
+        *,
+        domain: str,
+        full_screenshot: Literal["true", "false"] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandScreenshotResponse:
+        """Beta feature: Capture a screenshot of a website.
+
+        Supports both viewport
+        (standard browser view) and full-page screenshots. Returns a URL to the uploaded
+        screenshot image hosted on our CDN.
+
+        Args:
+          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated.
+
+          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
+              screenshot capturing all content. If 'false' or not provided, takes a viewport
+              screenshot (standard browser view).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/screenshot",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "domain": domain,
+                        "full_screenshot": full_screenshot,
+                    },
+                    brand_screenshot_params.BrandScreenshotParams,
+                ),
+            ),
+            cast_to=BrandScreenshotResponse,
+        )
+
     async def search(
         self,
         *,
@@ -903,6 +1165,58 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandSearchResponse,
         )
 
+    async def styleguide(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> BrandStyleguideResponse:
+        """
+        Beta feature: Automatically extract comprehensive design system information from
+        a brand's website including colors, typography, spacing, shadows, and UI
+        components. Uses AI-powered analysis of website screenshots to identify design
+        patterns and create a reusable styleguide.
+
+        Args:
+          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/styleguide",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "domain": domain,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_styleguide_params.BrandStyleguideParams,
+                ),
+            ),
+            cast_to=BrandStyleguideResponse,
+        )
+
 
 class BrandResourceWithRawResponse:
     def __init__(self, brand: BrandResource) -> None:
@@ -926,8 +1240,17 @@ class BrandResourceWithRawResponse:
         self.retrieve_naics = to_raw_response_wrapper(
             brand.retrieve_naics,
         )
+        self.retrieve_simplified = to_raw_response_wrapper(
+            brand.retrieve_simplified,
+        )
+        self.screenshot = to_raw_response_wrapper(
+            brand.screenshot,
+        )
         self.search = to_raw_response_wrapper(
             brand.search,
+        )
+        self.styleguide = to_raw_response_wrapper(
+            brand.styleguide,
         )
 
 
@@ -953,8 +1276,17 @@ class AsyncBrandResourceWithRawResponse:
         self.retrieve_naics = async_to_raw_response_wrapper(
             brand.retrieve_naics,
         )
+        self.retrieve_simplified = async_to_raw_response_wrapper(
+            brand.retrieve_simplified,
+        )
+        self.screenshot = async_to_raw_response_wrapper(
+            brand.screenshot,
+        )
         self.search = async_to_raw_response_wrapper(
             brand.search,
+        )
+        self.styleguide = async_to_raw_response_wrapper(
+            brand.styleguide,
         )
 
 
@@ -980,8 +1312,17 @@ class BrandResourceWithStreamingResponse:
         self.retrieve_naics = to_streamed_response_wrapper(
             brand.retrieve_naics,
         )
+        self.retrieve_simplified = to_streamed_response_wrapper(
+            brand.retrieve_simplified,
+        )
+        self.screenshot = to_streamed_response_wrapper(
+            brand.screenshot,
+        )
         self.search = to_streamed_response_wrapper(
             brand.search,
+        )
+        self.styleguide = to_streamed_response_wrapper(
+            brand.styleguide,
         )
 
 
@@ -1007,6 +1348,15 @@ class AsyncBrandResourceWithStreamingResponse:
         self.retrieve_naics = async_to_streamed_response_wrapper(
             brand.retrieve_naics,
         )
+        self.retrieve_simplified = async_to_streamed_response_wrapper(
+            brand.retrieve_simplified,
+        )
+        self.screenshot = async_to_streamed_response_wrapper(
+            brand.screenshot,
+        )
         self.search = async_to_streamed_response_wrapper(
             brand.search,
+        )
+        self.styleguide = async_to_streamed_response_wrapper(
+            brand.styleguide,
         )

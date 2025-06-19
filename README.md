@@ -1,6 +1,6 @@
 # Brand Dev Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/brand.dev.svg)](https://pypi.org/project/brand.dev/)
+[![PyPI version](<https://img.shields.io/pypi/v/brand.dev.svg?label=pypi%20(stable)>)](https://pypi.org/project/brand.dev/)
 
 The Brand Dev Python library provides convenient access to the Brand Dev REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -170,7 +170,7 @@ client.with_options(max_retries=5).brand.retrieve(
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from brand.dev import BrandDev

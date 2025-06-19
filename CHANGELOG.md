@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.6.0 (2025-06-19)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **api:** manual updates ([315c5dc](https://github.com/brand-dot-dev/python-sdk/commit/315c5dcb1aa4982bf5e90b3fbe1223c969234a64))
+* **api:** manual updates ([adc4bd6](https://github.com/brand-dot-dev/python-sdk/commit/adc4bd6260c7bc6471fa060b66c1f3e8f368bf07))
+
+
+### Bug Fixes
+
+* **client:** correctly parse binary response | stream ([26be0c4](https://github.com/brand-dot-dev/python-sdk/commit/26be0c417636a9be6f5b52fd079038b3eeb11484))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([b2bff71](https://github.com/brand-dot-dev/python-sdk/commit/b2bff712704ec48751c0b2ea4f51960913811a98))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([d908899](https://github.com/brand-dot-dev/python-sdk/commit/d9088990a6b2e760d1a425117848697882a2b5bd))
+* **internal:** update conftest.py ([fd16274](https://github.com/brand-dot-dev/python-sdk/commit/fd16274f9eb87fac48f5d746e628f135f98ff052))
+* **readme:** update badges ([727b0fa](https://github.com/brand-dot-dev/python-sdk/commit/727b0fa230d8a40abbd1e36e592ba3ba05b6f8eb))
+* **tests:** add tests for httpx client instantiation & proxies ([bb70721](https://github.com/brand-dot-dev/python-sdk/commit/bb70721dd5ac47752cc749ac9269eb4e7d1bb6d4))
+* **tests:** run tests in parallel ([b12584c](https://github.com/brand-dot-dev/python-sdk/commit/b12584c87749c3a9e06653418a9e3365f80cfee0))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([05629cf](https://github.com/brand-dot-dev/python-sdk/commit/05629cf3a6cef8bf5b65aa4df60528e313883a7b))
+
 ## 1.5.0 (2025-06-08)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.4.0...v1.5.0)
