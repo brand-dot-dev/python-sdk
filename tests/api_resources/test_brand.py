@@ -18,6 +18,7 @@ from brand.dev.types import (
     BrandStyleguideResponse,
     BrandRetrieveNaicsResponse,
     BrandRetrieveByTickerResponse,
+    BrandRetrieveSimplifiedResponse,
     BrandIdentifyFromTransactionResponse,
 )
 
@@ -326,6 +327,49 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve_simplified(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_simplified(
+            domain="domain",
+        )
+        assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_retrieve_simplified_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_simplified(
+            domain="domain",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_retrieve_simplified(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.retrieve_simplified(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_retrieve_simplified(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.retrieve_simplified(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -761,6 +805,49 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_simplified(
+            domain="domain",
+        )
+        assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_retrieve_simplified_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_simplified(
+            domain="domain",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.retrieve_simplified(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.retrieve_simplified(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
