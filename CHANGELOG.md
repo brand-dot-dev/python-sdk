@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.8.0 (2025-06-28)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* **client:** add support for aiohttp ([ec89992](https://github.com/brand-dot-dev/python-sdk/commit/ec89992888ebc95015e914ec22ad479054797455))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([5dfdca8](https://github.com/brand-dot-dev/python-sdk/commit/5dfdca8ac67612c7ebe230b03d8b30754c7ceb49))
+
+
+### Chores
+
+* **ci:** only run for pushes and fork pull requests ([4a9a6ac](https://github.com/brand-dot-dev/python-sdk/commit/4a9a6acb4467d8f45b3d81967094fdd119f30bd2))
+* **tests:** skip some failing tests on the latest python versions ([1c82bc6](https://github.com/brand-dot-dev/python-sdk/commit/1c82bc6b846e17da31ec6798c9fcd59336709a60))
+
 ## 1.7.0 (2025-06-19)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.6.0...v1.7.0)
