@@ -153,7 +153,11 @@ class Brand(BaseModel):
     """The domain name of the brand"""
 
     fonts: Optional[List[BrandFont]] = None
-    """An array of fonts used by the brand's website"""
+    """An array of fonts used by the brand's website.
+
+    NOTE: This is deprecated and will be removed in the future. Please migrate to
+    the styleguide API.
+    """
 
     logos: Optional[List[BrandLogo]] = None
     """An array of logos associated with the brand"""
