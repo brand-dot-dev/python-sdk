@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.9.1 (2025-07-02)
+
+Full Changelog: [v1.9.0...v1.9.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.9.0...v1.9.1)
+
+### Bug Fixes
+
+* **ci:** correct conditional ([ad26494](https://github.com/brand-dot-dev/python-sdk/commit/ad26494daca49a55899f9e769e9b38e20f51857a))
+
+
+### Chores
+
+* **ci:** change upload type ([9f67ed0](https://github.com/brand-dot-dev/python-sdk/commit/9f67ed039e0b905f81d8c1e1a1bd79e9c997d483))
+
 ## 1.9.0 (2025-06-29)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.8.0...v1.9.0)
