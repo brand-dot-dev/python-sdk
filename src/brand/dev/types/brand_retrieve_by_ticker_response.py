@@ -12,7 +12,6 @@ __all__ = [
     "BrandBackdropColor",
     "BrandBackdropResolution",
     "BrandColor",
-    "BrandFont",
     "BrandLogo",
     "BrandLogoColor",
     "BrandLogoResolution",
@@ -79,14 +78,6 @@ class BrandColor(BaseModel):
     """Name of the color"""
 
 
-class BrandFont(BaseModel):
-    name: Optional[str] = None
-    """Name of the font"""
-
-    usage: Optional[str] = None
-    """Usage of the font, e.g., 'title', 'body', 'button'"""
-
-
 class BrandLogoColor(BaseModel):
     hex: Optional[str] = None
     """Color in hexadecimal format"""
@@ -151,9 +142,6 @@ class Brand(BaseModel):
 
     domain: Optional[str] = None
     """The domain name of the brand"""
-
-    fonts: Optional[List[BrandFont]] = None
-    """An array of fonts used by the brand's website"""
 
     logos: Optional[List[BrandLogo]] = None
     """An array of logos associated with the brand"""
