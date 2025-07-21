@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.10.0 (2025-07-21)
+
+Full Changelog: [v1.9.0...v1.10.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.9.0...v1.10.0)
+
+### Features
+
+* **api:** manual updates ([89a4986](https://github.com/brand-dot-dev/python-sdk/commit/89a49860aa2c253b9f12397684d7ee38670298b1))
+* clean up environment call outs ([3d8cf3d](https://github.com/brand-dot-dev/python-sdk/commit/3d8cf3dcad83da7cf75078c501997fb0cfc4eefa))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([ad26494](https://github.com/brand-dot-dev/python-sdk/commit/ad26494daca49a55899f9e769e9b38e20f51857a))
+* **client:** don't send Content-Type header on GET requests ([34c2827](https://github.com/brand-dot-dev/python-sdk/commit/34c2827853c1d1c04ac05d3ce3fa519179d60793))
+* **parsing:** correctly handle nested discriminated unions ([3f1078d](https://github.com/brand-dot-dev/python-sdk/commit/3f1078dede16aed00d8e434b4491f4f3285cfe51))
+
+
+### Chores
+
+* **ci:** change upload type ([9f67ed0](https://github.com/brand-dot-dev/python-sdk/commit/9f67ed039e0b905f81d8c1e1a1bd79e9c997d483))
+* **internal:** bump pinned h11 dep ([a9e93bf](https://github.com/brand-dot-dev/python-sdk/commit/a9e93bf5b4f7d4d6bf2c82b9e1db113a8396d398))
+* **internal:** codegen related update ([92cf858](https://github.com/brand-dot-dev/python-sdk/commit/92cf85837fb7a56a98736c97d5115308e51c5906))
+* **package:** mark python 3.13 as supported ([4600562](https://github.com/brand-dot-dev/python-sdk/commit/46005627ab1a6e83e62bb90a8b8f0183b2292786))
+* **readme:** fix version rendering on pypi ([ed9ea71](https://github.com/brand-dot-dev/python-sdk/commit/ed9ea71094d6bede408dd145d9951bd5bf24c0b8))
+
 ## 1.9.0 (2025-06-29)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.8.0...v1.9.0)
