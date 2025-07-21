@@ -12,7 +12,6 @@ from brand.dev.types import (
     BrandRetrieveNaicsResponse,
     BrandRetrieveSimplifiedResponse,
     BrandScreenshotResponse,
-    BrandSearchResponse,
     BrandStyleguideResponse,
 )
 ```
@@ -27,5 +26,4 @@ Methods:
 - <code title="get /brand/naics">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_naics</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_naics_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_naics_response.py">BrandRetrieveNaicsResponse</a></code>
 - <code title="get /brand/retrieve-simplified">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_simplified</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_simplified_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_simplified_response.py">BrandRetrieveSimplifiedResponse</a></code>
 - <code title="get /brand/screenshot">client.brand.<a href="./src/brand/dev/resources/brand.py">screenshot</a>(\*\*<a href="src/brand/dev/types/brand_screenshot_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_screenshot_response.py">BrandScreenshotResponse</a></code>
-- <code title="get /brand/search">client.brand.<a href="./src/brand/dev/resources/brand.py">search</a>(\*\*<a href="src/brand/dev/types/brand_search_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_search_response.py">BrandSearchResponse</a></code>
 - <code title="get /brand/styleguide">client.brand.<a href="./src/brand/dev/resources/brand.py">styleguide</a>(\*\*<a href="src/brand/dev/types/brand_styleguide_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_styleguide_response.py">BrandStyleguideResponse</a></code>
