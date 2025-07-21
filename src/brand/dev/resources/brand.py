@@ -8,7 +8,6 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import (
-    brand_search_params,
     brand_ai_query_params,
     brand_prefetch_params,
     brand_retrieve_params,
@@ -30,7 +29,6 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.brand_search_response import BrandSearchResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
@@ -528,54 +526,6 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandScreenshotResponse,
-        )
-
-    def search(
-        self,
-        *,
-        query: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrandSearchResponse:
-        """
-        Search brands by query
-
-        Args:
-          query: Query string to search brands
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/search",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "query": query,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_search_params.BrandSearchParams,
-                ),
-            ),
-            cast_to=BrandSearchResponse,
         )
 
     def styleguide(
@@ -1116,54 +1066,6 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandScreenshotResponse,
         )
 
-    async def search(
-        self,
-        *,
-        query: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrandSearchResponse:
-        """
-        Search brands by query
-
-        Args:
-          query: Query string to search brands
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/search",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "query": query,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_search_params.BrandSearchParams,
-                ),
-            ),
-            cast_to=BrandSearchResponse,
-        )
-
     async def styleguide(
         self,
         *,
@@ -1244,9 +1146,6 @@ class BrandResourceWithRawResponse:
         self.screenshot = to_raw_response_wrapper(
             brand.screenshot,
         )
-        self.search = to_raw_response_wrapper(
-            brand.search,
-        )
         self.styleguide = to_raw_response_wrapper(
             brand.styleguide,
         )
@@ -1279,9 +1178,6 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.screenshot = async_to_raw_response_wrapper(
             brand.screenshot,
-        )
-        self.search = async_to_raw_response_wrapper(
-            brand.search,
         )
         self.styleguide = async_to_raw_response_wrapper(
             brand.styleguide,
@@ -1316,9 +1212,6 @@ class BrandResourceWithStreamingResponse:
         self.screenshot = to_streamed_response_wrapper(
             brand.screenshot,
         )
-        self.search = to_streamed_response_wrapper(
-            brand.search,
-        )
         self.styleguide = to_streamed_response_wrapper(
             brand.styleguide,
         )
@@ -1351,9 +1244,6 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.screenshot = async_to_streamed_response_wrapper(
             brand.screenshot,
-        )
-        self.search = async_to_streamed_response_wrapper(
-            brand.search,
         )
         self.styleguide = async_to_streamed_response_wrapper(
             brand.styleguide,

@@ -1,6 +1,7 @@
 # Brand Dev Python API library
 
-[![PyPI version](<https://img.shields.io/pypi/v/brand.dev.svg?label=pypi%20(stable)>)](https://pypi.org/project/brand.dev/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/brand.dev.svg?label=pypi%20(stable))](https://pypi.org/project/brand.dev/)
 
 The Brand Dev Python library provides convenient access to the Brand Dev REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -82,7 +83,6 @@ pip install brand.dev[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from brand.dev import DefaultAioHttpClient
 from brand.dev import AsyncBrandDev
@@ -90,7 +90,7 @@ from brand.dev import AsyncBrandDev
 
 async def main() -> None:
     async with AsyncBrandDev(
-        api_key=os.environ.get("BRAND_DEV_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         brand = await client.brand.retrieve(
