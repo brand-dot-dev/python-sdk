@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.10.1 (2025-07-23)
+
+Full Changelog: [v1.10.0...v1.10.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.10.0...v1.10.1)
+
+### Bug Fixes
+
+* **parsing:** ignore empty metadata ([dca3c67](https://github.com/brand-dot-dev/python-sdk/commit/dca3c6732cef49c169afc94625b8ccfecb11cdc2))
+* **parsing:** parse extra field types ([eba3879](https://github.com/brand-dot-dev/python-sdk/commit/eba38798002dd3cac30d4189e74bfe4c5a9700f9))
+
 ## 1.10.0 (2025-07-21)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.9.0...v1.10.0)
