@@ -16,11 +16,17 @@ class DataExtracted(BaseModel):
 
 
 class BrandAIQueryResponse(BaseModel):
+    code: Optional[int] = None
+    """HTTP status code"""
+
     data_extracted: Optional[List[DataExtracted]] = None
     """Array of extracted data points"""
 
     domain: Optional[str] = None
     """The domain that was analyzed"""
+
+    status: Optional[str] = None
+    """Status of the response, e.g., 'ok'"""
 
     urls_analyzed: Optional[List[str]] = None
     """List of URLs that were analyzed"""
