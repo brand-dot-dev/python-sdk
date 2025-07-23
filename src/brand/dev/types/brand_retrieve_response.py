@@ -143,6 +143,9 @@ class Brand(BaseModel):
     domain: Optional[str] = None
     """The domain name of the brand"""
 
+    is_nsfw: Optional[bool] = None
+    """Indicates whether the brand content is not safe for work (NSFW)"""
+
     logos: Optional[List[BrandLogo]] = None
     """An array of logos associated with the brand"""
 
