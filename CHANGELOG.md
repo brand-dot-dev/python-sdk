@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.11.0 (2025-07-31)
+
+Full Changelog: [v1.10.1...v1.11.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.10.1...v1.11.0)
+
+### Features
+
+* **api:** manual updates ([59f9ac6](https://github.com/brand-dot-dev/python-sdk/commit/59f9ac61748a337bcbec52a0034f06cac9e1b3d9))
+* **api:** manual updates ([59002c5](https://github.com/brand-dot-dev/python-sdk/commit/59002c5632848838141179929202e55c3c53d6a9))
+* **client:** support file upload requests ([5a700a4](https://github.com/brand-dot-dev/python-sdk/commit/5a700a45169a4bf3e13f7d27fd1eb0698db48b53))
+
+
+### Chores
+
+* **project:** add settings file for vscode ([5218747](https://github.com/brand-dot-dev/python-sdk/commit/5218747ee50439e600cfb756f14364d9a7e7aef3))
+
 ## 1.10.1 (2025-07-23)
 
 Full Changelog: [v1.10.0...v1.10.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.10.0...v1.10.1)

@@ -22,5 +22,8 @@ class BrandAIQueryResponse(BaseModel):
     domain: Optional[str] = None
     """The domain that was analyzed"""
 
+    status: Optional[str] = None
+    """Status of the response, e.g., 'ok'"""
+
     urls_analyzed: Optional[List[str]] = None
     """List of URLs that were analyzed"""
