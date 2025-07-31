@@ -16,9 +16,6 @@ class DataExtracted(BaseModel):
 
 
 class BrandAIQueryResponse(BaseModel):
-    code: Optional[int] = None
-    """HTTP status code"""
-
     data_extracted: Optional[List[DataExtracted]] = None
     """Array of extracted data points"""
 
