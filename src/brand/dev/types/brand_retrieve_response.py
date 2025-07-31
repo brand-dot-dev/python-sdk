@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -52,6 +53,9 @@ class BrandBackdropColor(BaseModel):
 
 
 class BrandBackdropResolution(BaseModel):
+    aspect_ratio: Optional[float] = None
+    """Aspect ratio of the image (width/height)"""
+
     height: Optional[int] = None
     """Height of the image in pixels"""
 
@@ -87,6 +91,9 @@ class BrandLogoColor(BaseModel):
 
 
 class BrandLogoResolution(BaseModel):
+    aspect_ratio: Optional[float] = None
+    """Aspect ratio of the image (width/height)"""
+
     height: Optional[int] = None
     """Height of the image in pixels"""
 
@@ -98,17 +105,21 @@ class BrandLogo(BaseModel):
     colors: Optional[List[BrandLogoColor]] = None
     """Array of colors in the logo"""
 
-    group: Optional[int] = None
-    """Group identifier for logos"""
-
-    mode: Optional[str] = None
-    """Mode of the logo, e.g., 'dark', 'light'"""
+    mode: Optional[Literal["light", "dark", "has_opaque_background"]] = None
+    """
+    Indicates when this logo is best used: 'light' = best for light mode, 'dark' =
+    best for dark mode, 'has_opaque_background' = can be used for either as image
+    has its own background
+    """
 
     resolution: Optional[BrandLogoResolution] = None
     """Resolution of the logo image"""
 
+    type: Optional[Literal["icon", "logo"]] = None
+    """Type of the logo based on resolution (e.g., 'icon', 'logo')"""
+
     url: Optional[str] = None
-    """URL of the logo image"""
+    """CDN hosted url of the logo (ready for display)"""
 
 
 class BrandSocial(BaseModel):
@@ -143,11 +154,17 @@ class Brand(BaseModel):
     domain: Optional[str] = None
     """The domain name of the brand"""
 
+    email: Optional[str] = None
+    """Company email address"""
+
     is_nsfw: Optional[bool] = None
     """Indicates whether the brand content is not safe for work (NSFW)"""
 
     logos: Optional[List[BrandLogo]] = None
     """An array of logos associated with the brand"""
+
+    phone: Optional[str] = None
+    """Company phone number"""
 
     slogan: Optional[str] = None
     """The brand's slogan"""
