@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.11.1 (2025-08-09)
+
+Full Changelog: [v1.11.0...v1.11.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.11.0...v1.11.1)
+
+### Chores
+
+* **internal:** fix ruff target version ([8674d17](https://github.com/brand-dot-dev/python-sdk/commit/8674d1739383a872081dbc40b3726572654a5800))
+* **internal:** update comment in script ([59767cf](https://github.com/brand-dot-dev/python-sdk/commit/59767cfff3a11d740c30d764b566730551b1e259))
+* update @stainless-api/prism-cli to v5.15.0 ([c3e909c](https://github.com/brand-dot-dev/python-sdk/commit/c3e909c65e6d21d669321ac53dbb7ac84a5d9afc))
+
 ## 1.11.0 (2025-07-31)
 
 Full Changelog: [v1.10.1...v1.11.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.10.1...v1.11.0)
