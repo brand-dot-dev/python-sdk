@@ -717,7 +717,7 @@ class TestBrandDev:
         respx_mock.get("/brand/retrieve").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.brand.with_streaming_response.retrieve(domain="domain").__enter__()
+            client.brand.with_streaming_response.retrieve().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -727,7 +727,7 @@ class TestBrandDev:
         respx_mock.get("/brand/retrieve").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.brand.with_streaming_response.retrieve(domain="domain").__enter__()
+            client.brand.with_streaming_response.retrieve().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -756,7 +756,7 @@ class TestBrandDev:
 
         respx_mock.get("/brand/retrieve").mock(side_effect=retry_handler)
 
-        response = client.brand.with_raw_response.retrieve(domain="domain")
+        response = client.brand.with_raw_response.retrieve()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -780,9 +780,7 @@ class TestBrandDev:
 
         respx_mock.get("/brand/retrieve").mock(side_effect=retry_handler)
 
-        response = client.brand.with_raw_response.retrieve(
-            domain="domain", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.brand.with_raw_response.retrieve(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -805,9 +803,7 @@ class TestBrandDev:
 
         respx_mock.get("/brand/retrieve").mock(side_effect=retry_handler)
 
-        response = client.brand.with_raw_response.retrieve(
-            domain="domain", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.brand.with_raw_response.retrieve(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1538,7 +1534,7 @@ class TestAsyncBrandDev:
         respx_mock.get("/brand/retrieve").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.brand.with_streaming_response.retrieve(domain="domain").__aenter__()
+            await async_client.brand.with_streaming_response.retrieve().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1550,7 +1546,7 @@ class TestAsyncBrandDev:
         respx_mock.get("/brand/retrieve").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.brand.with_streaming_response.retrieve(domain="domain").__aenter__()
+            await async_client.brand.with_streaming_response.retrieve().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1580,7 +1576,7 @@ class TestAsyncBrandDev:
 
         respx_mock.get("/brand/retrieve").mock(side_effect=retry_handler)
 
-        response = await client.brand.with_raw_response.retrieve(domain="domain")
+        response = await client.brand.with_raw_response.retrieve()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1605,9 +1601,7 @@ class TestAsyncBrandDev:
 
         respx_mock.get("/brand/retrieve").mock(side_effect=retry_handler)
 
-        response = await client.brand.with_raw_response.retrieve(
-            domain="domain", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = await client.brand.with_raw_response.retrieve(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1631,9 +1625,7 @@ class TestAsyncBrandDev:
 
         respx_mock.get("/brand/retrieve").mock(side_effect=retry_handler)
 
-        response = await client.brand.with_raw_response.retrieve(
-            domain="domain", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = await client.brand.with_raw_response.retrieve(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
