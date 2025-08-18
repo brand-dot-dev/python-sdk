@@ -14,7 +14,6 @@ from ..types import (
     brand_screenshot_params,
     brand_styleguide_params,
     brand_retrieve_naics_params,
-    brand_retrieve_by_ticker_params,
     brand_retrieve_simplified_params,
     brand_identify_from_transaction_params,
 )
@@ -35,7 +34,6 @@ from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_screenshot_response import BrandScreenshotResponse
 from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
-from ..types.brand_retrieve_by_ticker_response import BrandRetrieveByTickerResponse
 from ..types.brand_retrieve_simplified_response import BrandRetrieveSimplifiedResponse
 from ..types.brand_identify_from_transaction_response import BrandIdentifyFromTransactionResponse
 
@@ -340,55 +338,6 @@ class BrandResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandPrefetchResponse,
-        )
-
-    def retrieve_by_ticker(
-        self,
-        *,
-        ticker: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand data by stock ticker (e.g.
-
-        AAPL, TSLA, etc.)
-
-        Args:
-          ticker: Stock ticker symbol to retrieve brand data for (e.g. AAPL, TSLA, etc.)
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/retrieve-by-ticker",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "ticker": ticker,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams,
-                ),
-            ),
-            cast_to=BrandRetrieveByTickerResponse,
         )
 
     def retrieve_naics(
@@ -895,55 +844,6 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandPrefetchResponse,
         )
 
-    async def retrieve_by_ticker(
-        self,
-        *,
-        ticker: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand data by stock ticker (e.g.
-
-        AAPL, TSLA, etc.)
-
-        Args:
-          ticker: Stock ticker symbol to retrieve brand data for (e.g. AAPL, TSLA, etc.)
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/retrieve-by-ticker",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "ticker": ticker,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams,
-                ),
-            ),
-            cast_to=BrandRetrieveByTickerResponse,
-        )
-
     async def retrieve_naics(
         self,
         *,
@@ -1164,9 +1064,6 @@ class BrandResourceWithRawResponse:
         self.prefetch = to_raw_response_wrapper(
             brand.prefetch,
         )
-        self.retrieve_by_ticker = to_raw_response_wrapper(
-            brand.retrieve_by_ticker,
-        )
         self.retrieve_naics = to_raw_response_wrapper(
             brand.retrieve_naics,
         )
@@ -1196,9 +1093,6 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.prefetch = async_to_raw_response_wrapper(
             brand.prefetch,
-        )
-        self.retrieve_by_ticker = async_to_raw_response_wrapper(
-            brand.retrieve_by_ticker,
         )
         self.retrieve_naics = async_to_raw_response_wrapper(
             brand.retrieve_naics,
@@ -1230,9 +1124,6 @@ class BrandResourceWithStreamingResponse:
         self.prefetch = to_streamed_response_wrapper(
             brand.prefetch,
         )
-        self.retrieve_by_ticker = to_streamed_response_wrapper(
-            brand.retrieve_by_ticker,
-        )
         self.retrieve_naics = to_streamed_response_wrapper(
             brand.retrieve_naics,
         )
@@ -1262,9 +1153,6 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.prefetch = async_to_streamed_response_wrapper(
             brand.prefetch,
-        )
-        self.retrieve_by_ticker = async_to_streamed_response_wrapper(
-            brand.retrieve_by_ticker,
         )
         self.retrieve_naics = async_to_streamed_response_wrapper(
             brand.retrieve_naics,

@@ -16,7 +16,6 @@ from brand.dev.types import (
     BrandScreenshotResponse,
     BrandStyleguideResponse,
     BrandRetrieveNaicsResponse,
-    BrandRetrieveByTickerResponse,
     BrandRetrieveSimplifiedResponse,
     BrandIdentifyFromTransactionResponse,
 )
@@ -236,49 +235,6 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_retrieve_by_ticker(self, client: BrandDev) -> None:
-        brand = client.brand.retrieve_by_ticker(
-            ticker="ticker",
-        )
-        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
-        brand = client.brand.retrieve_by_ticker(
-            ticker="ticker",
-            timeout_ms=1,
-        )
-        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_retrieve_by_ticker(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.retrieve_by_ticker(
-            ticker="ticker",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = response.parse()
-        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_retrieve_by_ticker(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.retrieve_by_ticker(
-            ticker="ticker",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = response.parse()
-            assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -669,49 +625,6 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.retrieve_by_ticker(
-            ticker="ticker",
-        )
-        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.retrieve_by_ticker(
-            ticker="ticker",
-            timeout_ms=1,
-        )
-        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.retrieve_by_ticker(
-            ticker="ticker",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = await response.parse()
-        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.retrieve_by_ticker(
-            ticker="ticker",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = await response.parse()
-            assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
