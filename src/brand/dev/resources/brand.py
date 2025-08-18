@@ -65,7 +65,7 @@ class BrandResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        domain: str,
+        domain: str | NotGiven = NOT_GIVEN,
         force_language: Literal[
             "albanian",
             "arabic",
@@ -122,6 +122,8 @@ class BrandResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         max_speed: bool | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        ticker: str | NotGiven = NOT_GIVEN,
         timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -131,16 +133,27 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BrandRetrieveResponse:
         """
-        Retrieve brand data by domain
+        Retrieve brand information using one of three methods: domain name, company
+        name, or stock ticker symbol. Exactly one of these parameters must be provided.
 
         Args:
-          domain: Domain name to retrieve brand data for
+          domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
+              Cannot be used with name or ticker parameters.
 
-          force_language: Optional parameter to force the language of the retrieved brand data
+          force_language: Optional parameter to force the language of the retrieved brand data. Works with
+              all three lookup methods.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
-              less comprehensive data.
+              less comprehensive data. Works with all three lookup methods.
+
+          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
+              Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
+              parameters.
+
+          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
+              Must be 1-6 characters, letters/numbers/dots only. Cannot be used with domain or
+              name parameters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -166,6 +179,8 @@ class BrandResource(SyncAPIResource):
                         "domain": domain,
                         "force_language": force_language,
                         "max_speed": max_speed,
+                        "name": name,
+                        "ticker": ticker,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
@@ -603,7 +618,7 @@ class AsyncBrandResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        domain: str,
+        domain: str | NotGiven = NOT_GIVEN,
         force_language: Literal[
             "albanian",
             "arabic",
@@ -660,6 +675,8 @@ class AsyncBrandResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         max_speed: bool | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        ticker: str | NotGiven = NOT_GIVEN,
         timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -669,16 +686,27 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> BrandRetrieveResponse:
         """
-        Retrieve brand data by domain
+        Retrieve brand information using one of three methods: domain name, company
+        name, or stock ticker symbol. Exactly one of these parameters must be provided.
 
         Args:
-          domain: Domain name to retrieve brand data for
+          domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
+              Cannot be used with name or ticker parameters.
 
-          force_language: Optional parameter to force the language of the retrieved brand data
+          force_language: Optional parameter to force the language of the retrieved brand data. Works with
+              all three lookup methods.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
-              less comprehensive data.
+              less comprehensive data. Works with all three lookup methods.
+
+          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
+              Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
+              parameters.
+
+          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
+              Must be 1-6 characters, letters/numbers/dots only. Cannot be used with domain or
+              name parameters.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -704,6 +732,8 @@ class AsyncBrandResource(AsyncAPIResource):
                         "domain": domain,
                         "force_language": force_language,
                         "max_speed": max_speed,
+                        "name": name,
+                        "ticker": ticker,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,

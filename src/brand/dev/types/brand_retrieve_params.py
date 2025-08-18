@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,8 +10,11 @@ __all__ = ["BrandRetrieveParams"]
 
 
 class BrandRetrieveParams(TypedDict, total=False):
-    domain: Required[str]
-    """Domain name to retrieve brand data for"""
+    domain: str
+    """Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
+
+    Cannot be used with name or ticker parameters.
+    """
 
     force_language: Literal[
         "albanian",
@@ -67,13 +70,31 @@ class BrandRetrieveParams(TypedDict, total=False):
         "vietnamese",
         "welsh",
     ]
-    """Optional parameter to force the language of the retrieved brand data"""
+    """Optional parameter to force the language of the retrieved brand data.
+
+    Works with all three lookup methods.
+    """
 
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
     When set to true, the API will skip time-consuming operations for faster
-    response at the cost of less comprehensive data.
+    response at the cost of less comprehensive data. Works with all three lookup
+    methods.
+    """
+
+    name: str
+    """
+    Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
+    Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
+    parameters.
+    """
+
+    ticker: str
+    """Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
+
+    Must be 1-6 characters, letters/numbers/dots only. Cannot be used with domain or
+    name parameters.
     """
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
