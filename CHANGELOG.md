@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.12.0 (2025-08-19)
+
+Full Changelog: [v1.11.0...v1.12.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.11.0...v1.12.0)
+
+### Features
+
+* **api:** api update ([f91ea74](https://github.com/brand-dot-dev/python-sdk/commit/f91ea744a88f266bc754d3225fbeb90e01d8c759))
+* **api:** api update ([ed3e4c7](https://github.com/brand-dot-dev/python-sdk/commit/ed3e4c7f6f4d0e23f1879959ac1cc534454ff8d8))
+* **api:** api update ([eb66567](https://github.com/brand-dot-dev/python-sdk/commit/eb66567eee137fe637b6629a0113b3af26eae9e9))
+
+
+### Chores
+
+* **internal:** codegen related update ([2b591ec](https://github.com/brand-dot-dev/python-sdk/commit/2b591ec1951445ed47e3c7d5e2f129e04133b42e))
+* **internal:** fix ruff target version ([8674d17](https://github.com/brand-dot-dev/python-sdk/commit/8674d1739383a872081dbc40b3726572654a5800))
+* **internal:** update comment in script ([59767cf](https://github.com/brand-dot-dev/python-sdk/commit/59767cfff3a11d740c30d764b566730551b1e259))
+* update @stainless-api/prism-cli to v5.15.0 ([c3e909c](https://github.com/brand-dot-dev/python-sdk/commit/c3e909c65e6d21d669321ac53dbb7ac84a5d9afc))
+
 ## 1.11.0 (2025-07-31)
 
 Full Changelog: [v1.10.1...v1.11.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.10.1...v1.11.0)
