@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.1 (2025-08-22)
+
+Full Changelog: [v1.12.0...v1.12.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.12.0...v1.12.1)
+
+### Chores
+
+* update github action ([66063f3](https://github.com/brand-dot-dev/python-sdk/commit/66063f3144f528c5268e056fd4e90ae65d759c30))
+
 ## 1.12.0 (2025-08-19)
 
 Full Changelog: [v1.11.0...v1.12.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.11.0...v1.12.0)
