@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.13.0 (2025-09-07)
+
+Full Changelog: [v1.12.1...v1.13.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.12.1...v1.13.0)
+
+### Features
+
+* **api:** api update ([87df1d4](https://github.com/brand-dot-dev/python-sdk/commit/87df1d46a0d754a0d3dc3cc68b4fd9d2cce93356))
+* improve future compat with pydantic v3 ([3cc4580](https://github.com/brand-dot-dev/python-sdk/commit/3cc4580e2035d82876574d3515d6f0e8b3194220))
+* **types:** replace List[str] with SequenceNotStr in params ([e4204bb](https://github.com/brand-dot-dev/python-sdk/commit/e4204bb3295a96c4eeea07e306a9866d1ee8e852))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([4eda6ab](https://github.com/brand-dot-dev/python-sdk/commit/4eda6ab5d68888b9ae0a6f4c5333532603acbd06))
+
+
+### Chores
+
+* **internal:** add Sequence related utils ([6e617e9](https://github.com/brand-dot-dev/python-sdk/commit/6e617e978bd81bed9d39aa5be446c0697d96a173))
+* **internal:** change ci workflow machines ([169d92b](https://github.com/brand-dot-dev/python-sdk/commit/169d92b7eda9c15d806accc91e89033d0e4e0dc2))
+* **internal:** codegen related update ([1fe969e](https://github.com/brand-dot-dev/python-sdk/commit/1fe969e85edcb0370dbd7f926c860115939e0aa9))
+* **internal:** move mypy configurations to `pyproject.toml` file ([62bff96](https://github.com/brand-dot-dev/python-sdk/commit/62bff96543fce02199301107ad8fea0f86883ebd))
+* **internal:** update pyright exclude list ([b0ec69a](https://github.com/brand-dot-dev/python-sdk/commit/b0ec69ae1a0caa28e00b37df2ad8e602ca127c35))
+
 ## 1.12.1 (2025-08-22)
 
 Full Changelog: [v1.12.0...v1.12.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.12.0...v1.12.1)
