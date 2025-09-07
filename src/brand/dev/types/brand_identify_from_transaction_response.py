@@ -15,6 +15,7 @@ __all__ = [
     "BrandColor",
     "BrandIndustries",
     "BrandIndustriesEic",
+    "BrandLinks",
     "BrandLogo",
     "BrandLogoColor",
     "BrandLogoResolution",
@@ -343,6 +344,26 @@ class BrandIndustries(BaseModel):
     """Easy Industry Classification - array of industry and subindustry pairs"""
 
 
+class BrandLinks(BaseModel):
+    blog: Optional[str] = None
+    """URL to the brand's blog or news page"""
+
+    careers: Optional[str] = None
+    """URL to the brand's careers or job opportunities page"""
+
+    contact: Optional[str] = None
+    """URL to the brand's contact or contact us page"""
+
+    pricing: Optional[str] = None
+    """URL to the brand's pricing or plans page"""
+
+    privacy: Optional[str] = None
+    """URL to the brand's privacy policy page"""
+
+    terms: Optional[str] = None
+    """URL to the brand's terms of service or terms and conditions page"""
+
+
 class BrandLogoColor(BaseModel):
     hex: Optional[str] = None
     """Color in hexadecimal format"""
@@ -423,6 +444,9 @@ class Brand(BaseModel):
 
     is_nsfw: Optional[bool] = None
     """Indicates whether the brand content is not safe for work (NSFW)"""
+
+    links: Optional[BrandLinks] = None
+    """Important website links for the brand"""
 
     logos: Optional[List[BrandLogo]] = None
     """An array of logos associated with the brand"""
