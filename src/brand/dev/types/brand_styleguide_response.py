@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -269,6 +270,9 @@ class Styleguide(BaseModel):
 
     element_spacing: Optional[StyleguideElementSpacing] = FieldInfo(alias="elementSpacing", default=None)
     """Spacing system used on the website"""
+
+    mode: Optional[Literal["light", "dark"]] = None
+    """The primary color mode of the website design"""
 
     shadows: Optional[StyleguideShadows] = None
     """Shadow styles used on the website"""
