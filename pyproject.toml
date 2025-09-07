@@ -1,11 +1,11 @@
 [project]
 name = "brand.dev"
-version = "1.13.0"
+version = "1.14.0"
 description = "The official Python library for the brand.dev API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Brand Dev", email = "" },
+{ name = "Brand Dev", email = "hello@brand.dev" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
