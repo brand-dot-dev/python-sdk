@@ -445,6 +445,9 @@ class BrandResource(SyncAPIResource):
         *,
         domain: str,
         full_screenshot: Literal["true", "false"] | NotGiven = NOT_GIVEN,
+        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"]
+        | NotGiven = NOT_GIVEN,
+        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -455,8 +458,9 @@ class BrandResource(SyncAPIResource):
         """Beta feature: Capture a screenshot of a website.
 
         Supports both viewport
-        (standard browser view) and full-page screenshots. Returns a URL to the uploaded
-        screenshot image hosted on our CDN.
+        (standard browser view) and full-page screenshots. Can also screenshot specific
+        page types (login, pricing, etc.) by using heuristics to find the appropriate
+        URL. Returns a URL to the uploaded screenshot image hosted on our CDN.
 
         Args:
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
@@ -465,6 +469,15 @@ class BrandResource(SyncAPIResource):
           full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
               screenshot capturing all content. If 'false' or not provided, takes a viewport
               screenshot (standard browser view).
+
+          page: Optional parameter to specify which page type to screenshot. If provided, the
+              system will scrape the domain's links and use heuristics to find the most
+              appropriate URL for the specified page type (30 supported languages). If not
+              provided, screenshots the main domain landing page.
+
+          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
+              faster capture with basic quality. If 'quality', optimizes for higher quality
+              with longer wait times. Defaults to 'quality' if not provided.
 
           extra_headers: Send extra headers
 
@@ -485,6 +498,8 @@ class BrandResource(SyncAPIResource):
                     {
                         "domain": domain,
                         "full_screenshot": full_screenshot,
+                        "page": page,
+                        "prioritize": prioritize,
                     },
                     brand_screenshot_params.BrandScreenshotParams,
                 ),
@@ -496,6 +511,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
         timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -512,6 +528,11 @@ class BrandResource(SyncAPIResource):
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
               domain will be automatically normalized and validated.
+
+          prioritize: Optional parameter to prioritize screenshot capture for styleguide extraction.
+              If 'speed', optimizes for faster capture with basic quality. If 'quality',
+              optimizes for higher quality with longer wait times. Defaults to 'speed' if not
+              provided.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -535,6 +556,7 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "domain": domain,
+                        "prioritize": prioritize,
                         "timeout_ms": timeout_ms,
                     },
                     brand_styleguide_params.BrandStyleguideParams,
@@ -949,6 +971,9 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         domain: str,
         full_screenshot: Literal["true", "false"] | NotGiven = NOT_GIVEN,
+        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"]
+        | NotGiven = NOT_GIVEN,
+        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -959,8 +984,9 @@ class AsyncBrandResource(AsyncAPIResource):
         """Beta feature: Capture a screenshot of a website.
 
         Supports both viewport
-        (standard browser view) and full-page screenshots. Returns a URL to the uploaded
-        screenshot image hosted on our CDN.
+        (standard browser view) and full-page screenshots. Can also screenshot specific
+        page types (login, pricing, etc.) by using heuristics to find the appropriate
+        URL. Returns a URL to the uploaded screenshot image hosted on our CDN.
 
         Args:
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
@@ -969,6 +995,15 @@ class AsyncBrandResource(AsyncAPIResource):
           full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
               screenshot capturing all content. If 'false' or not provided, takes a viewport
               screenshot (standard browser view).
+
+          page: Optional parameter to specify which page type to screenshot. If provided, the
+              system will scrape the domain's links and use heuristics to find the most
+              appropriate URL for the specified page type (30 supported languages). If not
+              provided, screenshots the main domain landing page.
+
+          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
+              faster capture with basic quality. If 'quality', optimizes for higher quality
+              with longer wait times. Defaults to 'quality' if not provided.
 
           extra_headers: Send extra headers
 
@@ -989,6 +1024,8 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "domain": domain,
                         "full_screenshot": full_screenshot,
+                        "page": page,
+                        "prioritize": prioritize,
                     },
                     brand_screenshot_params.BrandScreenshotParams,
                 ),
@@ -1000,6 +1037,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
         timeout_ms: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1016,6 +1054,11 @@ class AsyncBrandResource(AsyncAPIResource):
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
               domain will be automatically normalized and validated.
+
+          prioritize: Optional parameter to prioritize screenshot capture for styleguide extraction.
+              If 'speed', optimizes for faster capture with basic quality. If 'quality',
+              optimizes for higher quality with longer wait times. Defaults to 'speed' if not
+              provided.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1039,6 +1082,7 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "domain": domain,
+                        "prioritize": prioritize,
                         "timeout_ms": timeout_ms,
                     },
                     brand_styleguide_params.BrandStyleguideParams,

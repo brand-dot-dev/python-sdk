@@ -338,6 +338,8 @@ class TestBrand:
         brand = client.brand.screenshot(
             domain="domain",
             full_screenshot="true",
+            page="login",
+            prioritize="speed",
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
@@ -380,6 +382,7 @@ class TestBrand:
     def test_method_styleguide_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.styleguide(
             domain="domain",
+            prioritize="speed",
             timeout_ms=1,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
@@ -728,6 +731,8 @@ class TestAsyncBrand:
         brand = await async_client.brand.screenshot(
             domain="domain",
             full_screenshot="true",
+            page="login",
+            prioritize="speed",
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
@@ -770,6 +775,7 @@ class TestAsyncBrand:
     async def test_method_styleguide_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.styleguide(
             domain="domain",
+            prioritize="speed",
             timeout_ms=1,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
