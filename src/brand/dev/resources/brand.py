@@ -17,7 +17,7 @@ from ..types import (
     brand_retrieve_simplified_params,
     brand_identify_from_transaction_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -63,7 +63,7 @@ class BrandResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        domain: str | NotGiven = NOT_GIVEN,
+        domain: str | Omit = omit,
         force_language: Literal[
             "albanian",
             "arabic",
@@ -118,17 +118,17 @@ class BrandResource(SyncAPIResource):
             "vietnamese",
             "welsh",
         ]
-        | NotGiven = NOT_GIVEN,
-        max_speed: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        ticker: str | NotGiven = NOT_GIVEN,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
+        name: str | Omit = omit,
+        ticker: str | Omit = omit,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveResponse:
         """
         Retrieve brand information using one of three methods: domain name, company
@@ -192,14 +192,14 @@ class BrandResource(SyncAPIResource):
         *,
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
-        specific_pages: brand_ai_query_params.SpecificPages | NotGiven = NOT_GIVEN,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIQueryResponse:
         """Beta feature: Use AI to extract specific data points from a brand's website.
 
@@ -247,13 +247,13 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         transaction_info: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandIdentifyFromTransactionResponse:
         """
         Endpoint specially designed for platforms that want to identify transaction data
@@ -296,13 +296,13 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
@@ -344,13 +344,13 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         input: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveNaicsResponse:
         """
         Endpoint to classify any brand into a 2022 NAICS code.
@@ -394,13 +394,13 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
@@ -444,16 +444,15 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
-        full_screenshot: Literal["true", "false"] | NotGiven = NOT_GIVEN,
-        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"]
-        | NotGiven = NOT_GIVEN,
-        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
+        full_screenshot: Literal["true", "false"] | Omit = omit,
+        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
+        prioritize: Literal["speed", "quality"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
         """Beta feature: Capture a screenshot of a website.
 
@@ -511,14 +510,14 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
-        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        prioritize: Literal["speed", "quality"] | Omit = omit,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
         Beta feature: Automatically extract comprehensive design system information from
@@ -589,7 +588,7 @@ class AsyncBrandResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        domain: str | NotGiven = NOT_GIVEN,
+        domain: str | Omit = omit,
         force_language: Literal[
             "albanian",
             "arabic",
@@ -644,17 +643,17 @@ class AsyncBrandResource(AsyncAPIResource):
             "vietnamese",
             "welsh",
         ]
-        | NotGiven = NOT_GIVEN,
-        max_speed: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        ticker: str | NotGiven = NOT_GIVEN,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
+        name: str | Omit = omit,
+        ticker: str | Omit = omit,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveResponse:
         """
         Retrieve brand information using one of three methods: domain name, company
@@ -718,14 +717,14 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
         domain: str,
-        specific_pages: brand_ai_query_params.SpecificPages | NotGiven = NOT_GIVEN,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIQueryResponse:
         """Beta feature: Use AI to extract specific data points from a brand's website.
 
@@ -773,13 +772,13 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         transaction_info: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandIdentifyFromTransactionResponse:
         """
         Endpoint specially designed for platforms that want to identify transaction data
@@ -822,13 +821,13 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
@@ -870,13 +869,13 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         input: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveNaicsResponse:
         """
         Endpoint to classify any brand into a 2022 NAICS code.
@@ -920,13 +919,13 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
@@ -970,16 +969,15 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
-        full_screenshot: Literal["true", "false"] | NotGiven = NOT_GIVEN,
-        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"]
-        | NotGiven = NOT_GIVEN,
-        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
+        full_screenshot: Literal["true", "false"] | Omit = omit,
+        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
+        prioritize: Literal["speed", "quality"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
         """Beta feature: Capture a screenshot of a website.
 
@@ -1037,14 +1035,14 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
-        prioritize: Literal["speed", "quality"] | NotGiven = NOT_GIVEN,
-        timeout_ms: int | NotGiven = NOT_GIVEN,
+        prioritize: Literal["speed", "quality"] | Omit = omit,
+        timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
         Beta feature: Automatically extract comprehensive design system information from
