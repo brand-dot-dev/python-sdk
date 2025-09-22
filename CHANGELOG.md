@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.16.0 (2025-09-22)
+
+Full Changelog: [v1.15.0...v1.16.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.15.0...v1.16.0)
+
+### Features
+
+* **api:** api update ([b4f32bb](https://github.com/brand-dot-dev/python-sdk/commit/b4f32bbe3594730346a863e6cc9872880a6a0c67))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([f856a6b](https://github.com/brand-dot-dev/python-sdk/commit/f856a6b751a5ff4c057eed53c9b765fa88b1df09))
+* **internal:** update pydantic dependency ([7800848](https://github.com/brand-dot-dev/python-sdk/commit/7800848421ccea5af40e1c7cc8c15708b1c4948d))
+* **types:** change optional parameter type from NotGiven to Omit ([ef0373e](https://github.com/brand-dot-dev/python-sdk/commit/ef0373ec0840486ad33c4cac1af9e306d12debc9))
+
 ## 1.15.0 (2025-09-14)
 
 Full Changelog: [v1.14.0...v1.15.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.14.0...v1.15.0)
