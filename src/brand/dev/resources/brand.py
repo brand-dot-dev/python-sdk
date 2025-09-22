@@ -530,8 +530,8 @@ class BrandResource(SyncAPIResource):
 
           prioritize: Optional parameter to prioritize screenshot capture for styleguide extraction.
               If 'speed', optimizes for faster capture with basic quality. If 'quality',
-              optimizes for higher quality with longer wait times. Defaults to 'speed' if not
-              provided.
+              optimizes for higher quality with longer wait times. Defaults to 'quality' if
+              not provided.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1055,8 +1055,8 @@ class AsyncBrandResource(AsyncAPIResource):
 
           prioritize: Optional parameter to prioritize screenshot capture for styleguide extraction.
               If 'speed', optimizes for faster capture with basic quality. If 'quality',
-              optimizes for higher quality with longer wait times. Defaults to 'speed' if not
-              provided.
+              optimizes for higher quality with longer wait times. Defaults to 'quality' if
+              not provided.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
