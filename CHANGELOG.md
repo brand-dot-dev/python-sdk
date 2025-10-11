@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.17.1 (2025-10-11)
+
+Full Changelog: [v1.17.0...v1.17.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.17.0...v1.17.1)
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([2d0454e](https://github.com/brand-dot-dev/python-sdk/commit/2d0454e6f67dd4700753139aa49c7c774ead033a))
+
 ## 1.17.0 (2025-10-08)
 
 Full Changelog: [v1.16.0...v1.17.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.16.0...v1.17.0)
