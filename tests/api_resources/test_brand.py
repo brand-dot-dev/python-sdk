@@ -41,9 +41,6 @@ class TestBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
-            name="xxx",
-            ticker="ticker",
-            ticker_exchange="AMEX",
             timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -526,9 +523,6 @@ class TestAsyncBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
-            name="xxx",
-            ticker="ticker",
-            ticker_exchange="AMEX",
             timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])

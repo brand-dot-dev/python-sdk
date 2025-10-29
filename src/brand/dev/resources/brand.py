@@ -124,83 +124,6 @@ class BrandResource(SyncAPIResource):
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
-        name: str | Omit = omit,
-        ticker: str | Omit = omit,
-        ticker_exchange: Literal[
-            "AMEX",
-            "AMS",
-            "AQS",
-            "ASX",
-            "ATH",
-            "BER",
-            "BME",
-            "BRU",
-            "BSE",
-            "BUD",
-            "BUE",
-            "BVC",
-            "CBOE",
-            "CNQ",
-            "CPH",
-            "DFM",
-            "DOH",
-            "DUB",
-            "DUS",
-            "DXE",
-            "EGX",
-            "FSX",
-            "HAM",
-            "HEL",
-            "HKSE",
-            "HOSE",
-            "ICE",
-            "IOB",
-            "IST",
-            "JKT",
-            "JNB",
-            "JPX",
-            "KLS",
-            "KOE",
-            "KSC",
-            "KUW",
-            "LIS",
-            "LSE",
-            "MCX",
-            "MEX",
-            "MIL",
-            "MUN",
-            "NASDAQ",
-            "NEO",
-            "NSE",
-            "NYSE",
-            "NZE",
-            "OSL",
-            "OTC",
-            "PAR",
-            "PNK",
-            "PRA",
-            "RIS",
-            "SAO",
-            "SAU",
-            "SES",
-            "SET",
-            "SGO",
-            "SHH",
-            "SHZ",
-            "SIX",
-            "STO",
-            "STU",
-            "TAI",
-            "TAL",
-            "TLV",
-            "TSX",
-            "TSXV",
-            "TWO",
-            "VIE",
-            "WSE",
-            "XETRA",
-        ]
-        | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -210,8 +133,7 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveResponse:
         """
-        Retrieve brand information using one of three methods: domain name, company
-        name, or stock ticker symbol. Exactly one of these parameters must be provided.
+        Retrieve brand information from a domain name
 
         Args:
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
@@ -223,17 +145,6 @@ class BrandResource(SyncAPIResource):
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data. Works with all three lookup methods.
-
-          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
-              Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
-              parameters.
-
-          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
-              Must be 1-15 characters, letters/numbers/dots only. Cannot be used with domain
-              or name parameters.
-
-          ticker_exchange: Optional stock exchange for the ticker. Only used when ticker parameter is
-              provided. Defaults to assume ticker is American if not specified.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -259,9 +170,6 @@ class BrandResource(SyncAPIResource):
                         "domain": domain,
                         "force_language": force_language,
                         "max_speed": max_speed,
-                        "name": name,
-                        "ticker": ticker,
-                        "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
@@ -1036,83 +944,6 @@ class AsyncBrandResource(AsyncAPIResource):
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
-        name: str | Omit = omit,
-        ticker: str | Omit = omit,
-        ticker_exchange: Literal[
-            "AMEX",
-            "AMS",
-            "AQS",
-            "ASX",
-            "ATH",
-            "BER",
-            "BME",
-            "BRU",
-            "BSE",
-            "BUD",
-            "BUE",
-            "BVC",
-            "CBOE",
-            "CNQ",
-            "CPH",
-            "DFM",
-            "DOH",
-            "DUB",
-            "DUS",
-            "DXE",
-            "EGX",
-            "FSX",
-            "HAM",
-            "HEL",
-            "HKSE",
-            "HOSE",
-            "ICE",
-            "IOB",
-            "IST",
-            "JKT",
-            "JNB",
-            "JPX",
-            "KLS",
-            "KOE",
-            "KSC",
-            "KUW",
-            "LIS",
-            "LSE",
-            "MCX",
-            "MEX",
-            "MIL",
-            "MUN",
-            "NASDAQ",
-            "NEO",
-            "NSE",
-            "NYSE",
-            "NZE",
-            "OSL",
-            "OTC",
-            "PAR",
-            "PNK",
-            "PRA",
-            "RIS",
-            "SAO",
-            "SAU",
-            "SES",
-            "SET",
-            "SGO",
-            "SHH",
-            "SHZ",
-            "SIX",
-            "STO",
-            "STU",
-            "TAI",
-            "TAL",
-            "TLV",
-            "TSX",
-            "TSXV",
-            "TWO",
-            "VIE",
-            "WSE",
-            "XETRA",
-        ]
-        | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1122,8 +953,7 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveResponse:
         """
-        Retrieve brand information using one of three methods: domain name, company
-        name, or stock ticker symbol. Exactly one of these parameters must be provided.
+        Retrieve brand information from a domain name
 
         Args:
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
@@ -1135,17 +965,6 @@ class AsyncBrandResource(AsyncAPIResource):
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
               less comprehensive data. Works with all three lookup methods.
-
-          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
-              Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
-              parameters.
-
-          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
-              Must be 1-15 characters, letters/numbers/dots only. Cannot be used with domain
-              or name parameters.
-
-          ticker_exchange: Optional stock exchange for the ticker. Only used when ticker parameter is
-              provided. Defaults to assume ticker is American if not specified.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1171,9 +990,6 @@ class AsyncBrandResource(AsyncAPIResource):
                         "domain": domain,
                         "force_language": force_language,
                         "max_speed": max_speed,
-                        "name": name,
-                        "ticker": ticker,
-                        "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_params.BrandRetrieveParams,
