@@ -165,6 +165,8 @@ class TestBrand:
     def test_method_identify_from_transaction_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
             transaction_info="transaction_info",
+            force_language="albanian",
+            max_speed=True,
             timeout_ms=1,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -647,6 +649,8 @@ class TestAsyncBrand:
     async def test_method_identify_from_transaction_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
             transaction_info="transaction_info",
+            force_language="albanian",
+            max_speed=True,
             timeout_ms=1,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
