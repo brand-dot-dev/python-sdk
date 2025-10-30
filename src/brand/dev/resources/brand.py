@@ -133,7 +133,8 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveResponse:
         """
-        Retrieve brand information from a domain name
+        Retrieve logos, backdrops, colors, industry, description, and more from any
+        domain
 
         Args:
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
@@ -238,6 +239,62 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         transaction_info: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -252,6 +309,12 @@ class BrandResource(SyncAPIResource):
 
         Args:
           transaction_info: Transaction information to identify the brand
+
+          force_language: Optional parameter to force the language of the retrieved brand data.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -275,6 +338,8 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "transaction_info": transaction_info,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
@@ -953,7 +1018,8 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveResponse:
         """
-        Retrieve brand information from a domain name
+        Retrieve logos, backdrops, colors, industry, description, and more from any
+        domain
 
         Args:
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
@@ -1058,6 +1124,62 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         transaction_info: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1072,6 +1194,12 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           transaction_info: Transaction information to identify the brand
+
+          force_language: Optional parameter to force the language of the retrieved brand data.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1095,6 +1223,8 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "transaction_info": transaction_info,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
