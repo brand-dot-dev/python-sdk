@@ -16,6 +16,8 @@ from brand.dev.types import (
     BrandScreenshotResponse,
     BrandStyleguideResponse,
     BrandRetrieveNaicsResponse,
+    BrandRetrieveByNameResponse,
+    BrandRetrieveByTickerResponse,
     BrandRetrieveSimplifiedResponse,
     BrandIdentifyFromTransactionResponse,
 )
@@ -39,9 +41,6 @@ class TestBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
-            name="xxx",
-            ticker="ticker",
-            ticker_exchange="AMEX",
             timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -166,6 +165,8 @@ class TestBrand:
     def test_method_identify_from_transaction_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
             transaction_info="transaction_info",
+            force_language="albanian",
+            max_speed=True,
             timeout_ms=1,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -236,6 +237,97 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_by_name(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_name(
+            name="xxx",
+        )
+        assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_by_name_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_name(
+            name="xxx",
+            force_language="albanian",
+            max_speed=True,
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_by_name(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.retrieve_by_name(
+            name="xxx",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_by_name(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.retrieve_by_name(
+            name="xxx",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_by_ticker(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_ticker(
+            ticker="ticker",
+        )
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_ticker(
+            ticker="ticker",
+            force_language="albanian",
+            max_speed=True,
+            ticker_exchange="AMEX",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_by_ticker(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.retrieve_by_ticker(
+            ticker="ticker",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_by_ticker(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.retrieve_by_ticker(
+            ticker="ticker",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -433,9 +525,6 @@ class TestAsyncBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
-            name="xxx",
-            ticker="ticker",
-            ticker_exchange="AMEX",
             timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
@@ -560,6 +649,8 @@ class TestAsyncBrand:
     async def test_method_identify_from_transaction_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
             transaction_info="transaction_info",
+            force_language="albanian",
+            max_speed=True,
             timeout_ms=1,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -630,6 +721,97 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_by_name(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_name(
+            name="xxx",
+        )
+        assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_by_name_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_name(
+            name="xxx",
+            force_language="albanian",
+            max_speed=True,
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_by_name(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.retrieve_by_name(
+            name="xxx",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_by_name(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.retrieve_by_name(
+            name="xxx",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_ticker(
+            ticker="ticker",
+        )
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_ticker(
+            ticker="ticker",
+            force_language="albanian",
+            max_speed=True,
+            ticker_exchange="AMEX",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.retrieve_by_ticker(
+            ticker="ticker",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.retrieve_by_ticker(
+            ticker="ticker",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

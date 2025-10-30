@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["BrandRetrieveParams"]
+__all__ = ["BrandRetrieveByNameParams"]
 
 
-class BrandRetrieveParams(TypedDict, total=False):
-    domain: str
-    """Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
-
-    Cannot be used with name or ticker parameters.
+class BrandRetrieveByNameParams(TypedDict, total=False):
+    name: Required[str]
+    """
+    Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
+    Corporation'). Must be 3-30 characters.
     """
 
     force_language: Literal[
@@ -70,17 +70,13 @@ class BrandRetrieveParams(TypedDict, total=False):
         "vietnamese",
         "welsh",
     ]
-    """Optional parameter to force the language of the retrieved brand data.
-
-    Works with all three lookup methods.
-    """
+    """Optional parameter to force the language of the retrieved brand data."""
 
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
     When set to true, the API will skip time-consuming operations for faster
-    response at the cost of less comprehensive data. Works with all three lookup
-    methods.
+    response at the cost of less comprehensive data.
     """
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]

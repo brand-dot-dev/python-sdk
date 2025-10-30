@@ -14,6 +14,8 @@ from ..types import (
     brand_screenshot_params,
     brand_styleguide_params,
     brand_retrieve_naics_params,
+    brand_retrieve_by_name_params,
+    brand_retrieve_by_ticker_params,
     brand_retrieve_simplified_params,
     brand_identify_from_transaction_params,
 )
@@ -34,6 +36,8 @@ from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_screenshot_response import BrandScreenshotResponse
 from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
+from ..types.brand_retrieve_by_name_response import BrandRetrieveByNameResponse
+from ..types.brand_retrieve_by_ticker_response import BrandRetrieveByTickerResponse
 from ..types.brand_retrieve_simplified_response import BrandRetrieveSimplifiedResponse
 from ..types.brand_identify_from_transaction_response import BrandIdentifyFromTransactionResponse
 
@@ -120,8 +124,453 @@ class BrandResource(SyncAPIResource):
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
-        name: str | Omit = omit,
-        ticker: str | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandRetrieveResponse:
+        """
+        Retrieve logos, backdrops, colors, industry, description, and more from any
+        domain
+
+        Args:
+          domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
+              Cannot be used with name or ticker parameters.
+
+          force_language: Optional parameter to force the language of the retrieved brand data. Works with
+              all three lookup methods.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data. Works with all three lookup methods.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/retrieve",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "domain": domain,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_params.BrandRetrieveParams,
+                ),
+            ),
+            cast_to=BrandRetrieveResponse,
+        )
+
+    def ai_query(
+        self,
+        *,
+        data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
+        domain: str,
+        specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIQueryResponse:
+        """Beta feature: Use AI to extract specific data points from a brand's website.
+
+        The
+        AI will crawl the website and extract the requested information based on the
+        provided data points.
+
+        Args:
+          data_to_extract: Array of data points to extract from the website
+
+          domain: The domain name to analyze
+
+          specific_pages: Optional object specifying which pages to analyze
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/ai/query",
+            body=maybe_transform(
+                {
+                    "data_to_extract": data_to_extract,
+                    "domain": domain,
+                    "specific_pages": specific_pages,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_ai_query_params.BrandAIQueryParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIQueryResponse,
+        )
+
+    def identify_from_transaction(
+        self,
+        *,
+        transaction_info: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandIdentifyFromTransactionResponse:
+        """
+        Endpoint specially designed for platforms that want to identify transaction data
+        by the transaction title.
+
+        Args:
+          transaction_info: Transaction information to identify the brand
+
+          force_language: Optional parameter to force the language of the retrieved brand data.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/transaction_identifier",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "transaction_info": transaction_info,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
+                ),
+            ),
+            cast_to=BrandIdentifyFromTransactionResponse,
+        )
+
+    def prefetch(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandPrefetchResponse:
+        """
+        Signal that you may fetch brand data for a particular domain soon to improve
+        latency. This endpoint does not charge credits and is available for paid
+        customers to optimize future requests. [You must be on a paid plan to use this
+        endpoint]
+
+        Args:
+          domain: Domain name to prefetch brand data for
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/prefetch",
+            body=maybe_transform(
+                {
+                    "domain": domain,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_prefetch_params.BrandPrefetchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandPrefetchResponse,
+        )
+
+    def retrieve_by_name(
+        self,
+        *,
+        name: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandRetrieveByNameResponse:
+        """Retrieve brand information using a company name.
+
+        This endpoint searches for the
+        company by name and returns its brand data.
+
+        Args:
+          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
+              Corporation'). Must be 3-30 characters.
+
+          force_language: Optional parameter to force the language of the retrieved brand data.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/retrieve-by-name",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "name": name,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_by_name_params.BrandRetrieveByNameParams,
+                ),
+            ),
+            cast_to=BrandRetrieveByNameResponse,
+        )
+
+    def retrieve_by_ticker(
+        self,
+        *,
+        ticker: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
         ticker_exchange: Literal[
             "AMEX",
             "AMS",
@@ -204,32 +653,23 @@ class BrandResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandRetrieveResponse:
-        """
-        Retrieve brand information using one of three methods: domain name, company
-        name, or stock ticker symbol. Exactly one of these parameters must be provided.
+    ) -> BrandRetrieveByTickerResponse:
+        """Retrieve brand information using a stock ticker symbol.
+
+        This endpoint looks up
+        the company associated with the ticker and returns its brand data.
 
         Args:
-          domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
-              Cannot be used with name or ticker parameters.
+          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
+              Must be 1-15 characters, letters/numbers/dots only.
 
-          force_language: Optional parameter to force the language of the retrieved brand data. Works with
-              all three lookup methods.
+          force_language: Optional parameter to force the language of the retrieved brand data.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
-              less comprehensive data. Works with all three lookup methods.
+              less comprehensive data.
 
-          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
-              Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
-              parameters.
-
-          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
-              Must be 1-15 characters, letters/numbers/dots only. Cannot be used with domain
-              or name parameters.
-
-          ticker_exchange: Optional stock exchange for the ticker. Only used when ticker parameter is
-              provided. Defaults to assume ticker is American if not specified.
+          ticker_exchange: Optional stock exchange for the ticker. Defaults to NASDAQ if not specified.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -244,7 +684,7 @@ class BrandResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/brand/retrieve",
+            "/brand/retrieve-by-ticker",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -252,171 +692,16 @@ class BrandResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "domain": domain,
+                        "ticker": ticker,
                         "force_language": force_language,
                         "max_speed": max_speed,
-                        "name": name,
-                        "ticker": ticker,
                         "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
-                    brand_retrieve_params.BrandRetrieveParams,
+                    brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams,
                 ),
             ),
-            cast_to=BrandRetrieveResponse,
-        )
-
-    def ai_query(
-        self,
-        *,
-        data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
-        domain: str,
-        specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandAIQueryResponse:
-        """Beta feature: Use AI to extract specific data points from a brand's website.
-
-        The
-        AI will crawl the website and extract the requested information based on the
-        provided data points.
-
-        Args:
-          data_to_extract: Array of data points to extract from the website
-
-          domain: The domain name to analyze
-
-          specific_pages: Optional object specifying which pages to analyze
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/brand/ai/query",
-            body=maybe_transform(
-                {
-                    "data_to_extract": data_to_extract,
-                    "domain": domain,
-                    "specific_pages": specific_pages,
-                    "timeout_ms": timeout_ms,
-                },
-                brand_ai_query_params.BrandAIQueryParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrandAIQueryResponse,
-        )
-
-    def identify_from_transaction(
-        self,
-        *,
-        transaction_info: str,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandIdentifyFromTransactionResponse:
-        """
-        Endpoint specially designed for platforms that want to identify transaction data
-        by the transaction title.
-
-        Args:
-          transaction_info: Transaction information to identify the brand
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/transaction_identifier",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "transaction_info": transaction_info,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
-                ),
-            ),
-            cast_to=BrandIdentifyFromTransactionResponse,
-        )
-
-    def prefetch(
-        self,
-        *,
-        domain: str,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandPrefetchResponse:
-        """
-        Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
-
-        Args:
-          domain: Domain name to prefetch brand data for
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/brand/prefetch",
-            body=maybe_transform(
-                {
-                    "domain": domain,
-                    "timeout_ms": timeout_ms,
-                },
-                brand_prefetch_params.BrandPrefetchParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrandPrefetchResponse,
+            cast_to=BrandRetrieveByTickerResponse,
         )
 
     def retrieve_naics(
@@ -724,8 +1009,453 @@ class AsyncBrandResource(AsyncAPIResource):
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
-        name: str | Omit = omit,
-        ticker: str | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandRetrieveResponse:
+        """
+        Retrieve logos, backdrops, colors, industry, description, and more from any
+        domain
+
+        Args:
+          domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
+              Cannot be used with name or ticker parameters.
+
+          force_language: Optional parameter to force the language of the retrieved brand data. Works with
+              all three lookup methods.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data. Works with all three lookup methods.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/retrieve",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "domain": domain,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_params.BrandRetrieveParams,
+                ),
+            ),
+            cast_to=BrandRetrieveResponse,
+        )
+
+    async def ai_query(
+        self,
+        *,
+        data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
+        domain: str,
+        specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIQueryResponse:
+        """Beta feature: Use AI to extract specific data points from a brand's website.
+
+        The
+        AI will crawl the website and extract the requested information based on the
+        provided data points.
+
+        Args:
+          data_to_extract: Array of data points to extract from the website
+
+          domain: The domain name to analyze
+
+          specific_pages: Optional object specifying which pages to analyze
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/ai/query",
+            body=await async_maybe_transform(
+                {
+                    "data_to_extract": data_to_extract,
+                    "domain": domain,
+                    "specific_pages": specific_pages,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_ai_query_params.BrandAIQueryParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIQueryResponse,
+        )
+
+    async def identify_from_transaction(
+        self,
+        *,
+        transaction_info: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandIdentifyFromTransactionResponse:
+        """
+        Endpoint specially designed for platforms that want to identify transaction data
+        by the transaction title.
+
+        Args:
+          transaction_info: Transaction information to identify the brand
+
+          force_language: Optional parameter to force the language of the retrieved brand data.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/transaction_identifier",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "transaction_info": transaction_info,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
+                ),
+            ),
+            cast_to=BrandIdentifyFromTransactionResponse,
+        )
+
+    async def prefetch(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandPrefetchResponse:
+        """
+        Signal that you may fetch brand data for a particular domain soon to improve
+        latency. This endpoint does not charge credits and is available for paid
+        customers to optimize future requests. [You must be on a paid plan to use this
+        endpoint]
+
+        Args:
+          domain: Domain name to prefetch brand data for
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/prefetch",
+            body=await async_maybe_transform(
+                {
+                    "domain": domain,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_prefetch_params.BrandPrefetchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandPrefetchResponse,
+        )
+
+    async def retrieve_by_name(
+        self,
+        *,
+        name: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandRetrieveByNameResponse:
+        """Retrieve brand information using a company name.
+
+        This endpoint searches for the
+        company by name and returns its brand data.
+
+        Args:
+          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
+              Corporation'). Must be 3-30 characters.
+
+          force_language: Optional parameter to force the language of the retrieved brand data.
+
+          max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
+              the API will skip time-consuming operations for faster response at the cost of
+              less comprehensive data.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/retrieve-by-name",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "name": name,
+                        "force_language": force_language,
+                        "max_speed": max_speed,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_retrieve_by_name_params.BrandRetrieveByNameParams,
+                ),
+            ),
+            cast_to=BrandRetrieveByNameResponse,
+        )
+
+    async def retrieve_by_ticker(
+        self,
+        *,
+        ticker: str,
+        force_language: Literal[
+            "albanian",
+            "arabic",
+            "azeri",
+            "bengali",
+            "bulgarian",
+            "cebuano",
+            "croatian",
+            "czech",
+            "danish",
+            "dutch",
+            "english",
+            "estonian",
+            "farsi",
+            "finnish",
+            "french",
+            "german",
+            "hausa",
+            "hawaiian",
+            "hindi",
+            "hungarian",
+            "icelandic",
+            "indonesian",
+            "italian",
+            "kazakh",
+            "kyrgyz",
+            "latin",
+            "latvian",
+            "lithuanian",
+            "macedonian",
+            "mongolian",
+            "nepali",
+            "norwegian",
+            "pashto",
+            "pidgin",
+            "polish",
+            "portuguese",
+            "romanian",
+            "russian",
+            "serbian",
+            "slovak",
+            "slovene",
+            "somali",
+            "spanish",
+            "swahili",
+            "swedish",
+            "tagalog",
+            "turkish",
+            "ukrainian",
+            "urdu",
+            "uzbek",
+            "vietnamese",
+            "welsh",
+        ]
+        | Omit = omit,
+        max_speed: bool | Omit = omit,
         ticker_exchange: Literal[
             "AMEX",
             "AMS",
@@ -808,32 +1538,23 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandRetrieveResponse:
-        """
-        Retrieve brand information using one of three methods: domain name, company
-        name, or stock ticker symbol. Exactly one of these parameters must be provided.
+    ) -> BrandRetrieveByTickerResponse:
+        """Retrieve brand information using a stock ticker symbol.
+
+        This endpoint looks up
+        the company associated with the ticker and returns its brand data.
 
         Args:
-          domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
-              Cannot be used with name or ticker parameters.
+          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
+              Must be 1-15 characters, letters/numbers/dots only.
 
-          force_language: Optional parameter to force the language of the retrieved brand data. Works with
-              all three lookup methods.
+          force_language: Optional parameter to force the language of the retrieved brand data.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
-              less comprehensive data. Works with all three lookup methods.
+              less comprehensive data.
 
-          name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
-              Corporation'). Must be 3-30 characters. Cannot be used with domain or ticker
-              parameters.
-
-          ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
-              Must be 1-15 characters, letters/numbers/dots only. Cannot be used with domain
-              or name parameters.
-
-          ticker_exchange: Optional stock exchange for the ticker. Only used when ticker parameter is
-              provided. Defaults to assume ticker is American if not specified.
+          ticker_exchange: Optional stock exchange for the ticker. Defaults to NASDAQ if not specified.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -848,7 +1569,7 @@ class AsyncBrandResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/brand/retrieve",
+            "/brand/retrieve-by-ticker",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -856,171 +1577,16 @@ class AsyncBrandResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "domain": domain,
+                        "ticker": ticker,
                         "force_language": force_language,
                         "max_speed": max_speed,
-                        "name": name,
-                        "ticker": ticker,
                         "ticker_exchange": ticker_exchange,
                         "timeout_ms": timeout_ms,
                     },
-                    brand_retrieve_params.BrandRetrieveParams,
+                    brand_retrieve_by_ticker_params.BrandRetrieveByTickerParams,
                 ),
             ),
-            cast_to=BrandRetrieveResponse,
-        )
-
-    async def ai_query(
-        self,
-        *,
-        data_to_extract: Iterable[brand_ai_query_params.DataToExtract],
-        domain: str,
-        specific_pages: brand_ai_query_params.SpecificPages | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandAIQueryResponse:
-        """Beta feature: Use AI to extract specific data points from a brand's website.
-
-        The
-        AI will crawl the website and extract the requested information based on the
-        provided data points.
-
-        Args:
-          data_to_extract: Array of data points to extract from the website
-
-          domain: The domain name to analyze
-
-          specific_pages: Optional object specifying which pages to analyze
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/brand/ai/query",
-            body=await async_maybe_transform(
-                {
-                    "data_to_extract": data_to_extract,
-                    "domain": domain,
-                    "specific_pages": specific_pages,
-                    "timeout_ms": timeout_ms,
-                },
-                brand_ai_query_params.BrandAIQueryParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrandAIQueryResponse,
-        )
-
-    async def identify_from_transaction(
-        self,
-        *,
-        transaction_info: str,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandIdentifyFromTransactionResponse:
-        """
-        Endpoint specially designed for platforms that want to identify transaction data
-        by the transaction title.
-
-        Args:
-          transaction_info: Transaction information to identify the brand
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/transaction_identifier",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "transaction_info": transaction_info,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
-                ),
-            ),
-            cast_to=BrandIdentifyFromTransactionResponse,
-        )
-
-    async def prefetch(
-        self,
-        *,
-        domain: str,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandPrefetchResponse:
-        """
-        Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
-
-        Args:
-          domain: Domain name to prefetch brand data for
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/brand/prefetch",
-            body=await async_maybe_transform(
-                {
-                    "domain": domain,
-                    "timeout_ms": timeout_ms,
-                },
-                brand_prefetch_params.BrandPrefetchParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=BrandPrefetchResponse,
+            cast_to=BrandRetrieveByTickerResponse,
         )
 
     async def retrieve_naics(
@@ -1264,6 +1830,12 @@ class BrandResourceWithRawResponse:
         self.prefetch = to_raw_response_wrapper(
             brand.prefetch,
         )
+        self.retrieve_by_name = to_raw_response_wrapper(
+            brand.retrieve_by_name,
+        )
+        self.retrieve_by_ticker = to_raw_response_wrapper(
+            brand.retrieve_by_ticker,
+        )
         self.retrieve_naics = to_raw_response_wrapper(
             brand.retrieve_naics,
         )
@@ -1293,6 +1865,12 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.prefetch = async_to_raw_response_wrapper(
             brand.prefetch,
+        )
+        self.retrieve_by_name = async_to_raw_response_wrapper(
+            brand.retrieve_by_name,
+        )
+        self.retrieve_by_ticker = async_to_raw_response_wrapper(
+            brand.retrieve_by_ticker,
         )
         self.retrieve_naics = async_to_raw_response_wrapper(
             brand.retrieve_naics,
@@ -1324,6 +1902,12 @@ class BrandResourceWithStreamingResponse:
         self.prefetch = to_streamed_response_wrapper(
             brand.prefetch,
         )
+        self.retrieve_by_name = to_streamed_response_wrapper(
+            brand.retrieve_by_name,
+        )
+        self.retrieve_by_ticker = to_streamed_response_wrapper(
+            brand.retrieve_by_ticker,
+        )
         self.retrieve_naics = to_streamed_response_wrapper(
             brand.retrieve_naics,
         )
@@ -1353,6 +1937,12 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.prefetch = async_to_streamed_response_wrapper(
             brand.prefetch,
+        )
+        self.retrieve_by_name = async_to_streamed_response_wrapper(
+            brand.retrieve_by_name,
+        )
+        self.retrieve_by_ticker = async_to_streamed_response_wrapper(
+            brand.retrieve_by_ticker,
         )
         self.retrieve_naics = async_to_streamed_response_wrapper(
             brand.retrieve_naics,
