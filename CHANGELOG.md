@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.19.0 (2025-10-31)
+
+Full Changelog: [v1.18.0...v1.19.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.18.0...v1.19.0)
+
+### Features
+
+* **api:** manual updates ([887cd82](https://github.com/brand-dot-dev/python-sdk/commit/887cd82aaf78b8752cbf2fe8956ce81a9905d882))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([8c87170](https://github.com/brand-dot-dev/python-sdk/commit/8c8717069bf064ca9a467b1c478ed642a10d5342))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([ccaa28b](https://github.com/brand-dot-dev/python-sdk/commit/ccaa28b34cfbd24a0f46371dca4e43ab7a15fa61))
+
 ## 1.18.0 (2025-10-30)
 
 Full Changelog: [v1.17.1...v1.18.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.17.1...v1.18.0)
