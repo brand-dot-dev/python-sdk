@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.19.1 (2025-11-04)
+
+Full Changelog: [v1.19.0...v1.19.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.19.0...v1.19.1)
+
+### Chores
+
+* **internal:** grammar fix (it's -&gt; its) ([569ba5e](https://github.com/brand-dot-dev/python-sdk/commit/569ba5e3563091f8e4f770c279c805ad43cafa50))
+
 ## 1.19.0 (2025-10-31)
 
 Full Changelog: [v1.18.0...v1.19.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.18.0...v1.19.0)
