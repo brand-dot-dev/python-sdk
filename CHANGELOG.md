@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.20.0 (2025-11-19)
+
+Full Changelog: [v1.19.1...v1.20.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.19.1...v1.20.0)
+
+### Features
+
+* **api:** manual updates ([152e848](https://github.com/brand-dot-dev/python-sdk/commit/152e8489b6ecbbe717d48ac0c437e88c64e923a5))
+
+
+### Bug Fixes
+
+* compat with Python 3.14 ([8602245](https://github.com/brand-dot-dev/python-sdk/commit/860224506b4fe79750cff976b1bed305f4f826da))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([768e2d1](https://github.com/brand-dot-dev/python-sdk/commit/768e2d13ddf92adde07ad4715419caa4b3257338))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([ecc46d0](https://github.com/brand-dot-dev/python-sdk/commit/ecc46d081a6d8ecbbdb633e444218f0d12487f2b))
+
 ## 1.19.1 (2025-11-04)
 
 Full Changelog: [v1.19.0...v1.19.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.19.0...v1.19.1)

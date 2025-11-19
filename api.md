@@ -9,6 +9,7 @@ from brand.dev.types import (
     BrandIdentifyFromTransactionResponse,
     BrandPrefetchResponse,
     BrandRetrieveByEmailResponse,
+    BrandRetrieveByIsinResponse,
     BrandRetrieveByNameResponse,
     BrandRetrieveByTickerResponse,
     BrandRetrieveNaicsResponse,
@@ -25,6 +26,7 @@ Methods:
 - <code title="get /brand/transaction_identifier">client.brand.<a href="./src/brand/dev/resources/brand.py">identify_from_transaction</a>(\*\*<a href="src/brand/dev/types/brand_identify_from_transaction_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_identify_from_transaction_response.py">BrandIdentifyFromTransactionResponse</a></code>
 - <code title="post /brand/prefetch">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_response.py">BrandPrefetchResponse</a></code>
 - <code title="get /brand/retrieve-by-email">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_email</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_email_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_email_response.py">BrandRetrieveByEmailResponse</a></code>
+- <code title="get /brand/retrieve-by-isin">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_isin</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_isin_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_isin_response.py">BrandRetrieveByIsinResponse</a></code>
 - <code title="get /brand/retrieve-by-name">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_name</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_name_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_name_response.py">BrandRetrieveByNameResponse</a></code>
 - <code title="get /brand/retrieve-by-ticker">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_ticker</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_ticker_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_ticker_response.py">BrandRetrieveByTickerResponse</a></code>
 - <code title="get /brand/naics">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_naics</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_naics_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_naics_response.py">BrandRetrieveNaicsResponse</a></code>

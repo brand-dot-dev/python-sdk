@@ -16,6 +16,7 @@ from brand.dev.types import (
     BrandScreenshotResponse,
     BrandStyleguideResponse,
     BrandRetrieveNaicsResponse,
+    BrandRetrieveByIsinResponse,
     BrandRetrieveByNameResponse,
     BrandRetrieveByEmailResponse,
     BrandRetrieveByTickerResponse,
@@ -283,6 +284,51 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_by_isin(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_isin(
+            isin="SE60513A9993",
+        )
+        assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_by_isin_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.retrieve_by_isin(
+            isin="SE60513A9993",
+            force_language="albanian",
+            max_speed=True,
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve_by_isin(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.retrieve_by_isin(
+            isin="SE60513A9993",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve_by_isin(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.retrieve_by_isin(
+            isin="SE60513A9993",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -812,6 +858,51 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_by_isin(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_isin(
+            isin="SE60513A9993",
+        )
+        assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_by_isin_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.retrieve_by_isin(
+            isin="SE60513A9993",
+            force_language="albanian",
+            max_speed=True,
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve_by_isin(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.retrieve_by_isin(
+            isin="SE60513A9993",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve_by_isin(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.retrieve_by_isin(
+            isin="SE60513A9993",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
