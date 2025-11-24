@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.21.0 (2025-11-24)
+
+Full Changelog: [v1.20.0...v1.21.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.20.0...v1.21.0)
+
+### Features
+
+* **api:** api update ([66e9f1b](https://github.com/brand-dot-dev/python-sdk/commit/66e9f1bff651d0cbb90edfec969b5d8522384d55))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([c3c5690](https://github.com/brand-dot-dev/python-sdk/commit/c3c5690cda3a9e5c5ca874799cf9018119f30781))
+
 ## 1.20.0 (2025-11-19)
 
 Full Changelog: [v1.19.1...v1.20.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.19.1...v1.20.0)
