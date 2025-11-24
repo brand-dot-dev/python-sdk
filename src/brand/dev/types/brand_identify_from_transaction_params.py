@@ -257,9 +257,9 @@ class BrandIdentifyFromTransactionParams(TypedDict, total=False):
         "zm",
         "zw",
     ]
-    """
-    Optional country code (GL parameter) to specify the country for Google search
-    results. This affects the geographic location used for search queries.
+    """Optional country code (GL parameter) to specify the country.
+
+    This affects the geographic location used for search queries.
     """
 
     force_language: Literal[

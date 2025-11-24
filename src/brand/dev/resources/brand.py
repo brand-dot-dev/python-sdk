@@ -560,8 +560,8 @@ class BrandResource(SyncAPIResource):
 
           city: Optional city name to prioritize when searching for the brand.
 
-          country_gl: Optional country code (GL parameter) to specify the country for Google search
-              results. This affects the geographic location used for search queries.
+          country_gl: Optional country code (GL parameter) to specify the country. This affects the
+              geographic location used for search queries.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
 
@@ -1933,8 +1933,8 @@ class AsyncBrandResource(AsyncAPIResource):
 
           city: Optional city name to prioritize when searching for the brand.
 
-          country_gl: Optional country code (GL parameter) to specify the country for Google search
-              results. This affects the geographic location used for search queries.
+          country_gl: Optional country code (GL parameter) to specify the country. This affects the
+              geographic location used for search queries.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
 
