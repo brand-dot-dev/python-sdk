@@ -6,6 +6,7 @@ Types:
 from brand.dev.types import (
     BrandRetrieveResponse,
     BrandAIQueryResponse,
+    BrandFontsResponse,
     BrandIdentifyFromTransactionResponse,
     BrandPrefetchResponse,
     BrandRetrieveByEmailResponse,
@@ -23,6 +24,7 @@ Methods:
 
 - <code title="get /brand/retrieve">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_response.py">BrandRetrieveResponse</a></code>
 - <code title="post /brand/ai/query">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_query</a>(\*\*<a href="src/brand/dev/types/brand_ai_query_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_query_response.py">BrandAIQueryResponse</a></code>
+- <code title="get /brand/fonts">client.brand.<a href="./src/brand/dev/resources/brand.py">fonts</a>(\*\*<a href="src/brand/dev/types/brand_fonts_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_fonts_response.py">BrandFontsResponse</a></code>
 - <code title="get /brand/transaction_identifier">client.brand.<a href="./src/brand/dev/resources/brand.py">identify_from_transaction</a>(\*\*<a href="src/brand/dev/types/brand_identify_from_transaction_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_identify_from_transaction_response.py">BrandIdentifyFromTransactionResponse</a></code>
 - <code title="post /brand/prefetch">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_response.py">BrandPrefetchResponse</a></code>
 - <code title="get /brand/retrieve-by-email">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_email</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_email_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_email_response.py">BrandRetrieveByEmailResponse</a></code>
