@@ -8,6 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import (
+    brand_fonts_params,
     brand_ai_query_params,
     brand_prefetch_params,
     brand_retrieve_params,
@@ -32,6 +33,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.brand_fonts_response import BrandFontsResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
@@ -237,6 +239,56 @@ class BrandResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandAIQueryResponse,
+        )
+
+    def fonts(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandFontsResponse:
+        """
+        Beta feature: Extract font information from a brand's website including font
+        families, usage statistics, fallbacks, and element/word counts.
+
+        Args:
+          domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/brand/fonts",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "domain": domain,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_fonts_params.BrandFontsParams,
+                ),
+            ),
+            cast_to=BrandFontsResponse,
         )
 
     def identify_from_transaction(
@@ -1612,6 +1664,56 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandAIQueryResponse,
         )
 
+    async def fonts(
+        self,
+        *,
+        domain: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandFontsResponse:
+        """
+        Beta feature: Extract font information from a brand's website including font
+        families, usage statistics, fallbacks, and element/word counts.
+
+        Args:
+          domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
+              domain will be automatically normalized and validated.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/brand/fonts",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "domain": domain,
+                        "timeout_ms": timeout_ms,
+                    },
+                    brand_fonts_params.BrandFontsParams,
+                ),
+            ),
+            cast_to=BrandFontsResponse,
+        )
+
     async def identify_from_transaction(
         self,
         *,
@@ -2804,6 +2906,9 @@ class BrandResourceWithRawResponse:
         self.ai_query = to_raw_response_wrapper(
             brand.ai_query,
         )
+        self.fonts = to_raw_response_wrapper(
+            brand.fonts,
+        )
         self.identify_from_transaction = to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -2845,6 +2950,9 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.ai_query = async_to_raw_response_wrapper(
             brand.ai_query,
+        )
+        self.fonts = async_to_raw_response_wrapper(
+            brand.fonts,
         )
         self.identify_from_transaction = async_to_raw_response_wrapper(
             brand.identify_from_transaction,
@@ -2888,6 +2996,9 @@ class BrandResourceWithStreamingResponse:
         self.ai_query = to_streamed_response_wrapper(
             brand.ai_query,
         )
+        self.fonts = to_streamed_response_wrapper(
+            brand.fonts,
+        )
         self.identify_from_transaction = to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -2929,6 +3040,9 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.ai_query = async_to_streamed_response_wrapper(
             brand.ai_query,
+        )
+        self.fonts = async_to_streamed_response_wrapper(
+            brand.fonts,
         )
         self.identify_from_transaction = async_to_streamed_response_wrapper(
             brand.identify_from_transaction,

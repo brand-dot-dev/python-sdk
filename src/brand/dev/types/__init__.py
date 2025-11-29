@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .brand_fonts_params import BrandFontsParams as BrandFontsParams
+from .brand_fonts_response import BrandFontsResponse as BrandFontsResponse
 from .brand_ai_query_params import BrandAIQueryParams as BrandAIQueryParams
 from .brand_prefetch_params import BrandPrefetchParams as BrandPrefetchParams
 from .brand_retrieve_params import BrandRetrieveParams as BrandRetrieveParams
