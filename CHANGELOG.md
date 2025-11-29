@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.23.0 (2025-11-29)
+
+Full Changelog: [v1.22.0...v1.23.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.22.0...v1.23.0)
+
+### Features
+
+* **api:** manual updates ([d95285a](https://github.com/brand-dot-dev/python-sdk/commit/d95285ae339e8df4d50e793e7c9938ac226974f1))
+
+
+### Bug Fixes
+
+* ensure streams are always closed ([77df827](https://github.com/brand-dot-dev/python-sdk/commit/77df827c2608b4326d707c0ecbc93d7ec83957d5))
+
+
+### Chores
+
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([eedd772](https://github.com/brand-dot-dev/python-sdk/commit/eedd772cb757bcff196b6ed21ac9e887b8423fe0))
+
 ## 1.22.0 (2025-11-24)
 
 Full Changelog: [v1.21.0...v1.22.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.21.0...v1.22.0)
