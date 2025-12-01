@@ -96,6 +96,11 @@ class TestBrand:
                     "datapoint_example": "datapoint_example",
                     "datapoint_name": "datapoint_name",
                     "datapoint_type": "text",
+                    "datapoint_list_type": "string",
+                    "datapoint_object_schema": {
+                        "testimonial_text": "string",
+                        "testimonial_author": "string",
+                    },
                 }
             ],
             domain="domain",
@@ -106,6 +111,7 @@ class TestBrand:
                 "contact_us": True,
                 "faq": True,
                 "home_page": True,
+                "pricing": True,
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
@@ -716,6 +722,11 @@ class TestAsyncBrand:
                     "datapoint_example": "datapoint_example",
                     "datapoint_name": "datapoint_name",
                     "datapoint_type": "text",
+                    "datapoint_list_type": "string",
+                    "datapoint_object_schema": {
+                        "testimonial_text": "string",
+                        "testimonial_author": "string",
+                    },
                 }
             ],
             domain="domain",
@@ -726,6 +737,7 @@ class TestAsyncBrand:
                 "contact_us": True,
                 "faq": True,
                 "home_page": True,
+                "pricing": True,
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
