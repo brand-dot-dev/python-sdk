@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Dict, Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -41,6 +41,19 @@ class DataToExtract(TypedDict, total=False):
     datapoint_type: Required[Literal["text", "number", "date", "boolean", "list", "url"]]
     """Type of the data point"""
 
+    datapoint_list_type: Literal["string", "text", "number", "date", "boolean", "list", "url", "object"]
+    """Type of items in the list when datapoint_type is 'list'.
+
+    Defaults to 'string'. Use 'object' to extract an array of objects matching a
+    schema.
+    """
+
+    datapoint_object_schema: Dict[str, Literal["string", "number", "date", "boolean"]]
+    """Schema definition for objects when datapoint_list_type is 'object'.
+
+    Provide a map of field names to their scalar types.
+    """
+
 
 class SpecificPages(TypedDict, total=False):
     about_us: bool
@@ -60,6 +73,9 @@ class SpecificPages(TypedDict, total=False):
 
     home_page: bool
     """Whether to analyze the home page"""
+
+    pricing: bool
+    """Whether to analyze the pricing page"""
 
     privacy_policy: bool
     """Whether to analyze the privacy policy page"""

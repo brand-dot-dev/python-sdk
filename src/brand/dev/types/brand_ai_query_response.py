@@ -11,8 +11,12 @@ class DataExtracted(BaseModel):
     datapoint_name: Optional[str] = None
     """Name of the extracted data point"""
 
-    datapoint_value: Union[str, float, bool, List[str], List[float], None] = None
-    """Value of the extracted data point"""
+    datapoint_value: Union[str, float, bool, List[str], List[float], List[object], None] = None
+    """Value of the extracted data point.
+
+    Can be a primitive type, an array of primitives, or an array of objects when
+    datapoint_list_type is 'object'.
+    """
 
 
 class BrandAIQueryResponse(BaseModel):
