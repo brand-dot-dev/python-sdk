@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.24.1 (2025-12-03)
+
+Full Changelog: [v1.24.0...v1.24.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.24.0...v1.24.1)
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([ab01c66](https://github.com/brand-dot-dev/python-sdk/commit/ab01c662dc0eeff8e6335f9296c27264fbd27ce2))
+* update lockfile ([8102591](https://github.com/brand-dot-dev/python-sdk/commit/8102591bdc579695e7c9e569962d4e08dedb5ac1))
+
 ## 1.24.0 (2025-12-01)
 
 Full Changelog: [v1.23.0...v1.24.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.23.0...v1.24.0)
