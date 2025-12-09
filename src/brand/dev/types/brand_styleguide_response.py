@@ -30,6 +30,8 @@ __all__ = [
 
 
 class StyleguideColors(BaseModel):
+    """Primary colors used on the website"""
+
     accent: Optional[str] = None
     """Accent color of the website (hex format)"""
 
@@ -41,6 +43,8 @@ class StyleguideColors(BaseModel):
 
 
 class StyleguideComponentsButtonLink(BaseModel):
+    """Link button style"""
+
     background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
 
     border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
@@ -65,6 +69,8 @@ class StyleguideComponentsButtonLink(BaseModel):
 
 
 class StyleguideComponentsButtonPrimary(BaseModel):
+    """Primary button style"""
+
     background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
 
     border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
@@ -89,6 +95,8 @@ class StyleguideComponentsButtonPrimary(BaseModel):
 
 
 class StyleguideComponentsButtonSecondary(BaseModel):
+    """Secondary button style"""
+
     background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
 
     border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
@@ -113,6 +121,8 @@ class StyleguideComponentsButtonSecondary(BaseModel):
 
 
 class StyleguideComponentsButton(BaseModel):
+    """Button component styles"""
+
     link: Optional[StyleguideComponentsButtonLink] = None
     """Link button style"""
 
@@ -124,6 +134,8 @@ class StyleguideComponentsButton(BaseModel):
 
 
 class StyleguideComponentsCard(BaseModel):
+    """Card component style"""
+
     background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
 
     border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
@@ -142,6 +154,8 @@ class StyleguideComponentsCard(BaseModel):
 
 
 class StyleguideComponents(BaseModel):
+    """UI component styles"""
+
     button: Optional[StyleguideComponentsButton] = None
     """Button component styles"""
 
@@ -150,6 +164,8 @@ class StyleguideComponents(BaseModel):
 
 
 class StyleguideElementSpacing(BaseModel):
+    """Spacing system used on the website"""
+
     lg: Optional[str] = None
     """Large spacing value"""
 
@@ -167,6 +183,8 @@ class StyleguideElementSpacing(BaseModel):
 
 
 class StyleguideShadows(BaseModel):
+    """Shadow styles used on the website"""
+
     inner: Optional[str] = None
     """Inner shadow value"""
 
@@ -232,6 +250,8 @@ class StyleguideTypographyHeadingsH4(BaseModel):
 
 
 class StyleguideTypographyHeadings(BaseModel):
+    """Heading styles"""
+
     h1: Optional[StyleguideTypographyHeadingsH1] = None
 
     h2: Optional[StyleguideTypographyHeadingsH2] = None
@@ -242,6 +262,8 @@ class StyleguideTypographyHeadings(BaseModel):
 
 
 class StyleguideTypographyP(BaseModel):
+    """Paragraph text styles"""
+
     font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
 
     font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
@@ -254,6 +276,8 @@ class StyleguideTypographyP(BaseModel):
 
 
 class StyleguideTypography(BaseModel):
+    """Typography styles used on the website"""
+
     headings: Optional[StyleguideTypographyHeadings] = None
     """Heading styles"""
 
@@ -262,6 +286,8 @@ class StyleguideTypography(BaseModel):
 
 
 class Styleguide(BaseModel):
+    """Comprehensive styleguide data extracted from the website"""
+
     colors: Optional[StyleguideColors] = None
     """Primary colors used on the website"""
 
