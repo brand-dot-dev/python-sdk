@@ -56,6 +56,8 @@ class DataToExtract(TypedDict, total=False):
 
 
 class SpecificPages(TypedDict, total=False):
+    """Optional object specifying which pages to analyze"""
+
     about_us: bool
     """Whether to analyze the about us page"""
 
