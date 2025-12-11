@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.25.0 (2025-12-11)
+
+Full Changelog: [v1.24.0...v1.25.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.24.0...v1.25.0)
+
+### Features
+
+* **api:** api update ([3584d59](https://github.com/brand-dot-dev/python-sdk/commit/3584d596dd958801f09f6bc8dc8c805ce77e5351))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([f64c32a](https://github.com/brand-dot-dev/python-sdk/commit/f64c32a4b1a4a7b4560d26fcc14fa9f66961bf5b))
+
+
+### Chores
+
+* add missing docstrings ([d511865](https://github.com/brand-dot-dev/python-sdk/commit/d511865b2e098417a8ee142c082938e68db84cfb))
+* **docs:** use environment variables for authentication in code snippets ([ab01c66](https://github.com/brand-dot-dev/python-sdk/commit/ab01c662dc0eeff8e6335f9296c27264fbd27ce2))
+* update lockfile ([8102591](https://github.com/brand-dot-dev/python-sdk/commit/8102591bdc579695e7c9e569962d4e08dedb5ac1))
+
 ## 1.24.0 (2025-12-01)
 
 Full Changelog: [v1.23.0...v1.24.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.23.0...v1.24.0)
