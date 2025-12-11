@@ -331,6 +331,9 @@ class BrandIdentifyFromTransactionParams(TypedDict, total=False):
     category/industry.
     """
 
+    phone: float
+    """Optional phone number from the transaction to help verify brand match."""
+
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.
 
