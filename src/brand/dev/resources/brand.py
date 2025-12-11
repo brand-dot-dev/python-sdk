@@ -595,6 +595,7 @@ class BrandResource(SyncAPIResource):
         | Omit = omit,
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
+        phone: float | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -624,6 +625,8 @@ class BrandResource(SyncAPIResource):
           mcc: Optional Merchant Category Code (MCC) to help identify the business
               category/industry.
 
+          phone: Optional phone number from the transaction to help verify brand match.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -651,6 +654,7 @@ class BrandResource(SyncAPIResource):
                         "force_language": force_language,
                         "max_speed": max_speed,
                         "mcc": mcc,
+                        "phone": phone,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
@@ -2018,6 +2022,7 @@ class AsyncBrandResource(AsyncAPIResource):
         | Omit = omit,
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
+        phone: float | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2047,6 +2052,8 @@ class AsyncBrandResource(AsyncAPIResource):
           mcc: Optional Merchant Category Code (MCC) to help identify the business
               category/industry.
 
+          phone: Optional phone number from the transaction to help verify brand match.
+
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
@@ -2074,6 +2081,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "force_language": force_language,
                         "max_speed": max_speed,
                         "mcc": mcc,
+                        "phone": phone,
                         "timeout_ms": timeout_ms,
                     },
                     brand_identify_from_transaction_params.BrandIdentifyFromTransactionParams,
