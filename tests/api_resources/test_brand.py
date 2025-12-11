@@ -222,6 +222,7 @@ class TestBrand:
             force_language="albanian",
             max_speed=True,
             mcc="mcc",
+            phone=0,
             timeout_ms=1,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
@@ -848,6 +849,7 @@ class TestAsyncBrand:
             force_language="albanian",
             max_speed=True,
             mcc="mcc",
+            phone=0,
             timeout_ms=1,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])

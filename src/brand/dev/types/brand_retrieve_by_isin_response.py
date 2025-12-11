@@ -25,6 +25,8 @@ __all__ = [
 
 
 class BrandAddress(BaseModel):
+    """Physical address of the brand"""
+
     city: Optional[str] = None
     """City name"""
 
@@ -56,6 +58,8 @@ class BrandBackdropColor(BaseModel):
 
 
 class BrandBackdropResolution(BaseModel):
+    """Resolution of the backdrop image"""
+
     aspect_ratio: Optional[float] = None
     """Aspect ratio of the image (width/height)"""
 
@@ -340,11 +344,15 @@ class BrandIndustriesEic(BaseModel):
 
 
 class BrandIndustries(BaseModel):
+    """Industry classification information for the brand"""
+
     eic: Optional[List[BrandIndustriesEic]] = None
     """Easy Industry Classification - array of industry and subindustry pairs"""
 
 
 class BrandLinks(BaseModel):
+    """Important website links for the brand"""
+
     blog: Optional[str] = None
     """URL to the brand's blog or news page"""
 
@@ -373,6 +381,8 @@ class BrandLogoColor(BaseModel):
 
 
 class BrandLogoResolution(BaseModel):
+    """Resolution of the logo image"""
+
     aspect_ratio: Optional[float] = None
     """Aspect ratio of the image (width/height)"""
 
@@ -413,6 +423,10 @@ class BrandSocial(BaseModel):
 
 
 class BrandStock(BaseModel):
+    """
+    Stock market information for this brand (will be null if not a publicly traded company)
+    """
+
     exchange: Optional[str] = None
     """Stock exchange name"""
 
@@ -421,6 +435,8 @@ class BrandStock(BaseModel):
 
 
 class Brand(BaseModel):
+    """Detailed brand information"""
+
     address: Optional[BrandAddress] = None
     """Physical address of the brand"""
 

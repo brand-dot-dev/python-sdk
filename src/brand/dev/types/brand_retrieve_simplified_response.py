@@ -27,6 +27,8 @@ class BrandBackdropColor(BaseModel):
 
 
 class BrandBackdropResolution(BaseModel):
+    """Resolution of the backdrop image"""
+
     aspect_ratio: Optional[float] = None
     """Aspect ratio of the image (width/height)"""
 
@@ -65,6 +67,8 @@ class BrandLogoColor(BaseModel):
 
 
 class BrandLogoResolution(BaseModel):
+    """Resolution of the logo image"""
+
     aspect_ratio: Optional[float] = None
     """Aspect ratio of the image (width/height)"""
 
@@ -97,6 +101,8 @@ class BrandLogo(BaseModel):
 
 
 class Brand(BaseModel):
+    """Simplified brand information"""
+
     backdrops: Optional[List[BrandBackdrop]] = None
     """An array of backdrop images for the brand"""
 
