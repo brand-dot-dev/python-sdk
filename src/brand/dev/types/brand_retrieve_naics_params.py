@@ -17,6 +17,15 @@ class BrandRetrieveNaicsParams(TypedDict, total=False):
     otherwise, we will search for the brand using the provided title.
     """
 
+    max_results: Annotated[int, PropertyInfo(alias="maxResults")]
+    """Maximum number of NAICS codes to return.
+
+    Must be between 1 and 10. Defaults to 5.
+    """
+
+    min_results: Annotated[int, PropertyInfo(alias="minResults")]
+    """Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1."""
+
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
     """Optional timeout in milliseconds for the request.
 

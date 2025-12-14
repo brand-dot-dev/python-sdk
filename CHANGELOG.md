@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.26.0 (2025-12-14)
+
+Full Changelog: [v1.25.0...v1.26.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.25.0...v1.26.0)
+
+### Features
+
+* **api:** api update ([08ca403](https://github.com/brand-dot-dev/python-sdk/commit/08ca403530f9057d25b443c0c8b02fe821fef14f))
+
 ## 1.25.0 (2025-12-11)
 
 Full Changelog: [v1.24.0...v1.25.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.24.0...v1.25.0)
