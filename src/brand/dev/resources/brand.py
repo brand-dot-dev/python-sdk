@@ -1256,6 +1256,8 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         input: str,
+        max_results: int | Omit = omit,
+        min_results: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1271,6 +1273,11 @@ class BrandResource(SyncAPIResource):
           input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
               in `input`, it will be used for classification, otherwise, we will search for
               the brand using the provided title.
+
+          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
+              to 5.
+
+          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -1294,6 +1301,8 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "input": input,
+                        "max_results": max_results,
+                        "min_results": min_results,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_naics_params.BrandRetrieveNaicsParams,
@@ -2683,6 +2692,8 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         input: str,
+        max_results: int | Omit = omit,
+        min_results: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2698,6 +2709,11 @@ class AsyncBrandResource(AsyncAPIResource):
           input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
               in `input`, it will be used for classification, otherwise, we will search for
               the brand using the provided title.
+
+          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
+              to 5.
+
+          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2721,6 +2737,8 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "input": input,
+                        "max_results": max_results,
+                        "min_results": min_results,
                         "timeout_ms": timeout_ms,
                     },
                     brand_retrieve_naics_params.BrandRetrieveNaicsParams,

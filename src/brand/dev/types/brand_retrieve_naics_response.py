@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -8,10 +9,13 @@ __all__ = ["BrandRetrieveNaicsResponse", "Code"]
 
 
 class Code(BaseModel):
-    code: Optional[str] = None
+    code: str
     """NAICS code"""
 
-    title: Optional[str] = None
+    confidence: Literal["high", "medium", "low"]
+    """Confidence level for how well this NAICS code matches the company description"""
+
+    name: str
     """NAICS title"""
 
 

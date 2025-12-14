@@ -490,6 +490,8 @@ class TestBrand:
     def test_method_retrieve_naics_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_naics(
             input="input",
+            max_results=1,
+            min_results=1,
             timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
@@ -1117,6 +1119,8 @@ class TestAsyncBrand:
     async def test_method_retrieve_naics_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_naics(
             input="input",
+            max_results=1,
+            min_results=1,
             timeout_ms=1,
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
