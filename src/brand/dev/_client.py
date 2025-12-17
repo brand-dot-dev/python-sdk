@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import brand
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import BrandDevError, APIStatusError
 from ._base_client import (
@@ -29,6 +29,10 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+
+if TYPE_CHECKING:
+    from .resources import brand
+    from .resources.brand import BrandResource, AsyncBrandResource
 
 __all__ = [
     "Timeout",
@@ -43,10 +47,6 @@ __all__ = [
 
 
 class BrandDev(SyncAPIClient):
-    brand: brand.BrandResource
-    with_raw_response: BrandDevWithRawResponse
-    with_streaming_response: BrandDevWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -101,9 +101,19 @@ class BrandDev(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.brand = brand.BrandResource(self)
-        self.with_raw_response = BrandDevWithRawResponse(self)
-        self.with_streaming_response = BrandDevWithStreamedResponse(self)
+    @cached_property
+    def brand(self) -> BrandResource:
+        from .resources.brand import BrandResource
+
+        return BrandResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> BrandDevWithRawResponse:
+        return BrandDevWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> BrandDevWithStreamedResponse:
+        return BrandDevWithStreamedResponse(self)
 
     @property
     @override
@@ -211,10 +221,6 @@ class BrandDev(SyncAPIClient):
 
 
 class AsyncBrandDev(AsyncAPIClient):
-    brand: brand.AsyncBrandResource
-    with_raw_response: AsyncBrandDevWithRawResponse
-    with_streaming_response: AsyncBrandDevWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -269,9 +275,19 @@ class AsyncBrandDev(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.brand = brand.AsyncBrandResource(self)
-        self.with_raw_response = AsyncBrandDevWithRawResponse(self)
-        self.with_streaming_response = AsyncBrandDevWithStreamedResponse(self)
+    @cached_property
+    def brand(self) -> AsyncBrandResource:
+        from .resources.brand import AsyncBrandResource
+
+        return AsyncBrandResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncBrandDevWithRawResponse:
+        return AsyncBrandDevWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncBrandDevWithStreamedResponse:
+        return AsyncBrandDevWithStreamedResponse(self)
 
     @property
     @override
@@ -379,23 +395,55 @@ class AsyncBrandDev(AsyncAPIClient):
 
 
 class BrandDevWithRawResponse:
+    _client: BrandDev
+
     def __init__(self, client: BrandDev) -> None:
-        self.brand = brand.BrandResourceWithRawResponse(client.brand)
+        self._client = client
+
+    @cached_property
+    def brand(self) -> brand.BrandResourceWithRawResponse:
+        from .resources.brand import BrandResourceWithRawResponse
+
+        return BrandResourceWithRawResponse(self._client.brand)
 
 
 class AsyncBrandDevWithRawResponse:
+    _client: AsyncBrandDev
+
     def __init__(self, client: AsyncBrandDev) -> None:
-        self.brand = brand.AsyncBrandResourceWithRawResponse(client.brand)
+        self._client = client
+
+    @cached_property
+    def brand(self) -> brand.AsyncBrandResourceWithRawResponse:
+        from .resources.brand import AsyncBrandResourceWithRawResponse
+
+        return AsyncBrandResourceWithRawResponse(self._client.brand)
 
 
 class BrandDevWithStreamedResponse:
+    _client: BrandDev
+
     def __init__(self, client: BrandDev) -> None:
-        self.brand = brand.BrandResourceWithStreamingResponse(client.brand)
+        self._client = client
+
+    @cached_property
+    def brand(self) -> brand.BrandResourceWithStreamingResponse:
+        from .resources.brand import BrandResourceWithStreamingResponse
+
+        return BrandResourceWithStreamingResponse(self._client.brand)
 
 
 class AsyncBrandDevWithStreamedResponse:
+    _client: AsyncBrandDev
+
     def __init__(self, client: AsyncBrandDev) -> None:
-        self.brand = brand.AsyncBrandResourceWithStreamingResponse(client.brand)
+        self._client = client
+
+    @cached_property
+    def brand(self) -> brand.AsyncBrandResourceWithStreamingResponse:
+        from .resources.brand import AsyncBrandResourceWithStreamingResponse
+
+        return AsyncBrandResourceWithStreamingResponse(self._client.brand)
 
 
 Client = BrandDev
