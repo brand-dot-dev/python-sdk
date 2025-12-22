@@ -17,6 +17,7 @@ from ..types import (
     brand_retrieve_naics_params,
     brand_retrieve_by_isin_params,
     brand_retrieve_by_name_params,
+    brand_prefetch_by_email_params,
     brand_retrieve_by_email_params,
     brand_retrieve_by_ticker_params,
     brand_retrieve_simplified_params,
@@ -42,6 +43,7 @@ from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_retrieve_by_isin_response import BrandRetrieveByIsinResponse
 from ..types.brand_retrieve_by_name_response import BrandRetrieveByNameResponse
+from ..types.brand_prefetch_by_email_response import BrandPrefetchByEmailResponse
 from ..types.brand_retrieve_by_email_response import BrandRetrieveByEmailResponse
 from ..types.brand_retrieve_by_ticker_response import BrandRetrieveByTickerResponse
 from ..types.brand_retrieve_simplified_response import BrandRetrieveSimplifiedResponse
@@ -709,6 +711,58 @@ class BrandResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandPrefetchResponse,
+        )
+
+    def prefetch_by_email(
+        self,
+        *,
+        email: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandPrefetchByEmailResponse:
+        """
+        Signal that you may fetch brand data for a particular domain soon to improve
+        latency. This endpoint accepts an email address, extracts the domain from it,
+        validates that it's not a disposable or free email provider, and queues the
+        domain for prefetching. This endpoint does not charge credits and is available
+        for paid customers to optimize future requests. [You must be on a paid plan to
+        use this endpoint]
+
+        Args:
+          email: Email address to prefetch brand data for. The domain will be extracted from the
+              email. Free email providers (gmail.com, yahoo.com, etc.) and disposable email
+              addresses are not allowed.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/prefetch-by-email",
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_prefetch_by_email_params.BrandPrefetchByEmailParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandPrefetchByEmailResponse,
         )
 
     def retrieve_by_email(
@@ -2147,6 +2201,58 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandPrefetchResponse,
         )
 
+    async def prefetch_by_email(
+        self,
+        *,
+        email: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandPrefetchByEmailResponse:
+        """
+        Signal that you may fetch brand data for a particular domain soon to improve
+        latency. This endpoint accepts an email address, extracts the domain from it,
+        validates that it's not a disposable or free email provider, and queues the
+        domain for prefetching. This endpoint does not charge credits and is available
+        for paid customers to optimize future requests. [You must be on a paid plan to
+        use this endpoint]
+
+        Args:
+          email: Email address to prefetch brand data for. The domain will be extracted from the
+              email. Free email providers (gmail.com, yahoo.com, etc.) and disposable email
+              addresses are not allowed.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/prefetch-by-email",
+            body=await async_maybe_transform(
+                {
+                    "email": email,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_prefetch_by_email_params.BrandPrefetchByEmailParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandPrefetchByEmailResponse,
+        )
+
     async def retrieve_by_email(
         self,
         *,
@@ -2941,6 +3047,9 @@ class BrandResourceWithRawResponse:
         self.prefetch = to_raw_response_wrapper(
             brand.prefetch,
         )
+        self.prefetch_by_email = to_raw_response_wrapper(
+            brand.prefetch_by_email,
+        )
         self.retrieve_by_email = to_raw_response_wrapper(
             brand.retrieve_by_email,
         )
@@ -2985,6 +3094,9 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.prefetch = async_to_raw_response_wrapper(
             brand.prefetch,
+        )
+        self.prefetch_by_email = async_to_raw_response_wrapper(
+            brand.prefetch_by_email,
         )
         self.retrieve_by_email = async_to_raw_response_wrapper(
             brand.retrieve_by_email,
@@ -3031,6 +3143,9 @@ class BrandResourceWithStreamingResponse:
         self.prefetch = to_streamed_response_wrapper(
             brand.prefetch,
         )
+        self.prefetch_by_email = to_streamed_response_wrapper(
+            brand.prefetch_by_email,
+        )
         self.retrieve_by_email = to_streamed_response_wrapper(
             brand.retrieve_by_email,
         )
@@ -3075,6 +3190,9 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.prefetch = async_to_streamed_response_wrapper(
             brand.prefetch,
+        )
+        self.prefetch_by_email = async_to_streamed_response_wrapper(
+            brand.prefetch_by_email,
         )
         self.retrieve_by_email = async_to_streamed_response_wrapper(
             brand.retrieve_by_email,
