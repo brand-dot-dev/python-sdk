@@ -9,6 +9,7 @@ from brand.dev.types import (
     BrandFontsResponse,
     BrandIdentifyFromTransactionResponse,
     BrandPrefetchResponse,
+    BrandPrefetchByEmailResponse,
     BrandRetrieveByEmailResponse,
     BrandRetrieveByIsinResponse,
     BrandRetrieveByNameResponse,
@@ -27,6 +28,7 @@ Methods:
 - <code title="get /brand/fonts">client.brand.<a href="./src/brand/dev/resources/brand.py">fonts</a>(\*\*<a href="src/brand/dev/types/brand_fonts_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_fonts_response.py">BrandFontsResponse</a></code>
 - <code title="get /brand/transaction_identifier">client.brand.<a href="./src/brand/dev/resources/brand.py">identify_from_transaction</a>(\*\*<a href="src/brand/dev/types/brand_identify_from_transaction_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_identify_from_transaction_response.py">BrandIdentifyFromTransactionResponse</a></code>
 - <code title="post /brand/prefetch">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_response.py">BrandPrefetchResponse</a></code>
+- <code title="post /brand/prefetch-by-email">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch_by_email</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_by_email_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_by_email_response.py">BrandPrefetchByEmailResponse</a></code>
 - <code title="get /brand/retrieve-by-email">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_email</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_email_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_email_response.py">BrandRetrieveByEmailResponse</a></code>
 - <code title="get /brand/retrieve-by-isin">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_isin</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_isin_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_isin_response.py">BrandRetrieveByIsinResponse</a></code>
 - <code title="get /brand/retrieve-by-name">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_by_name</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_by_name_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_by_name_response.py">BrandRetrieveByNameResponse</a></code>

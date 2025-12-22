@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.27.0 (2025-12-22)
+
+Full Changelog: [v1.26.0...v1.27.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.26.0...v1.27.0)
+
+### Features
+
+* **api:** manual updates ([17cbb91](https://github.com/brand-dot-dev/python-sdk/commit/17cbb910aa48e07ced617793793165219952444f))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([cfd96a1](https://github.com/brand-dot-dev/python-sdk/commit/cfd96a1560076b2db2bdb36556f3546a06b4ad91))
+
+
+### Chores
+
+* **internal:** add missing files argument to base client ([a0aab9c](https://github.com/brand-dot-dev/python-sdk/commit/a0aab9cdf8e231a1c1e0177484944f04af00aeaa))
+* **internal:** codegen related update ([67b3cdd](https://github.com/brand-dot-dev/python-sdk/commit/67b3cdd7dbc80aa0195894c80c3ca2636f689cf7))
+* speedup initial import ([995537f](https://github.com/brand-dot-dev/python-sdk/commit/995537fa33a6c193350c3d730505591a700a3af5))
+
 ## 1.26.0 (2025-12-14)
 
 Full Changelog: [v1.25.0...v1.26.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.25.0...v1.26.0)
