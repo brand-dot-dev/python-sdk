@@ -14,6 +14,7 @@ from ..types import (
     brand_retrieve_params,
     brand_screenshot_params,
     brand_styleguide_params,
+    brand_ai_products_params,
     brand_retrieve_naics_params,
     brand_retrieve_by_isin_params,
     brand_retrieve_by_name_params,
@@ -40,6 +41,7 @@ from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_screenshot_response import BrandScreenshotResponse
 from ..types.brand_styleguide_response import BrandStyleguideResponse
+from ..types.brand_ai_products_response import BrandAIProductsResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_retrieve_by_isin_response import BrandRetrieveByIsinResponse
 from ..types.brand_retrieve_by_name_response import BrandRetrieveByNameResponse
@@ -187,6 +189,58 @@ class BrandResource(SyncAPIResource):
             cast_to=BrandRetrieveResponse,
         )
 
+    def ai_products(
+        self,
+        *,
+        domain: str,
+        max_products: int | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductsResponse:
+        """Beta feature: Extract product information from a brand's website.
+
+        Brand.dev will
+        analyze the website and return a list of products with details such as name,
+        description, image, pricing, features, and more.
+
+        Args:
+          domain: The domain name to analyze
+
+          max_products: Maximum number of products to extract.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/ai/products",
+            body=maybe_transform(
+                {
+                    "domain": domain,
+                    "max_products": max_products,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_ai_products_params.BrandAIProductsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIProductsResponse,
+        )
+
     def ai_query(
         self,
         *,
@@ -201,11 +255,11 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIQueryResponse:
-        """Beta feature: Use AI to extract specific data points from a brand's website.
+        """Use AI to extract specific data points from a brand's website.
 
-        The
-        AI will crawl the website and extract the requested information based on the
-        provided data points.
+        The AI will crawl
+        the website and extract the requested information based on the provided data
+        points.
 
         Args:
           data_to_extract: Array of data points to extract from the website
@@ -256,8 +310,8 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandFontsResponse:
         """
-        Beta feature: Extract font information from a brand's website including font
-        families, usage statistics, fallbacks, and element/word counts.
+        Extract font information from a brand's website including font families, usage
+        statistics, fallbacks, and element/word counts.
 
         Args:
           domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
@@ -1429,12 +1483,12 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
-        """Beta feature: Capture a screenshot of a website.
+        """Capture a screenshot of a website.
 
-        Supports both viewport
-        (standard browser view) and full-page screenshots. Can also screenshot specific
-        page types (login, pricing, etc.) by using heuristics to find the appropriate
-        URL. Returns a URL to the uploaded screenshot image hosted on our CDN.
+        Supports both viewport (standard browser
+        view) and full-page screenshots. Can also screenshot specific page types (login,
+        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
+        the uploaded screenshot image hosted on our CDN.
 
         Args:
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
@@ -1495,9 +1549,8 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
-        Beta feature: Automatically extract comprehensive design system information from
-        a brand's website including colors, typography, spacing, shadows, and UI
-        components.
+        Automatically extract comprehensive design system information from a brand's
+        website including colors, typography, spacing, shadows, and UI components.
 
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
@@ -1675,6 +1728,58 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveResponse,
         )
 
+    async def ai_products(
+        self,
+        *,
+        domain: str,
+        max_products: int | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductsResponse:
+        """Beta feature: Extract product information from a brand's website.
+
+        Brand.dev will
+        analyze the website and return a list of products with details such as name,
+        description, image, pricing, features, and more.
+
+        Args:
+          domain: The domain name to analyze
+
+          max_products: Maximum number of products to extract.
+
+          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
+              than this value, it will be aborted with a 408 status code. Maximum allowed
+              value is 300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/ai/products",
+            body=await async_maybe_transform(
+                {
+                    "domain": domain,
+                    "max_products": max_products,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_ai_products_params.BrandAIProductsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIProductsResponse,
+        )
+
     async def ai_query(
         self,
         *,
@@ -1689,11 +1794,11 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIQueryResponse:
-        """Beta feature: Use AI to extract specific data points from a brand's website.
+        """Use AI to extract specific data points from a brand's website.
 
-        The
-        AI will crawl the website and extract the requested information based on the
-        provided data points.
+        The AI will crawl
+        the website and extract the requested information based on the provided data
+        points.
 
         Args:
           data_to_extract: Array of data points to extract from the website
@@ -1744,8 +1849,8 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandFontsResponse:
         """
-        Beta feature: Extract font information from a brand's website including font
-        families, usage statistics, fallbacks, and element/word counts.
+        Extract font information from a brand's website including font families, usage
+        statistics, fallbacks, and element/word counts.
 
         Args:
           domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
@@ -2917,12 +3022,12 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
-        """Beta feature: Capture a screenshot of a website.
+        """Capture a screenshot of a website.
 
-        Supports both viewport
-        (standard browser view) and full-page screenshots. Can also screenshot specific
-        page types (login, pricing, etc.) by using heuristics to find the appropriate
-        URL. Returns a URL to the uploaded screenshot image hosted on our CDN.
+        Supports both viewport (standard browser
+        view) and full-page screenshots. Can also screenshot specific page types (login,
+        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
+        the uploaded screenshot image hosted on our CDN.
 
         Args:
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
@@ -2983,9 +3088,8 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
-        Beta feature: Automatically extract comprehensive design system information from
-        a brand's website including colors, typography, spacing, shadows, and UI
-        components.
+        Automatically extract comprehensive design system information from a brand's
+        website including colors, typography, spacing, shadows, and UI components.
 
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
@@ -3035,6 +3139,9 @@ class BrandResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             brand.retrieve,
         )
+        self.ai_products = to_raw_response_wrapper(
+            brand.ai_products,
+        )
         self.ai_query = to_raw_response_wrapper(
             brand.ai_query,
         )
@@ -3082,6 +3189,9 @@ class AsyncBrandResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             brand.retrieve,
+        )
+        self.ai_products = async_to_raw_response_wrapper(
+            brand.ai_products,
         )
         self.ai_query = async_to_raw_response_wrapper(
             brand.ai_query,
@@ -3131,6 +3241,9 @@ class BrandResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             brand.retrieve,
         )
+        self.ai_products = to_streamed_response_wrapper(
+            brand.ai_products,
+        )
         self.ai_query = to_streamed_response_wrapper(
             brand.ai_query,
         )
@@ -3178,6 +3291,9 @@ class AsyncBrandResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             brand.retrieve,
+        )
+        self.ai_products = async_to_streamed_response_wrapper(
+            brand.ai_products,
         )
         self.ai_query = async_to_streamed_response_wrapper(
             brand.ai_query,
