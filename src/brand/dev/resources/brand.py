@@ -201,11 +201,11 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIQueryResponse:
-        """Beta feature: Use AI to extract specific data points from a brand's website.
+        """Use AI to extract specific data points from a brand's website.
 
-        The
-        AI will crawl the website and extract the requested information based on the
-        provided data points.
+        The AI will crawl
+        the website and extract the requested information based on the provided data
+        points.
 
         Args:
           data_to_extract: Array of data points to extract from the website
@@ -256,8 +256,8 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandFontsResponse:
         """
-        Beta feature: Extract font information from a brand's website including font
-        families, usage statistics, fallbacks, and element/word counts.
+        Extract font information from a brand's website including font families, usage
+        statistics, fallbacks, and element/word counts.
 
         Args:
           domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
@@ -1429,12 +1429,12 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
-        """Beta feature: Capture a screenshot of a website.
+        """Capture a screenshot of a website.
 
-        Supports both viewport
-        (standard browser view) and full-page screenshots. Can also screenshot specific
-        page types (login, pricing, etc.) by using heuristics to find the appropriate
-        URL. Returns a URL to the uploaded screenshot image hosted on our CDN.
+        Supports both viewport (standard browser
+        view) and full-page screenshots. Can also screenshot specific page types (login,
+        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
+        the uploaded screenshot image hosted on our CDN.
 
         Args:
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
@@ -1495,9 +1495,8 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
-        Beta feature: Automatically extract comprehensive design system information from
-        a brand's website including colors, typography, spacing, shadows, and UI
-        components.
+        Automatically extract comprehensive design system information from a brand's
+        website including colors, typography, spacing, shadows, and UI components.
 
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
@@ -1689,11 +1688,11 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIQueryResponse:
-        """Beta feature: Use AI to extract specific data points from a brand's website.
+        """Use AI to extract specific data points from a brand's website.
 
-        The
-        AI will crawl the website and extract the requested information based on the
-        provided data points.
+        The AI will crawl
+        the website and extract the requested information based on the provided data
+        points.
 
         Args:
           data_to_extract: Array of data points to extract from the website
@@ -1744,8 +1743,8 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandFontsResponse:
         """
-        Beta feature: Extract font information from a brand's website including font
-        families, usage statistics, fallbacks, and element/word counts.
+        Extract font information from a brand's website including font families, usage
+        statistics, fallbacks, and element/word counts.
 
         Args:
           domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
@@ -2917,12 +2916,12 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandScreenshotResponse:
-        """Beta feature: Capture a screenshot of a website.
+        """Capture a screenshot of a website.
 
-        Supports both viewport
-        (standard browser view) and full-page screenshots. Can also screenshot specific
-        page types (login, pricing, etc.) by using heuristics to find the appropriate
-        URL. Returns a URL to the uploaded screenshot image hosted on our CDN.
+        Supports both viewport (standard browser
+        view) and full-page screenshots. Can also screenshot specific page types (login,
+        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
+        the uploaded screenshot image hosted on our CDN.
 
         Args:
           domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
@@ -2983,9 +2982,8 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandStyleguideResponse:
         """
-        Beta feature: Automatically extract comprehensive design system information from
-        a brand's website including colors, typography, spacing, shadows, and UI
-        components.
+        Automatically extract comprehensive design system information from a brand's
+        website including colors, typography, spacing, shadows, and UI components.
 
         Args:
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
