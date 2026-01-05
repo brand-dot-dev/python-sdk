@@ -202,11 +202,11 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Use AI to extract product information from a brand's website.
+        """Beta feature: Extract product information from a brand's website.
 
-        The
-        AI will analyze the website and return a list of products with details such as
-        name, description, pricing, features, and more.
+        Brand.dev will
+        analyze the website and return a list of products with details such as name,
+        description, image, pricing, features, and more.
 
         Args:
           domain: The domain name to analyze
@@ -1741,11 +1741,11 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Use AI to extract product information from a brand's website.
+        """Beta feature: Extract product information from a brand's website.
 
-        The
-        AI will analyze the website and return a list of products with details such as
-        name, description, pricing, features, and more.
+        Brand.dev will
+        analyze the website and return a list of products with details such as name,
+        description, image, pricing, features, and more.
 
         Args:
           domain: The domain name to analyze
