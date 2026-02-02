@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,7 +10,7 @@ __all__ = ["BrandRetrieveParams"]
 
 
 class BrandRetrieveParams(TypedDict, total=False):
-    domain: str
+    domain: Required[str]
     """Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
 
     Cannot be used with name or ticker parameters.

@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.29.0 (2026-02-02)
+
+Full Changelog: [v1.28.0...v1.29.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.28.0...v1.29.0)
+
+### Features
+
+* **api:** api update ([2131c0e](https://github.com/brand-dot-dev/python-sdk/commit/2131c0e5287b5e9abcba8b90c57810f05d479bf9))
+* **client:** add custom JSON encoder for extended type support ([4d2628a](https://github.com/brand-dot-dev/python-sdk/commit/4d2628ade95a98924df0a63347dc5d4263fa86e5))
+* **client:** add support for binary request streaming ([fb022d1](https://github.com/brand-dot-dev/python-sdk/commit/fb022d1dba2ccc882189db9f21a62de5321217d4))
+
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([04909f3](https://github.com/brand-dot-dev/python-sdk/commit/04909f3e6ed80cf91c19354f03ad5eb0f92f4398))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([2b8ee02](https://github.com/brand-dot-dev/python-sdk/commit/2b8ee025004e0cb91395ca4dcfa8cca70e91f1dd))
+* **internal:** update `actions/checkout` version ([da116bb](https://github.com/brand-dot-dev/python-sdk/commit/da116bb533a1e98211c72c5c95eb2eb8b725e5d7))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([6ca0c13](https://github.com/brand-dot-dev/python-sdk/commit/6ca0c134a8a6ac54af90cbc8562f716141dd57c2))
+
 ## 1.28.0 (2026-01-05)
 
 Full Changelog: [v1.27.0...v1.28.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.27.0...v1.28.0)
