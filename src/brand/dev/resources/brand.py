@@ -77,7 +77,7 @@ class BrandResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        domain: str | Omit = omit,
+        domain: str,
         force_language: Literal[
             "albanian",
             "arabic",
@@ -1616,7 +1616,7 @@ class AsyncBrandResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        domain: str | Omit = omit,
+        domain: str,
         force_language: Literal[
             "albanian",
             "arabic",

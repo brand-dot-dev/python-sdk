@@ -36,7 +36,9 @@ class TestBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: BrandDev) -> None:
-        brand = client.brand.retrieve()
+        brand = client.brand.retrieve(
+            domain="domain",
+        )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -53,7 +55,9 @@ class TestBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.retrieve()
+        response = client.brand.with_raw_response.retrieve(
+            domain="domain",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -63,7 +67,9 @@ class TestBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.retrieve() as response:
+        with client.brand.with_streaming_response.retrieve(
+            domain="domain",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -752,7 +758,9 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.retrieve()
+        brand = await async_client.brand.retrieve(
+            domain="domain",
+        )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
@@ -769,7 +777,9 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.retrieve()
+        response = await async_client.brand.with_raw_response.retrieve(
+            domain="domain",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -779,7 +789,9 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.retrieve() as response:
+        async with async_client.brand.with_streaming_response.retrieve(
+            domain="domain",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
