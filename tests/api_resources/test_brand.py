@@ -81,15 +81,14 @@ class TestBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_ai_products(self, client: BrandDev) -> None:
-        brand = client.brand.ai_products(
-            domain="domain",
-        )
+        brand = client.brand.ai_products()
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_ai_products_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
+            direct_url="https://example.com",
             domain="domain",
             max_products=1,
             timeout_ms=1,
@@ -99,9 +98,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_ai_products(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.ai_products(
-            domain="domain",
-        )
+        response = client.brand.with_raw_response.ai_products()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -111,9 +108,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_ai_products(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.ai_products(
-            domain="domain",
-        ) as response:
+        with client.brand.with_streaming_response.ai_products() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -803,15 +798,14 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_ai_products(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.ai_products(
-            domain="domain",
-        )
+        brand = await async_client.brand.ai_products()
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_ai_products_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
+            direct_url="https://example.com",
             domain="domain",
             max_products=1,
             timeout_ms=1,
@@ -821,9 +815,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_ai_products(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.ai_products(
-            domain="domain",
-        )
+        response = await async_client.brand.with_raw_response.ai_products()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -833,9 +825,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_ai_products(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.ai_products(
-            domain="domain",
-        ) as response:
+        async with async_client.brand.with_streaming_response.ai_products() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
