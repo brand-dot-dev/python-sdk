@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,8 +10,19 @@ __all__ = ["BrandAIProductsParams"]
 
 
 class BrandAIProductsParams(TypedDict, total=False):
-    domain: Required[str]
-    """The domain name to analyze"""
+    direct_url: Annotated[str, PropertyInfo(alias="directUrl")]
+    """
+    A specific URL to use directly as the starting point for extraction without
+    domain resolution. Useful when you want to extract products from a specific page
+    rather than discovering the site's product pages automatically. Either 'domain'
+    or 'directUrl' must be provided, but not both.
+    """
+
+    domain: str
+    """The domain name to analyze.
+
+    Either 'domain' or 'directUrl' must be provided, but not both.
+    """
 
     max_products: Annotated[int, PropertyInfo(alias="maxProducts")]
     """Maximum number of products to extract."""
