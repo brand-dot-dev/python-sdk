@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
@@ -25,7 +25,7 @@ from ..types import (
     brand_identify_from_transaction_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import required_args, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -189,11 +189,49 @@ class BrandResource(SyncAPIResource):
             cast_to=BrandRetrieveResponse,
         )
 
+    @overload
     def ai_products(
         self,
         *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
+        domain: str,
+        max_products: int | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductsResponse:
+        """Beta feature: Extract product information from a brand's website.
+
+        Brand.dev will
+        analyze the website and return a list of products with details such as name,
+        description, image, pricing, features, and more.
+
+        Args:
+          domain: The domain name to analyze.
+
+          max_products: Maximum number of products to extract.
+
+          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
+              300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def ai_products(
+        self,
+        *,
+        direct_url: str,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -211,18 +249,12 @@ class BrandResource(SyncAPIResource):
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
-              domain resolution. Useful when you want to extract products from a specific page
-              rather than discovering the site's product pages automatically. Either 'domain'
-              or 'directUrl' must be provided, but not both.
-
-          domain: The domain name to analyze. Either 'domain' or 'directUrl' must be provided, but
-              not both.
+              domain resolution.
 
           max_products: Maximum number of products to extract.
 
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
+          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
+              300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -232,14 +264,31 @@ class BrandResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @required_args(["domain"], ["direct_url"])
+    def ai_products(
+        self,
+        *,
+        domain: str | Omit = omit,
+        max_products: int | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        direct_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductsResponse:
         return self._post(
             "/brand/ai/products",
             body=maybe_transform(
                 {
-                    "direct_url": direct_url,
                     "domain": domain,
                     "max_products": max_products,
                     "timeout_ms": timeout_ms,
+                    "direct_url": direct_url,
                 },
                 brand_ai_products_params.BrandAIProductsParams,
             ),
@@ -1736,11 +1785,49 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveResponse,
         )
 
+    @overload
     async def ai_products(
         self,
         *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
+        domain: str,
+        max_products: int | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductsResponse:
+        """Beta feature: Extract product information from a brand's website.
+
+        Brand.dev will
+        analyze the website and return a list of products with details such as name,
+        description, image, pricing, features, and more.
+
+        Args:
+          domain: The domain name to analyze.
+
+          max_products: Maximum number of products to extract.
+
+          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
+              300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def ai_products(
+        self,
+        *,
+        direct_url: str,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1758,18 +1845,12 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
-              domain resolution. Useful when you want to extract products from a specific page
-              rather than discovering the site's product pages automatically. Either 'domain'
-              or 'directUrl' must be provided, but not both.
-
-          domain: The domain name to analyze. Either 'domain' or 'directUrl' must be provided, but
-              not both.
+              domain resolution.
 
           max_products: Maximum number of products to extract.
 
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
+          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
+              300000ms (5 minutes).
 
           extra_headers: Send extra headers
 
@@ -1779,14 +1860,31 @@ class AsyncBrandResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @required_args(["domain"], ["direct_url"])
+    async def ai_products(
+        self,
+        *,
+        domain: str | Omit = omit,
+        max_products: int | Omit = omit,
+        timeout_ms: int | Omit = omit,
+        direct_url: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductsResponse:
         return await self._post(
             "/brand/ai/products",
             body=await async_maybe_transform(
                 {
-                    "direct_url": direct_url,
                     "domain": domain,
                     "max_products": max_products,
                     "timeout_ms": timeout_ms,
+                    "direct_url": direct_url,
                 },
                 brand_ai_products_params.BrandAIProductsParams,
             ),
