@@ -192,7 +192,8 @@ class BrandResource(SyncAPIResource):
     def ai_products(
         self,
         *,
-        domain: str,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -209,7 +210,13 @@ class BrandResource(SyncAPIResource):
         description, image, pricing, features, and more.
 
         Args:
-          domain: The domain name to analyze
+          direct_url: A specific URL to use directly as the starting point for extraction without
+              domain resolution. Useful when you want to extract products from a specific page
+              rather than discovering the site's product pages automatically. Either 'domain'
+              or 'directUrl' must be provided, but not both.
+
+          domain: The domain name to analyze. Either 'domain' or 'directUrl' must be provided, but
+              not both.
 
           max_products: Maximum number of products to extract.
 
@@ -229,6 +236,7 @@ class BrandResource(SyncAPIResource):
             "/brand/ai/products",
             body=maybe_transform(
                 {
+                    "direct_url": direct_url,
                     "domain": domain,
                     "max_products": max_products,
                     "timeout_ms": timeout_ms,
@@ -1731,7 +1739,8 @@ class AsyncBrandResource(AsyncAPIResource):
     async def ai_products(
         self,
         *,
-        domain: str,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1748,7 +1757,13 @@ class AsyncBrandResource(AsyncAPIResource):
         description, image, pricing, features, and more.
 
         Args:
-          domain: The domain name to analyze
+          direct_url: A specific URL to use directly as the starting point for extraction without
+              domain resolution. Useful when you want to extract products from a specific page
+              rather than discovering the site's product pages automatically. Either 'domain'
+              or 'directUrl' must be provided, but not both.
+
+          domain: The domain name to analyze. Either 'domain' or 'directUrl' must be provided, but
+              not both.
 
           max_products: Maximum number of products to extract.
 
@@ -1768,6 +1783,7 @@ class AsyncBrandResource(AsyncAPIResource):
             "/brand/ai/products",
             body=await async_maybe_transform(
                 {
+                    "direct_url": direct_url,
                     "domain": domain,
                     "max_products": max_products,
                     "timeout_ms": timeout_ms,
