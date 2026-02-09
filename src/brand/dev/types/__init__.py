@@ -7,12 +7,14 @@ from .brand_fonts_response import BrandFontsResponse as BrandFontsResponse
 from .brand_ai_query_params import BrandAIQueryParams as BrandAIQueryParams
 from .brand_prefetch_params import BrandPrefetchParams as BrandPrefetchParams
 from .brand_retrieve_params import BrandRetrieveParams as BrandRetrieveParams
+from .brand_ai_product_params import BrandAIProductParams as BrandAIProductParams
 from .brand_ai_query_response import BrandAIQueryResponse as BrandAIQueryResponse
 from .brand_prefetch_response import BrandPrefetchResponse as BrandPrefetchResponse
 from .brand_retrieve_response import BrandRetrieveResponse as BrandRetrieveResponse
 from .brand_screenshot_params import BrandScreenshotParams as BrandScreenshotParams
 from .brand_styleguide_params import BrandStyleguideParams as BrandStyleguideParams
 from .brand_ai_products_params import BrandAIProductsParams as BrandAIProductsParams
+from .brand_ai_product_response import BrandAIProductResponse as BrandAIProductResponse
 from .brand_screenshot_response import BrandScreenshotResponse as BrandScreenshotResponse
 from .brand_styleguide_response import BrandStyleguideResponse as BrandStyleguideResponse
 from .brand_ai_products_response import BrandAIProductsResponse as BrandAIProductsResponse
