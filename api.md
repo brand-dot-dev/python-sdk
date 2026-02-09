@@ -5,6 +5,7 @@ Types:
 ```python
 from brand.dev.types import (
     BrandRetrieveResponse,
+    BrandAIProductResponse,
     BrandAIProductsResponse,
     BrandAIQueryResponse,
     BrandFontsResponse,
@@ -25,6 +26,7 @@ from brand.dev.types import (
 Methods:
 
 - <code title="get /brand/retrieve">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_response.py">BrandRetrieveResponse</a></code>
+- <code title="post /brand/ai/product">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_product</a>(\*\*<a href="src/brand/dev/types/brand_ai_product_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_product_response.py">BrandAIProductResponse</a></code>
 - <code title="post /brand/ai/products">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_products</a>(\*\*<a href="src/brand/dev/types/brand_ai_products_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_products_response.py">BrandAIProductsResponse</a></code>
 - <code title="post /brand/ai/query">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_query</a>(\*\*<a href="src/brand/dev/types/brand_ai_query_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_query_response.py">BrandAIQueryResponse</a></code>
 - <code title="get /brand/fonts">client.brand.<a href="./src/brand/dev/resources/brand.py">fonts</a>(\*\*<a href="src/brand/dev/types/brand_fonts_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_fonts_response.py">BrandFontsResponse</a></code>
