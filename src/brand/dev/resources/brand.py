@@ -12,6 +12,7 @@ from ..types import (
     brand_ai_query_params,
     brand_prefetch_params,
     brand_retrieve_params,
+    brand_ai_product_params,
     brand_screenshot_params,
     brand_styleguide_params,
     brand_ai_products_params,
@@ -39,6 +40,7 @@ from ..types.brand_fonts_response import BrandFontsResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
+from ..types.brand_ai_product_response import BrandAIProductResponse
 from ..types.brand_screenshot_response import BrandScreenshotResponse
 from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_ai_products_response import BrandAIProductsResponse
@@ -187,6 +189,52 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveResponse,
+        )
+
+    def ai_product(
+        self,
+        *,
+        url: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductResponse:
+        """
+        Beta feature: Given a single URL, determines if it is a product detail page,
+        classifies the platform/product type, and extracts the product information.
+        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+
+        Args:
+          url: The product page URL to extract product data from.
+
+          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
+              300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/brand/ai/product",
+            body=maybe_transform(
+                {
+                    "url": url,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_ai_product_params.BrandAIProductParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIProductResponse,
         )
 
     @overload
@@ -1785,6 +1833,52 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveResponse,
         )
 
+    async def ai_product(
+        self,
+        *,
+        url: str,
+        timeout_ms: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> BrandAIProductResponse:
+        """
+        Beta feature: Given a single URL, determines if it is a product detail page,
+        classifies the platform/product type, and extracts the product information.
+        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+
+        Args:
+          url: The product page URL to extract product data from.
+
+          timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
+              300000ms (5 minutes).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/brand/ai/product",
+            body=await async_maybe_transform(
+                {
+                    "url": url,
+                    "timeout_ms": timeout_ms,
+                },
+                brand_ai_product_params.BrandAIProductParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=BrandAIProductResponse,
+        )
+
     @overload
     async def ai_products(
         self,
@@ -3253,6 +3347,9 @@ class BrandResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             brand.retrieve,
         )
+        self.ai_product = to_raw_response_wrapper(
+            brand.ai_product,
+        )
         self.ai_products = to_raw_response_wrapper(
             brand.ai_products,
         )
@@ -3303,6 +3400,9 @@ class AsyncBrandResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             brand.retrieve,
+        )
+        self.ai_product = async_to_raw_response_wrapper(
+            brand.ai_product,
         )
         self.ai_products = async_to_raw_response_wrapper(
             brand.ai_products,
@@ -3355,6 +3455,9 @@ class BrandResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             brand.retrieve,
         )
+        self.ai_product = to_streamed_response_wrapper(
+            brand.ai_product,
+        )
         self.ai_products = to_streamed_response_wrapper(
             brand.ai_products,
         )
@@ -3405,6 +3508,9 @@ class AsyncBrandResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             brand.retrieve,
+        )
+        self.ai_product = async_to_streamed_response_wrapper(
+            brand.ai_product,
         )
         self.ai_products = async_to_streamed_response_wrapper(
             brand.ai_products,

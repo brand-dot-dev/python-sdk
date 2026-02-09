@@ -14,6 +14,7 @@ from brand.dev.types import (
     BrandAIQueryResponse,
     BrandPrefetchResponse,
     BrandRetrieveResponse,
+    BrandAIProductResponse,
     BrandAIProductsResponse,
     BrandScreenshotResponse,
     BrandStyleguideResponse,
@@ -75,6 +76,49 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_ai_product(self, client: BrandDev) -> None:
+        brand = client.brand.ai_product(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandAIProductResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_ai_product_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.ai_product(
+            url="https://example.com",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandAIProductResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_ai_product(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.ai_product(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandAIProductResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_ai_product(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.ai_product(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -841,6 +885,49 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_ai_product(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.ai_product(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandAIProductResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_ai_product_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.ai_product(
+            url="https://example.com",
+            timeout_ms=1,
+        )
+        assert_matches_type(BrandAIProductResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_ai_product(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.ai_product(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandAIProductResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_ai_product(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.ai_product(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
