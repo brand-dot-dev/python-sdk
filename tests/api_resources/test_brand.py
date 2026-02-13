@@ -49,7 +49,7 @@ class TestBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
@@ -92,7 +92,7 @@ class TestBrand:
     def test_method_ai_product_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_product(
             url="https://example.com",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
@@ -136,7 +136,7 @@ class TestBrand:
         brand = client.brand.ai_products(
             domain="domain",
             max_products=1,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
@@ -180,7 +180,7 @@ class TestBrand:
         brand = client.brand.ai_products(
             direct_url="https://example.com",
             max_products=1,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
@@ -255,7 +255,7 @@ class TestBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
@@ -314,7 +314,7 @@ class TestBrand:
     def test_method_fonts_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.fonts(
             domain="domain",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
@@ -363,7 +363,7 @@ class TestBrand:
             max_speed=True,
             mcc="mcc",
             phone=0,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
@@ -406,7 +406,7 @@ class TestBrand:
     def test_method_prefetch_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch(
             domain="domain",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
@@ -449,7 +449,7 @@ class TestBrand:
     def test_method_prefetch_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch_by_email(
             email="dev@stainless.com",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
@@ -494,7 +494,7 @@ class TestBrand:
             email="dev@stainless.com",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
@@ -539,7 +539,7 @@ class TestBrand:
             isin="SE60513A9993",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
@@ -584,7 +584,7 @@ class TestBrand:
             name="xxx",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
@@ -630,7 +630,7 @@ class TestBrand:
             force_language="albanian",
             max_speed=True,
             ticker_exchange="AMEX",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
@@ -675,7 +675,7 @@ class TestBrand:
             input="input",
             max_results=1,
             min_results=1,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
@@ -718,7 +718,7 @@ class TestBrand:
     def test_method_retrieve_simplified_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
             domain="domain",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
@@ -807,7 +807,7 @@ class TestBrand:
         brand = client.brand.styleguide(
             domain="domain",
             prioritize="speed",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
@@ -858,7 +858,7 @@ class TestAsyncBrand:
             domain="domain",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
@@ -901,7 +901,7 @@ class TestAsyncBrand:
     async def test_method_ai_product_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_product(
             url="https://example.com",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
@@ -945,7 +945,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.ai_products(
             domain="domain",
             max_products=1,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
@@ -989,7 +989,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.ai_products(
             direct_url="https://example.com",
             max_products=1,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
@@ -1064,7 +1064,7 @@ class TestAsyncBrand:
                 "privacy_policy": True,
                 "terms_and_conditions": True,
             },
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
@@ -1123,7 +1123,7 @@ class TestAsyncBrand:
     async def test_method_fonts_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.fonts(
             domain="domain",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
@@ -1172,7 +1172,7 @@ class TestAsyncBrand:
             max_speed=True,
             mcc="mcc",
             phone=0,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
@@ -1215,7 +1215,7 @@ class TestAsyncBrand:
     async def test_method_prefetch_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch(
             domain="domain",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
@@ -1258,7 +1258,7 @@ class TestAsyncBrand:
     async def test_method_prefetch_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch_by_email(
             email="dev@stainless.com",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
@@ -1303,7 +1303,7 @@ class TestAsyncBrand:
             email="dev@stainless.com",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
@@ -1348,7 +1348,7 @@ class TestAsyncBrand:
             isin="SE60513A9993",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
@@ -1393,7 +1393,7 @@ class TestAsyncBrand:
             name="xxx",
             force_language="albanian",
             max_speed=True,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
@@ -1439,7 +1439,7 @@ class TestAsyncBrand:
             force_language="albanian",
             max_speed=True,
             ticker_exchange="AMEX",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
@@ -1484,7 +1484,7 @@ class TestAsyncBrand:
             input="input",
             max_results=1,
             min_results=1,
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
@@ -1527,7 +1527,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_simplified_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
             domain="domain",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
@@ -1616,7 +1616,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.styleguide(
             domain="domain",
             prioritize="speed",
-            timeout_ms=1,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
