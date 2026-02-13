@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.33.0 (2026-02-13)
+
+Full Changelog: [v1.32.0...v1.33.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.32.0...v1.33.0)
+
+### Features
+
+* **api:** api update ([e8992d4](https://github.com/brand-dot-dev/python-sdk/commit/e8992d4c206a30ecc97395145d3a1c61b8ef1c7a))
+
+
+### Chores
+
+* format all `api.md` files ([1e07eb2](https://github.com/brand-dot-dev/python-sdk/commit/1e07eb24f5f98442570db5b59cca02beba01791d))
+* **internal:** bump dependencies ([2e44fb1](https://github.com/brand-dot-dev/python-sdk/commit/2e44fb1f73e3fbec9bb6326da4fbbf94d40dcd0d))
+* **internal:** fix lint error on Python 3.14 ([52df74d](https://github.com/brand-dot-dev/python-sdk/commit/52df74dc18219979bf3c62b6d682e04cfc10af67))
+
 ## 1.32.0 (2026-02-09)
 
 Full Changelog: [v1.31.0...v1.32.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.31.0...v1.32.0)
