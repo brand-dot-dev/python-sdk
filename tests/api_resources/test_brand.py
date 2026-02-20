@@ -34,7 +34,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestBrand:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: BrandDev) -> None:
         brand = client.brand.retrieve(
@@ -42,7 +42,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve(
@@ -53,7 +53,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve(
@@ -65,7 +65,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve(
@@ -79,7 +79,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_product(self, client: BrandDev) -> None:
         brand = client.brand.ai_product(
@@ -87,7 +87,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_product_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_product(
@@ -96,7 +96,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_ai_product(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.ai_product(
@@ -108,7 +108,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_ai_product(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.ai_product(
@@ -122,7 +122,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_products_overload_1(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
@@ -130,7 +130,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_products_with_all_params_overload_1(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
@@ -140,7 +140,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_ai_products_overload_1(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.ai_products(
@@ -152,7 +152,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_ai_products_overload_1(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.ai_products(
@@ -166,7 +166,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_products_overload_2(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
@@ -174,7 +174,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_products_with_all_params_overload_2(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
@@ -184,7 +184,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_ai_products_overload_2(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.ai_products(
@@ -196,7 +196,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_ai_products_overload_2(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.ai_products(
@@ -210,7 +210,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_query(self, client: BrandDev) -> None:
         brand = client.brand.ai_query(
@@ -226,7 +226,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_ai_query_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_query(
@@ -259,7 +259,7 @@ class TestBrand:
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_ai_query(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.ai_query(
@@ -279,7 +279,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_ai_query(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.ai_query(
@@ -301,7 +301,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_fonts(self, client: BrandDev) -> None:
         brand = client.brand.fonts(
@@ -309,7 +309,7 @@ class TestBrand:
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_fonts_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.fonts(
@@ -318,7 +318,7 @@ class TestBrand:
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_fonts(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.fonts(
@@ -330,7 +330,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_fonts(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.fonts(
@@ -344,7 +344,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_identify_from_transaction(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
@@ -352,7 +352,7 @@ class TestBrand:
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_identify_from_transaction_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
@@ -367,7 +367,7 @@ class TestBrand:
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_identify_from_transaction(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.identify_from_transaction(
@@ -379,7 +379,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_identify_from_transaction(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.identify_from_transaction(
@@ -393,7 +393,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_prefetch(self, client: BrandDev) -> None:
         brand = client.brand.prefetch(
@@ -401,7 +401,7 @@ class TestBrand:
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_prefetch_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch(
@@ -410,7 +410,7 @@ class TestBrand:
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_prefetch(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.prefetch(
@@ -422,7 +422,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_prefetch(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.prefetch(
@@ -436,7 +436,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_prefetch_by_email(self, client: BrandDev) -> None:
         brand = client.brand.prefetch_by_email(
@@ -444,7 +444,7 @@ class TestBrand:
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_prefetch_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.prefetch_by_email(
@@ -453,7 +453,7 @@ class TestBrand:
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_prefetch_by_email(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.prefetch_by_email(
@@ -465,7 +465,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_prefetch_by_email(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.prefetch_by_email(
@@ -479,7 +479,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_email(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_email(
@@ -487,7 +487,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_email(
@@ -498,7 +498,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_by_email(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_by_email(
@@ -510,7 +510,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_by_email(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_by_email(
@@ -524,7 +524,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_isin(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_isin(
@@ -532,7 +532,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_isin_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_isin(
@@ -543,7 +543,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_by_isin(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_by_isin(
@@ -555,7 +555,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_by_isin(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_by_isin(
@@ -569,7 +569,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_name(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_name(
@@ -577,7 +577,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_name_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_name(
@@ -588,7 +588,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_by_name(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_by_name(
@@ -600,7 +600,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_by_name(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_by_name(
@@ -614,7 +614,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_ticker(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_ticker(
@@ -622,7 +622,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_ticker(
@@ -634,7 +634,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_by_ticker(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_by_ticker(
@@ -646,7 +646,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_by_ticker(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_by_ticker(
@@ -660,7 +660,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_naics(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_naics(
@@ -668,7 +668,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_naics_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_naics(
@@ -679,7 +679,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_naics(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_naics(
@@ -691,7 +691,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_naics(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_naics(
@@ -705,7 +705,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_simplified(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
@@ -713,7 +713,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_simplified_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
@@ -722,7 +722,7 @@ class TestBrand:
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_simplified(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.retrieve_simplified(
@@ -734,7 +734,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_simplified(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.retrieve_simplified(
@@ -748,7 +748,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_screenshot(self, client: BrandDev) -> None:
         brand = client.brand.screenshot(
@@ -756,7 +756,7 @@ class TestBrand:
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_screenshot_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.screenshot(
@@ -767,7 +767,7 @@ class TestBrand:
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_screenshot(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.screenshot(
@@ -779,7 +779,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_screenshot(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.screenshot(
@@ -793,7 +793,7 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_styleguide(self, client: BrandDev) -> None:
         brand = client.brand.styleguide(
@@ -801,7 +801,7 @@ class TestBrand:
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_styleguide_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.styleguide(
@@ -811,7 +811,7 @@ class TestBrand:
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_styleguide(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.styleguide(
@@ -823,7 +823,7 @@ class TestBrand:
         brand = response.parse()
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_styleguide(self, client: BrandDev) -> None:
         with client.brand.with_streaming_response.styleguide(
@@ -843,7 +843,7 @@ class TestAsyncBrand:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve(
@@ -851,7 +851,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve(
@@ -862,7 +862,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve(
@@ -874,7 +874,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve(
@@ -888,7 +888,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_product(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_product(
@@ -896,7 +896,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_product_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_product(
@@ -905,7 +905,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_ai_product(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.ai_product(
@@ -917,7 +917,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_ai_product(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.ai_product(
@@ -931,7 +931,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_products_overload_1(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
@@ -939,7 +939,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_products_with_all_params_overload_1(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
@@ -949,7 +949,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_ai_products_overload_1(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.ai_products(
@@ -961,7 +961,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_ai_products_overload_1(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.ai_products(
@@ -975,7 +975,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_products_overload_2(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
@@ -983,7 +983,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_products_with_all_params_overload_2(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
@@ -993,7 +993,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_ai_products_overload_2(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.ai_products(
@@ -1005,7 +1005,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandAIProductsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_ai_products_overload_2(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.ai_products(
@@ -1019,7 +1019,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_query(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_query(
@@ -1035,7 +1035,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_ai_query_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_query(
@@ -1068,7 +1068,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_ai_query(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.ai_query(
@@ -1088,7 +1088,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandAIQueryResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_ai_query(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.ai_query(
@@ -1110,7 +1110,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_fonts(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.fonts(
@@ -1118,7 +1118,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_fonts_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.fonts(
@@ -1127,7 +1127,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_fonts(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.fonts(
@@ -1139,7 +1139,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandFontsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_fonts(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.fonts(
@@ -1153,7 +1153,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
@@ -1161,7 +1161,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_identify_from_transaction_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
@@ -1176,7 +1176,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.identify_from_transaction(
@@ -1188,7 +1188,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandIdentifyFromTransactionResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.identify_from_transaction(
@@ -1202,7 +1202,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_prefetch(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch(
@@ -1210,7 +1210,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_prefetch_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch(
@@ -1219,7 +1219,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_prefetch(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.prefetch(
@@ -1231,7 +1231,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandPrefetchResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_prefetch(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.prefetch(
@@ -1245,7 +1245,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_prefetch_by_email(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch_by_email(
@@ -1253,7 +1253,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_prefetch_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.prefetch_by_email(
@@ -1262,7 +1262,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_prefetch_by_email(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.prefetch_by_email(
@@ -1274,7 +1274,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandPrefetchByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_prefetch_by_email(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.prefetch_by_email(
@@ -1288,7 +1288,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_email(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_email(
@@ -1296,7 +1296,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_email(
@@ -1307,7 +1307,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_by_email(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_by_email(
@@ -1319,7 +1319,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveByEmailResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_by_email(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_by_email(
@@ -1333,7 +1333,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_isin(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_isin(
@@ -1341,7 +1341,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_isin_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_isin(
@@ -1352,7 +1352,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_by_isin(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_by_isin(
@@ -1364,7 +1364,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveByIsinResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_by_isin(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_by_isin(
@@ -1378,7 +1378,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_name(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_name(
@@ -1386,7 +1386,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_name_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_name(
@@ -1397,7 +1397,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_by_name(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_by_name(
@@ -1409,7 +1409,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveByNameResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_by_name(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_by_name(
@@ -1423,7 +1423,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_ticker(
@@ -1431,7 +1431,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_ticker(
@@ -1443,7 +1443,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_by_ticker(
@@ -1455,7 +1455,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveByTickerResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_by_ticker(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_by_ticker(
@@ -1469,7 +1469,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_naics(
@@ -1477,7 +1477,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_naics_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_naics(
@@ -1488,7 +1488,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_naics(
@@ -1500,7 +1500,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_naics(
@@ -1514,7 +1514,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
@@ -1522,7 +1522,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_simplified_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
@@ -1531,7 +1531,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.retrieve_simplified(
@@ -1543,7 +1543,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.retrieve_simplified(
@@ -1557,7 +1557,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_screenshot(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.screenshot(
@@ -1565,7 +1565,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_screenshot_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.screenshot(
@@ -1576,7 +1576,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_screenshot(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.screenshot(
@@ -1588,7 +1588,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_screenshot(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.screenshot(
@@ -1602,7 +1602,7 @@ class TestAsyncBrand:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_styleguide(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.styleguide(
@@ -1610,7 +1610,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_styleguide_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.styleguide(
@@ -1620,7 +1620,7 @@ class TestAsyncBrand:
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_styleguide(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.styleguide(
@@ -1632,7 +1632,7 @@ class TestAsyncBrand:
         brand = await response.parse()
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_styleguide(self, async_client: AsyncBrandDev) -> None:
         async with async_client.brand.with_streaming_response.styleguide(
