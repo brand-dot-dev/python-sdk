@@ -17,6 +17,9 @@ class Product(BaseModel):
     features: List[str]
     """List of product features"""
 
+    images: List[str]
+    """URLs to product images on the page (up to 7)"""
+
     name: str
     """Name of the product"""
 
