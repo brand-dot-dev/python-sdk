@@ -20,6 +20,10 @@ from brand.dev.types import (
     BrandRetrieveSimplifiedResponse,
     BrandScreenshotResponse,
     BrandStyleguideResponse,
+    BrandWebScrapeHTMLResponse,
+    BrandWebScrapeImagesResponse,
+    BrandWebScrapeMdResponse,
+    BrandWebScrapeSitemapResponse,
 )
 ```
 
@@ -41,3 +45,7 @@ Methods:
 - <code title="get /brand/retrieve-simplified">client.brand.<a href="./src/brand/dev/resources/brand.py">retrieve_simplified</a>(\*\*<a href="src/brand/dev/types/brand_retrieve_simplified_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_retrieve_simplified_response.py">BrandRetrieveSimplifiedResponse</a></code>
 - <code title="get /brand/screenshot">client.brand.<a href="./src/brand/dev/resources/brand.py">screenshot</a>(\*\*<a href="src/brand/dev/types/brand_screenshot_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_screenshot_response.py">BrandScreenshotResponse</a></code>
 - <code title="get /brand/styleguide">client.brand.<a href="./src/brand/dev/resources/brand.py">styleguide</a>(\*\*<a href="src/brand/dev/types/brand_styleguide_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_styleguide_response.py">BrandStyleguideResponse</a></code>
+- <code title="get /web/scrape/html">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_html</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_html_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_html_response.py">BrandWebScrapeHTMLResponse</a></code>
+- <code title="get /web/scrape/images">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_images</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_images_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_images_response.py">BrandWebScrapeImagesResponse</a></code>
+- <code title="get /web/scrape/markdown">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_md</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_md_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_md_response.py">BrandWebScrapeMdResponse</a></code>
+- <code title="get /web/scrape/sitemap">client.brand.<a href="./src/brand/dev/resources/brand.py">web_scrape_sitemap</a>(\*\*<a href="src/brand/dev/types/brand_web_scrape_sitemap_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_web_scrape_sitemap_response.py">BrandWebScrapeSitemapResponse</a></code>

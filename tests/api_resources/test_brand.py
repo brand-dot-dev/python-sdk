@@ -18,12 +18,16 @@ from brand.dev.types import (
     BrandAIProductsResponse,
     BrandScreenshotResponse,
     BrandStyleguideResponse,
+    BrandWebScrapeMdResponse,
     BrandRetrieveNaicsResponse,
+    BrandWebScrapeHTMLResponse,
     BrandRetrieveByIsinResponse,
     BrandRetrieveByNameResponse,
     BrandPrefetchByEmailResponse,
     BrandRetrieveByEmailResponse,
+    BrandWebScrapeImagesResponse,
     BrandRetrieveByTickerResponse,
+    BrandWebScrapeSitemapResponse,
     BrandRetrieveSimplifiedResponse,
     BrandIdentifyFromTransactionResponse,
 )
@@ -837,6 +841,152 @@ class TestBrand:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_html(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_html(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_web_scrape_html(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.web_scrape_html(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_web_scrape_html(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.web_scrape_html(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_images(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_images(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_web_scrape_images(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.web_scrape_images(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_web_scrape_images(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.web_scrape_images(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_md(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_md(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_md(
+            url="https://example.com",
+            include_images=True,
+            include_links=True,
+        )
+        assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_web_scrape_md(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.web_scrape_md(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_web_scrape_md(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.web_scrape_md(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_sitemap(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_sitemap(
+            domain="domain",
+        )
+        assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_web_scrape_sitemap(self, client: BrandDev) -> None:
+        response = client.brand.with_raw_response.web_scrape_sitemap(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = response.parse()
+        assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_web_scrape_sitemap(self, client: BrandDev) -> None:
+        with client.brand.with_streaming_response.web_scrape_sitemap(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = response.parse()
+            assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncBrand:
     parametrize = pytest.mark.parametrize(
@@ -1643,5 +1793,151 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_html(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_html(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_web_scrape_html(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.web_scrape_html(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_web_scrape_html(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.web_scrape_html(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_images(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_images(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_web_scrape_images(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.web_scrape_images(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_web_scrape_images(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.web_scrape_images(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_md(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_md(
+            url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_md(
+            url="https://example.com",
+            include_images=True,
+            include_links=True,
+        )
+        assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_web_scrape_md(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.web_scrape_md(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_web_scrape_md(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.web_scrape_md(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_sitemap(
+            domain="domain",
+        )
+        assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
+        response = await async_client.brand.with_raw_response.web_scrape_sitemap(
+            domain="domain",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        brand = await response.parse()
+        assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
+        async with async_client.brand.with_streaming_response.web_scrape_sitemap(
+            domain="domain",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            brand = await response.parse()
+            assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
