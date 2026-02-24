@@ -800,15 +800,14 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_styleguide(self, client: BrandDev) -> None:
-        brand = client.brand.styleguide(
-            domain="domain",
-        )
+        brand = client.brand.styleguide()
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_styleguide_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.styleguide(
+            direct_url="https://example.com",
             domain="domain",
             prioritize="speed",
             timeout_ms=1000,
@@ -818,9 +817,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_styleguide(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.styleguide(
-            domain="domain",
-        )
+        response = client.brand.with_raw_response.styleguide()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -830,9 +827,7 @@ class TestBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_styleguide(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.styleguide(
-            domain="domain",
-        ) as response:
+        with client.brand.with_streaming_response.styleguide() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -1755,15 +1750,14 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_styleguide(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.styleguide(
-            domain="domain",
-        )
+        brand = await async_client.brand.styleguide()
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_styleguide_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.styleguide(
+            direct_url="https://example.com",
             domain="domain",
             prioritize="speed",
             timeout_ms=1000,
@@ -1773,9 +1767,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_styleguide(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.styleguide(
-            domain="domain",
-        )
+        response = await async_client.brand.with_raw_response.styleguide()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1785,9 +1777,7 @@ class TestAsyncBrand:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_styleguide(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.styleguide(
-            domain="domain",
-        ) as response:
+        async with async_client.brand.with_streaming_response.styleguide() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
