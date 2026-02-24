@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,7 +10,13 @@ __all__ = ["BrandStyleguideParams"]
 
 
 class BrandStyleguideParams(TypedDict, total=False):
-    domain: Required[str]
+    direct_url: Annotated[str, PropertyInfo(alias="directUrl")]
+    """
+    A specific URL to fetch the styleguide from directly, bypassing domain
+    resolution (e.g., 'https://example.com/design-system').
+    """
+
+    domain: str
     """Domain name to extract styleguide from (e.g., 'example.com', 'google.com').
 
     The domain will be automatically normalized and validated.

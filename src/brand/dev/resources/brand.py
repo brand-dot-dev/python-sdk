@@ -1651,7 +1651,8 @@ class BrandResource(SyncAPIResource):
     def styleguide(
         self,
         *,
-        domain: str,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
         prioritize: Literal["speed", "quality"] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1664,8 +1665,13 @@ class BrandResource(SyncAPIResource):
         """
         Automatically extract comprehensive design system information from a brand's
         website including colors, typography, spacing, shadows, and UI components.
+        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
+        both.
 
         Args:
+          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
+              resolution (e.g., 'https://example.com/design-system').
+
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
               domain will be automatically normalized and validated.
 
@@ -1695,6 +1701,7 @@ class BrandResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "direct_url": direct_url,
                         "domain": domain,
                         "prioritize": prioritize,
                         "timeout_ms": timeout_ms,
@@ -3465,7 +3472,8 @@ class AsyncBrandResource(AsyncAPIResource):
     async def styleguide(
         self,
         *,
-        domain: str,
+        direct_url: str | Omit = omit,
+        domain: str | Omit = omit,
         prioritize: Literal["speed", "quality"] | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -3478,8 +3486,13 @@ class AsyncBrandResource(AsyncAPIResource):
         """
         Automatically extract comprehensive design system information from a brand's
         website including colors, typography, spacing, shadows, and UI components.
+        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
+        both.
 
         Args:
+          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
+              resolution (e.g., 'https://example.com/design-system').
+
           domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
               domain will be automatically normalized and validated.
 
@@ -3509,6 +3522,7 @@ class AsyncBrandResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "direct_url": direct_url,
                         "domain": domain,
                         "prioritize": prioritize,
                         "timeout_ms": timeout_ms,
