@@ -762,6 +762,7 @@ class BrandResource(SyncAPIResource):
             "welsh",
         ]
         | Omit = omit,
+        high_confidence_only: bool | Omit = omit,
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
         phone: float | Omit = omit,
@@ -786,6 +787,10 @@ class BrandResource(SyncAPIResource):
               geographic location used for search queries.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
+
+          high_confidence_only: When set to true, the API will perform an additional verification steps to
+              ensure the identified brand matches the transaction with high confidence.
+              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -821,6 +826,7 @@ class BrandResource(SyncAPIResource):
                         "city": city,
                         "country_gl": country_gl,
                         "force_language": force_language,
+                        "high_confidence_only": high_confidence_only,
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
@@ -2583,6 +2589,7 @@ class AsyncBrandResource(AsyncAPIResource):
             "welsh",
         ]
         | Omit = omit,
+        high_confidence_only: bool | Omit = omit,
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
         phone: float | Omit = omit,
@@ -2607,6 +2614,10 @@ class AsyncBrandResource(AsyncAPIResource):
               geographic location used for search queries.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
+
+          high_confidence_only: When set to true, the API will perform an additional verification steps to
+              ensure the identified brand matches the transaction with high confidence.
+              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -2642,6 +2653,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "city": city,
                         "country_gl": country_gl,
                         "force_language": force_language,
+                        "high_confidence_only": high_confidence_only,
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
