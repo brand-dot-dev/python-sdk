@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.36.0 (2026-03-01)
+
+Full Changelog: [v1.35.0...v1.36.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.35.0...v1.36.0)
+
+### Features
+
+* **api:** api update ([06eeb90](https://github.com/brand-dot-dev/python-sdk/commit/06eeb901097ef65fc3bd748262ee0535fedbd41f))
+* **api:** api update ([99080ad](https://github.com/brand-dot-dev/python-sdk/commit/99080ade4047eba1c61b35aa5244ca139d259b2b))
+
+
+### Chores
+
+* **internal:** add request options to SSE classes ([2c7a465](https://github.com/brand-dot-dev/python-sdk/commit/2c7a465cd6c6af51ee31c51e654197c5b2f2141c))
+* **internal:** make `test_proxy_environment_variables` more resilient ([481029b](https://github.com/brand-dot-dev/python-sdk/commit/481029be8d533936b4078d6eeecf135b102463c3))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([b7ecf85](https://github.com/brand-dot-dev/python-sdk/commit/b7ecf85a40b0f93e742349f13b986f1263a2cc73))
+
 ## 1.35.0 (2026-02-24)
 
 Full Changelog: [v1.34.0...v1.35.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.34.0...v1.35.0)
