@@ -21,3 +21,6 @@ class BrandWebScrapeMdParams(TypedDict, total=False):
 
     include_links: Annotated[bool, PropertyInfo(alias="includeLinks")]
     """Preserve hyperlinks in Markdown output"""
+
+    shorten_base64_images: Annotated[bool, PropertyInfo(alias="shortenBase64Images")]
+    """Shorten base64-encoded image data in the Markdown output"""
