@@ -920,6 +920,7 @@ class TestBrand:
             url="https://example.com",
             include_images=True,
             include_links=True,
+            shorten_base64_images=True,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -1871,6 +1872,7 @@ class TestAsyncBrand:
             url="https://example.com",
             include_images=True,
             include_links=True,
+            shorten_base64_images=True,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
