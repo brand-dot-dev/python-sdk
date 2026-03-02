@@ -364,6 +364,7 @@ class TestBrand:
             city="city",
             country_gl="ad",
             force_language="albanian",
+            high_confidence_only=True,
             max_speed=True,
             mcc="mcc",
             phone=0,
@@ -919,6 +920,7 @@ class TestBrand:
             url="https://example.com",
             include_images=True,
             include_links=True,
+            shorten_base64_images=True,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -1314,6 +1316,7 @@ class TestAsyncBrand:
             city="city",
             country_gl="ad",
             force_language="albanian",
+            high_confidence_only=True,
             max_speed=True,
             mcc="mcc",
             phone=0,
@@ -1869,6 +1872,7 @@ class TestAsyncBrand:
             url="https://example.com",
             include_images=True,
             include_links=True,
+            shorten_base64_images=True,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 

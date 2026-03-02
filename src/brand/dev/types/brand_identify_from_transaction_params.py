@@ -318,6 +318,13 @@ class BrandIdentifyFromTransactionParams(TypedDict, total=False):
     ]
     """Optional parameter to force the language of the retrieved brand data."""
 
+    high_confidence_only: bool
+    """
+    When set to true, the API will perform an additional verification steps to
+    ensure the identified brand matches the transaction with high confidence.
+    Defaults to false.
+    """
+
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 

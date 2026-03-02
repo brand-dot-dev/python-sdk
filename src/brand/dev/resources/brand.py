@@ -762,6 +762,7 @@ class BrandResource(SyncAPIResource):
             "welsh",
         ]
         | Omit = omit,
+        high_confidence_only: bool | Omit = omit,
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
         phone: float | Omit = omit,
@@ -786,6 +787,10 @@ class BrandResource(SyncAPIResource):
               geographic location used for search queries.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
+
+          high_confidence_only: When set to true, the API will perform an additional verification steps to
+              ensure the identified brand matches the transaction with high confidence.
+              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -821,6 +826,7 @@ class BrandResource(SyncAPIResource):
                         "city": city,
                         "country_gl": country_gl,
                         "force_language": force_language,
+                        "high_confidence_only": high_confidence_only,
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
@@ -1797,6 +1803,7 @@ class BrandResource(SyncAPIResource):
         url: str,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        shorten_base64_images: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1816,6 +1823,8 @@ class BrandResource(SyncAPIResource):
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
           extra_headers: Send extra headers
 
@@ -1837,6 +1846,7 @@ class BrandResource(SyncAPIResource):
                         "url": url,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "shorten_base64_images": shorten_base64_images,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
@@ -2583,6 +2593,7 @@ class AsyncBrandResource(AsyncAPIResource):
             "welsh",
         ]
         | Omit = omit,
+        high_confidence_only: bool | Omit = omit,
         max_speed: bool | Omit = omit,
         mcc: str | Omit = omit,
         phone: float | Omit = omit,
@@ -2607,6 +2618,10 @@ class AsyncBrandResource(AsyncAPIResource):
               geographic location used for search queries.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
+
+          high_confidence_only: When set to true, the API will perform an additional verification steps to
+              ensure the identified brand matches the transaction with high confidence.
+              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -2642,6 +2657,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "city": city,
                         "country_gl": country_gl,
                         "force_language": force_language,
+                        "high_confidence_only": high_confidence_only,
                         "max_speed": max_speed,
                         "mcc": mcc,
                         "phone": phone,
@@ -3620,6 +3636,7 @@ class AsyncBrandResource(AsyncAPIResource):
         url: str,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        shorten_base64_images: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3639,6 +3656,8 @@ class AsyncBrandResource(AsyncAPIResource):
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
           extra_headers: Send extra headers
 
@@ -3660,6 +3679,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "url": url,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "shorten_base64_images": shorten_base64_images,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
