@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.36.1 (2026-03-07)
+
+Full Changelog: [v1.36.0...v1.36.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.36.0...v1.36.1)
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([d4eb82a](https://github.com/brand-dot-dev/python-sdk/commit/d4eb82a95117381b0f3ef3c8a06a7716370b654c))
+
 ## 1.36.0 (2026-03-01)
 
 Full Changelog: [v1.35.0...v1.36.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.35.0...v1.36.0)
