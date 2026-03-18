@@ -587,6 +587,7 @@ class TestBrand:
     def test_method_retrieve_by_name_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_name(
             name="xxx",
+            country_gl="ad",
             force_language="albanian",
             max_speed=True,
             timeout_ms=1000,
@@ -1539,6 +1540,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_name_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_name(
             name="xxx",
+            country_gl="ad",
             force_language="albanian",
             max_speed=True,
             timeout_ms=1000,
