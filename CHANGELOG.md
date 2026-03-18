@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.37.0 (2026-03-18)
+
+Full Changelog: [v1.36.1...v1.37.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.36.1...v1.37.0)
+
+### Features
+
+* **api:** api update ([1c8cf2c](https://github.com/brand-dot-dev/python-sdk/commit/1c8cf2cf35082ef29bdb212f65e2b2a6576ee171))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([b00d64f](https://github.com/brand-dot-dev/python-sdk/commit/b00d64faf3853055f45d4f2224d1d1e7ecd408dd))
+* **pydantic:** do not pass `by_alias` unless set ([e50e790](https://github.com/brand-dot-dev/python-sdk/commit/e50e790617805b8d8e7433cab5c5818fc19e5414))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([792abc0](https://github.com/brand-dot-dev/python-sdk/commit/792abc0a5813db36397413e29e8741810321878f))
+
 ## 1.36.1 (2026-03-07)
 
 Full Changelog: [v1.36.0...v1.36.1](https://github.com/brand-dot-dev/python-sdk/compare/v1.36.0...v1.36.1)
