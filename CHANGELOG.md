@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.38.0 (2026-03-20)
+
+Full Changelog: [v1.37.0...v1.38.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.37.0...v1.38.0)
+
+### Features
+
+* **api:** api update ([3d61f72](https://github.com/brand-dot-dev/python-sdk/commit/3d61f72f2877b8d27f6c40c6a2b96642542f323a))
+
+
+### Bug Fixes
+
+* sanitize endpoint path params ([3d9ea33](https://github.com/brand-dot-dev/python-sdk/commit/3d9ea339fd93fb864a8b68d132b1a2acbb6d8412))
+
 ## 1.37.0 (2026-03-18)
 
 Full Changelog: [v1.36.1...v1.37.0](https://github.com/brand-dot-dev/python-sdk/compare/v1.36.1...v1.37.0)
