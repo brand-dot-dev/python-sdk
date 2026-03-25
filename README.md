@@ -20,7 +20,7 @@ Use the Brand Dev MCP Server to enable AI assistants to interact with this API, 
 
 ## Documentation
 
-The REST API documentation can be found on [docs.brand.dev](https://docs.brand.dev/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.context.dev](https://docs.context.dev/). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
