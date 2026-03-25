@@ -19,12 +19,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from context.dev import ContextDev, AsyncContextDev, APIResponseValidationError
-from context.dev._types import Omit
-from context.dev._utils import asyncify
-from context.dev._models import BaseModel, FinalRequestOptions
-from context.dev._exceptions import APIStatusError, APITimeoutError, ContextDevError, APIResponseValidationError
-from context.dev._base_client import (
+from brand.dev import BrandDev, AsyncBrandDev, APIResponseValidationError
+from brand.dev._types import Omit
+from brand.dev._utils import asyncify
+from brand.dev._models import BaseModel, FinalRequestOptions
+from brand.dev._exceptions import BrandDevError, APIStatusError, APITimeoutError, APIResponseValidationError
+from brand.dev._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -103,7 +103,7 @@ async def _make_async_iterator(iterable: Iterable[T], counter: Optional[Counter]
         yield item
 
 
-def _get_open_connections(client: ContextDev | AsyncContextDev) -> int:
+def _get_open_connections(client: BrandDev | AsyncBrandDev) -> int:
     transport = client._client._transport
     assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
 
@@ -111,9 +111,9 @@ def _get_open_connections(client: ContextDev | AsyncContextDev) -> int:
     return len(pool._requests)
 
 
-class TestContextDev:
+class TestBrandDev:
     @pytest.mark.respx(base_url=base_url)
-    def test_raw_response(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_raw_response(self, respx_mock: MockRouter, client: BrandDev) -> None:
         respx_mock.post("/foo").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
 
         response = client.post("/foo", cast_to=httpx.Response)
@@ -122,7 +122,7 @@ class TestContextDev:
         assert response.json() == {"foo": "bar"}
 
     @pytest.mark.respx(base_url=base_url)
-    def test_raw_response_for_binary(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_raw_response_for_binary(self, respx_mock: MockRouter, client: BrandDev) -> None:
         respx_mock.post("/foo").mock(
             return_value=httpx.Response(200, headers={"Content-Type": "application/binary"}, content='{"foo": "bar"}')
         )
@@ -132,7 +132,7 @@ class TestContextDev:
         assert isinstance(response, httpx.Response)
         assert response.json() == {"foo": "bar"}
 
-    def test_copy(self, client: ContextDev) -> None:
+    def test_copy(self, client: BrandDev) -> None:
         copied = client.copy()
         assert id(copied) != id(client)
 
@@ -140,7 +140,7 @@ class TestContextDev:
         assert copied.api_key == "another My API Key"
         assert client.api_key == "My API Key"
 
-    def test_copy_default_options(self, client: ContextDev) -> None:
+    def test_copy_default_options(self, client: BrandDev) -> None:
         # options that have a default are overridden correctly
         copied = client.copy(max_retries=7)
         assert copied.max_retries == 7
@@ -157,7 +157,7 @@ class TestContextDev:
         assert isinstance(client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = ContextDev(
+        client = BrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -192,7 +192,7 @@ class TestContextDev:
         client.close()
 
     def test_copy_default_query(self) -> None:
-        client = ContextDev(
+        client = BrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -229,7 +229,7 @@ class TestContextDev:
 
         client.close()
 
-    def test_copy_signature(self, client: ContextDev) -> None:
+    def test_copy_signature(self, client: BrandDev) -> None:
         # ensure the same parameters that can be passed to the client are defined in the `.copy()` method
         init_signature = inspect.signature(
             # mypy doesn't like that we access the `__init__` property.
@@ -246,7 +246,7 @@ class TestContextDev:
             assert copy_param is not None, f"copy() signature is missing the {name} param"
 
     @pytest.mark.skipif(sys.version_info >= (3, 10), reason="fails because of a memory leak that started from 3.12")
-    def test_copy_build_request(self, client: ContextDev) -> None:
+    def test_copy_build_request(self, client: BrandDev) -> None:
         options = FinalRequestOptions(method="get", url="/foo")
 
         def build_request(options: FinalRequestOptions) -> None:
@@ -286,10 +286,10 @@ class TestContextDev:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "context/dev/_legacy_response.py",
-                        "context/dev/_response.py",
+                        "brand/dev/_legacy_response.py",
+                        "brand/dev/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "context/dev/_compat.py",
+                        "brand/dev/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -308,7 +308,7 @@ class TestContextDev:
                     print(frame)
             raise AssertionError()
 
-    def test_request_timeout(self, client: ContextDev) -> None:
+    def test_request_timeout(self, client: BrandDev) -> None:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
         assert timeout == DEFAULT_TIMEOUT
@@ -318,7 +318,7 @@ class TestContextDev:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = ContextDev(
+        client = BrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -331,7 +331,7 @@ class TestContextDev:
     def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
-            client = ContextDev(
+            client = BrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -343,7 +343,7 @@ class TestContextDev:
 
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
-            client = ContextDev(
+            client = BrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -355,7 +355,7 @@ class TestContextDev:
 
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = ContextDev(
+            client = BrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -368,7 +368,7 @@ class TestContextDev:
     async def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             async with httpx.AsyncClient() as http_client:
-                ContextDev(
+                BrandDev(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -376,14 +376,14 @@ class TestContextDev:
                 )
 
     def test_default_headers_option(self) -> None:
-        test_client = ContextDev(
+        test_client = BrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = test_client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        test_client2 = ContextDev(
+        test_client2 = BrandDev(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -400,17 +400,17 @@ class TestContextDev:
         test_client2.close()
 
     def test_validate_headers(self) -> None:
-        client = ContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = BrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(ContextDevError):
-            with update_env(**{"CONTEXT_DEV_API_KEY": Omit()}):
-                client2 = ContextDev(base_url=base_url, api_key=None, _strict_response_validation=True)
+        with pytest.raises(BrandDevError):
+            with update_env(**{"BRAND_DEV_API_KEY": Omit()}):
+                client2 = BrandDev(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = ContextDev(
+        client = BrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -429,7 +429,7 @@ class TestContextDev:
 
         client.close()
 
-    def test_request_extra_json(self, client: ContextDev) -> None:
+    def test_request_extra_json(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -463,7 +463,7 @@ class TestContextDev:
         data = json.loads(request.content.decode("utf-8"))
         assert data == {"foo": "bar", "baz": None}
 
-    def test_request_extra_headers(self, client: ContextDev) -> None:
+    def test_request_extra_headers(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -485,7 +485,7 @@ class TestContextDev:
         )
         assert request.headers.get("X-Bar") == "false"
 
-    def test_request_extra_query(self, client: ContextDev) -> None:
+    def test_request_extra_query(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -526,7 +526,7 @@ class TestContextDev:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, client: ContextDev) -> None:
+    def test_multipart_repeating_array(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
                 method="post",
@@ -556,7 +556,7 @@ class TestContextDev:
         ]
 
     @pytest.mark.respx(base_url=base_url)
-    def test_binary_content_upload(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_binary_content_upload(self, respx_mock: MockRouter, client: BrandDev) -> None:
         respx_mock.post("/upload").mock(side_effect=mirror_request_content)
 
         file_content = b"Hello, this is a test file."
@@ -581,7 +581,7 @@ class TestContextDev:
             assert counter.value == 0, "the request body should not have been read"
             return httpx.Response(200, content=request.read())
 
-        with ContextDev(
+        with BrandDev(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -600,7 +600,7 @@ class TestContextDev:
             assert counter.value == 1
 
     @pytest.mark.respx(base_url=base_url)
-    def test_binary_content_upload_with_body_is_deprecated(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_binary_content_upload_with_body_is_deprecated(self, respx_mock: MockRouter, client: BrandDev) -> None:
         respx_mock.post("/upload").mock(side_effect=mirror_request_content)
 
         file_content = b"Hello, this is a test file."
@@ -620,7 +620,7 @@ class TestContextDev:
         assert response.content == file_content
 
     @pytest.mark.respx(base_url=base_url)
-    def test_basic_union_response(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_basic_union_response(self, respx_mock: MockRouter, client: BrandDev) -> None:
         class Model1(BaseModel):
             name: str
 
@@ -634,7 +634,7 @@ class TestContextDev:
         assert response.foo == "bar"
 
     @pytest.mark.respx(base_url=base_url)
-    def test_union_response_different_types(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_union_response_different_types(self, respx_mock: MockRouter, client: BrandDev) -> None:
         """Union of objects with the same field name using a different type"""
 
         class Model1(BaseModel):
@@ -656,7 +656,7 @@ class TestContextDev:
         assert response.foo == 1
 
     @pytest.mark.respx(base_url=base_url)
-    def test_non_application_json_content_type_for_json_data(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_non_application_json_content_type_for_json_data(self, respx_mock: MockRouter, client: BrandDev) -> None:
         """
         Response that sets Content-Type to something other than application/json but returns json data
         """
@@ -677,7 +677,7 @@ class TestContextDev:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = ContextDev(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
+        client = BrandDev(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -687,17 +687,15 @@ class TestContextDev:
         client.close()
 
     def test_base_url_env(self) -> None:
-        with update_env(CONTEXT_DEV_BASE_URL="http://localhost:5000/from/env"):
-            client = ContextDev(api_key=api_key, _strict_response_validation=True)
+        with update_env(BRAND_DEV_BASE_URL="http://localhost:5000/from/env"):
+            client = BrandDev(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            ContextDev(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
-            ),
-            ContextDev(
+            BrandDev(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            BrandDev(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -706,7 +704,7 @@ class TestContextDev:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: ContextDev) -> None:
+    def test_base_url_trailing_slash(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -720,10 +718,8 @@ class TestContextDev:
     @pytest.mark.parametrize(
         "client",
         [
-            ContextDev(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
-            ),
-            ContextDev(
+            BrandDev(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            BrandDev(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -732,7 +728,7 @@ class TestContextDev:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: ContextDev) -> None:
+    def test_base_url_no_trailing_slash(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -746,10 +742,8 @@ class TestContextDev:
     @pytest.mark.parametrize(
         "client",
         [
-            ContextDev(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
-            ),
-            ContextDev(
+            BrandDev(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            BrandDev(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -758,7 +752,7 @@ class TestContextDev:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: ContextDev) -> None:
+    def test_absolute_request_url(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -770,7 +764,7 @@ class TestContextDev:
         client.close()
 
     def test_copied_client_does_not_close_http(self) -> None:
-        test_client = ContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        test_client = BrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not test_client.is_closed()
 
         copied = test_client.copy()
@@ -781,7 +775,7 @@ class TestContextDev:
         assert not test_client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        test_client = ContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        test_client = BrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with test_client as c2:
             assert c2 is test_client
             assert not c2.is_closed()
@@ -789,7 +783,7 @@ class TestContextDev:
         assert test_client.is_closed()
 
     @pytest.mark.respx(base_url=base_url)
-    def test_client_response_validation_error(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_client_response_validation_error(self, respx_mock: MockRouter, client: BrandDev) -> None:
         class Model(BaseModel):
             foo: str
 
@@ -802,9 +796,7 @@ class TestContextDev:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            ContextDev(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
-            )
+            BrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -813,12 +805,12 @@ class TestContextDev:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = ContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = BrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        non_strict_client = ContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        non_strict_client = BrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = non_strict_client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -849,16 +841,16 @@ class TestContextDev:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(
-        self, remaining_retries: int, retry_after: str, timeout: float, client: ContextDev
+        self, remaining_retries: int, retry_after: str, timeout: float, client: BrandDev
     ) -> None:
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: BrandDev) -> None:
         respx_mock.get("/brand/retrieve").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
@@ -866,9 +858,9 @@ class TestContextDev:
 
         assert _get_open_connections(client) == 0
 
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: BrandDev) -> None:
         respx_mock.get("/brand/retrieve").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
@@ -876,12 +868,12 @@ class TestContextDev:
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
         self,
-        client: ContextDev,
+        client: BrandDev,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -907,10 +899,10 @@ class TestContextDev:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
-        self, client: ContextDev, failures_before_success: int, respx_mock: MockRouter
+        self, client: BrandDev, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -932,10 +924,10 @@ class TestContextDev:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
-        self, client: ContextDev, failures_before_success: int, respx_mock: MockRouter
+        self, client: BrandDev, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -987,7 +979,7 @@ class TestContextDev:
         )
 
     @pytest.mark.respx(base_url=base_url)
-    def test_follow_redirects(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_follow_redirects(self, respx_mock: MockRouter, client: BrandDev) -> None:
         # Test that the default follow_redirects=True allows following redirects
         respx_mock.post("/redirect").mock(
             return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
@@ -999,7 +991,7 @@ class TestContextDev:
         assert response.json() == {"status": "ok"}
 
     @pytest.mark.respx(base_url=base_url)
-    def test_follow_redirects_disabled(self, respx_mock: MockRouter, client: ContextDev) -> None:
+    def test_follow_redirects_disabled(self, respx_mock: MockRouter, client: BrandDev) -> None:
         # Test that follow_redirects=False prevents following redirects
         respx_mock.post("/redirect").mock(
             return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
@@ -1012,9 +1004,9 @@ class TestContextDev:
         assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"
 
 
-class TestAsyncContextDev:
+class TestAsyncBrandDev:
     @pytest.mark.respx(base_url=base_url)
-    async def test_raw_response(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_raw_response(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         respx_mock.post("/foo").mock(return_value=httpx.Response(200, json={"foo": "bar"}))
 
         response = await async_client.post("/foo", cast_to=httpx.Response)
@@ -1023,7 +1015,7 @@ class TestAsyncContextDev:
         assert response.json() == {"foo": "bar"}
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_raw_response_for_binary(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_raw_response_for_binary(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         respx_mock.post("/foo").mock(
             return_value=httpx.Response(200, headers={"Content-Type": "application/binary"}, content='{"foo": "bar"}')
         )
@@ -1033,7 +1025,7 @@ class TestAsyncContextDev:
         assert isinstance(response, httpx.Response)
         assert response.json() == {"foo": "bar"}
 
-    def test_copy(self, async_client: AsyncContextDev) -> None:
+    def test_copy(self, async_client: AsyncBrandDev) -> None:
         copied = async_client.copy()
         assert id(copied) != id(async_client)
 
@@ -1041,7 +1033,7 @@ class TestAsyncContextDev:
         assert copied.api_key == "another My API Key"
         assert async_client.api_key == "My API Key"
 
-    def test_copy_default_options(self, async_client: AsyncContextDev) -> None:
+    def test_copy_default_options(self, async_client: AsyncBrandDev) -> None:
         # options that have a default are overridden correctly
         copied = async_client.copy(max_retries=7)
         assert copied.max_retries == 7
@@ -1058,7 +1050,7 @@ class TestAsyncContextDev:
         assert isinstance(async_client.timeout, httpx.Timeout)
 
     async def test_copy_default_headers(self) -> None:
-        client = AsyncContextDev(
+        client = AsyncBrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -1093,7 +1085,7 @@ class TestAsyncContextDev:
         await client.close()
 
     async def test_copy_default_query(self) -> None:
-        client = AsyncContextDev(
+        client = AsyncBrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -1130,7 +1122,7 @@ class TestAsyncContextDev:
 
         await client.close()
 
-    def test_copy_signature(self, async_client: AsyncContextDev) -> None:
+    def test_copy_signature(self, async_client: AsyncBrandDev) -> None:
         # ensure the same parameters that can be passed to the client are defined in the `.copy()` method
         init_signature = inspect.signature(
             # mypy doesn't like that we access the `__init__` property.
@@ -1147,7 +1139,7 @@ class TestAsyncContextDev:
             assert copy_param is not None, f"copy() signature is missing the {name} param"
 
     @pytest.mark.skipif(sys.version_info >= (3, 10), reason="fails because of a memory leak that started from 3.12")
-    def test_copy_build_request(self, async_client: AsyncContextDev) -> None:
+    def test_copy_build_request(self, async_client: AsyncBrandDev) -> None:
         options = FinalRequestOptions(method="get", url="/foo")
 
         def build_request(options: FinalRequestOptions) -> None:
@@ -1187,10 +1179,10 @@ class TestAsyncContextDev:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "context/dev/_legacy_response.py",
-                        "context/dev/_response.py",
+                        "brand/dev/_legacy_response.py",
+                        "brand/dev/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "context/dev/_compat.py",
+                        "brand/dev/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1209,7 +1201,7 @@ class TestAsyncContextDev:
                     print(frame)
             raise AssertionError()
 
-    async def test_request_timeout(self, async_client: AsyncContextDev) -> None:
+    async def test_request_timeout(self, async_client: AsyncBrandDev) -> None:
         request = async_client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
         assert timeout == DEFAULT_TIMEOUT
@@ -1221,7 +1213,7 @@ class TestAsyncContextDev:
         assert timeout == httpx.Timeout(100.0)
 
     async def test_client_timeout_option(self) -> None:
-        client = AsyncContextDev(
+        client = AsyncBrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -1234,7 +1226,7 @@ class TestAsyncContextDev:
     async def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
-            client = AsyncContextDev(
+            client = AsyncBrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1246,7 +1238,7 @@ class TestAsyncContextDev:
 
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
-            client = AsyncContextDev(
+            client = AsyncBrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1258,7 +1250,7 @@ class TestAsyncContextDev:
 
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = AsyncContextDev(
+            client = AsyncBrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1271,7 +1263,7 @@ class TestAsyncContextDev:
     def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             with httpx.Client() as http_client:
-                AsyncContextDev(
+                AsyncBrandDev(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -1279,14 +1271,14 @@ class TestAsyncContextDev:
                 )
 
     async def test_default_headers_option(self) -> None:
-        test_client = AsyncContextDev(
+        test_client = AsyncBrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = test_client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        test_client2 = AsyncContextDev(
+        test_client2 = AsyncBrandDev(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -1303,17 +1295,17 @@ class TestAsyncContextDev:
         await test_client2.close()
 
     def test_validate_headers(self) -> None:
-        client = AsyncContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncBrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(ContextDevError):
-            with update_env(**{"CONTEXT_DEV_API_KEY": Omit()}):
-                client2 = AsyncContextDev(base_url=base_url, api_key=None, _strict_response_validation=True)
+        with pytest.raises(BrandDevError):
+            with update_env(**{"BRAND_DEV_API_KEY": Omit()}):
+                client2 = AsyncBrandDev(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     async def test_default_query_option(self) -> None:
-        client = AsyncContextDev(
+        client = AsyncBrandDev(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1332,7 +1324,7 @@ class TestAsyncContextDev:
 
         await client.close()
 
-    def test_request_extra_json(self, client: ContextDev) -> None:
+    def test_request_extra_json(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1366,7 +1358,7 @@ class TestAsyncContextDev:
         data = json.loads(request.content.decode("utf-8"))
         assert data == {"foo": "bar", "baz": None}
 
-    def test_request_extra_headers(self, client: ContextDev) -> None:
+    def test_request_extra_headers(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1388,7 +1380,7 @@ class TestAsyncContextDev:
         )
         assert request.headers.get("X-Bar") == "false"
 
-    def test_request_extra_query(self, client: ContextDev) -> None:
+    def test_request_extra_query(self, client: BrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1429,7 +1421,7 @@ class TestAsyncContextDev:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, async_client: AsyncContextDev) -> None:
+    def test_multipart_repeating_array(self, async_client: AsyncBrandDev) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
                 method="post",
@@ -1459,7 +1451,7 @@ class TestAsyncContextDev:
         ]
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_binary_content_upload(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_binary_content_upload(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         respx_mock.post("/upload").mock(side_effect=mirror_request_content)
 
         file_content = b"Hello, this is a test file."
@@ -1484,7 +1476,7 @@ class TestAsyncContextDev:
             assert counter.value == 0, "the request body should not have been read"
             return httpx.Response(200, content=await request.aread())
 
-        async with AsyncContextDev(
+        async with AsyncBrandDev(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -1504,7 +1496,7 @@ class TestAsyncContextDev:
 
     @pytest.mark.respx(base_url=base_url)
     async def test_binary_content_upload_with_body_is_deprecated(
-        self, respx_mock: MockRouter, async_client: AsyncContextDev
+        self, respx_mock: MockRouter, async_client: AsyncBrandDev
     ) -> None:
         respx_mock.post("/upload").mock(side_effect=mirror_request_content)
 
@@ -1525,7 +1517,7 @@ class TestAsyncContextDev:
         assert response.content == file_content
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_basic_union_response(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_basic_union_response(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         class Model1(BaseModel):
             name: str
 
@@ -1539,7 +1531,7 @@ class TestAsyncContextDev:
         assert response.foo == "bar"
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_union_response_different_types(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_union_response_different_types(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         """Union of objects with the same field name using a different type"""
 
         class Model1(BaseModel):
@@ -1562,7 +1554,7 @@ class TestAsyncContextDev:
 
     @pytest.mark.respx(base_url=base_url)
     async def test_non_application_json_content_type_for_json_data(
-        self, respx_mock: MockRouter, async_client: AsyncContextDev
+        self, respx_mock: MockRouter, async_client: AsyncBrandDev
     ) -> None:
         """
         Response that sets Content-Type to something other than application/json but returns json data
@@ -1584,7 +1576,7 @@ class TestAsyncContextDev:
         assert response.foo == 2
 
     async def test_base_url_setter(self) -> None:
-        client = AsyncContextDev(
+        client = AsyncBrandDev(
             base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -1596,17 +1588,17 @@ class TestAsyncContextDev:
         await client.close()
 
     async def test_base_url_env(self) -> None:
-        with update_env(CONTEXT_DEV_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncContextDev(api_key=api_key, _strict_response_validation=True)
+        with update_env(BRAND_DEV_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncBrandDev(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1615,7 +1607,7 @@ class TestAsyncContextDev:
         ],
         ids=["standard", "custom http client"],
     )
-    async def test_base_url_trailing_slash(self, client: AsyncContextDev) -> None:
+    async def test_base_url_trailing_slash(self, client: AsyncBrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1629,10 +1621,10 @@ class TestAsyncContextDev:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1641,7 +1633,7 @@ class TestAsyncContextDev:
         ],
         ids=["standard", "custom http client"],
     )
-    async def test_base_url_no_trailing_slash(self, client: AsyncContextDev) -> None:
+    async def test_base_url_no_trailing_slash(self, client: AsyncBrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1655,10 +1647,10 @@ class TestAsyncContextDev:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1667,7 +1659,7 @@ class TestAsyncContextDev:
         ],
         ids=["standard", "custom http client"],
     )
-    async def test_absolute_request_url(self, client: AsyncContextDev) -> None:
+    async def test_absolute_request_url(self, client: AsyncBrandDev) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1679,7 +1671,7 @@ class TestAsyncContextDev:
         await client.close()
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        test_client = AsyncContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        test_client = AsyncBrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not test_client.is_closed()
 
         copied = test_client.copy()
@@ -1691,7 +1683,7 @@ class TestAsyncContextDev:
         assert not test_client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        test_client = AsyncContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        test_client = AsyncBrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with test_client as c2:
             assert c2 is test_client
             assert not c2.is_closed()
@@ -1699,9 +1691,7 @@ class TestAsyncContextDev:
         assert test_client.is_closed()
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_client_response_validation_error(
-        self, respx_mock: MockRouter, async_client: AsyncContextDev
-    ) -> None:
+    async def test_client_response_validation_error(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         class Model(BaseModel):
             foo: str
 
@@ -1714,7 +1704,7 @@ class TestAsyncContextDev:
 
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            AsyncContextDev(
+            AsyncBrandDev(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
@@ -1725,12 +1715,12 @@ class TestAsyncContextDev:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = AsyncBrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        non_strict_client = AsyncContextDev(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        non_strict_client = AsyncBrandDev(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await non_strict_client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1761,17 +1751,17 @@ class TestAsyncContextDev:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     async def test_parse_retry_after_header(
-        self, remaining_retries: int, retry_after: str, timeout: float, async_client: AsyncContextDev
+        self, remaining_retries: int, retry_after: str, timeout: float, async_client: AsyncBrandDev
     ) -> None:
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = async_client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(
-        self, respx_mock: MockRouter, async_client: AsyncContextDev
+        self, respx_mock: MockRouter, async_client: AsyncBrandDev
     ) -> None:
         respx_mock.get("/brand/retrieve").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
@@ -1780,10 +1770,10 @@ class TestAsyncContextDev:
 
         assert _get_open_connections(async_client) == 0
 
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(
-        self, respx_mock: MockRouter, async_client: AsyncContextDev
+        self, respx_mock: MockRouter, async_client: AsyncBrandDev
     ) -> None:
         respx_mock.get("/brand/retrieve").mock(return_value=httpx.Response(500))
 
@@ -1792,12 +1782,12 @@ class TestAsyncContextDev:
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
         self,
-        async_client: AsyncContextDev,
+        async_client: AsyncBrandDev,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -1823,10 +1813,10 @@ class TestAsyncContextDev:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_omit_retry_count_header(
-        self, async_client: AsyncContextDev, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncBrandDev, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1848,10 +1838,10 @@ class TestAsyncContextDev:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("context.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("brand.dev._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_overwrite_retry_count_header(
-        self, async_client: AsyncContextDev, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncBrandDev, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1907,7 +1897,7 @@ class TestAsyncContextDev:
         )
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_follow_redirects(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_follow_redirects(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         # Test that the default follow_redirects=True allows following redirects
         respx_mock.post("/redirect").mock(
             return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
@@ -1919,7 +1909,7 @@ class TestAsyncContextDev:
         assert response.json() == {"status": "ok"}
 
     @pytest.mark.respx(base_url=base_url)
-    async def test_follow_redirects_disabled(self, respx_mock: MockRouter, async_client: AsyncContextDev) -> None:
+    async def test_follow_redirects_disabled(self, respx_mock: MockRouter, async_client: AsyncBrandDev) -> None:
         # Test that follow_redirects=False prevents following redirects
         respx_mock.post("/redirect").mock(
             return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
