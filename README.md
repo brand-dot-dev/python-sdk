@@ -1,9 +1,9 @@
-# Context Dev Python API library
+# Brand Dev Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/context.dev.svg?label=pypi%20(stable))](https://pypi.org/project/context.dev/)
+[![PyPI version](https://img.shields.io/pypi/v/brand.dev.svg?label=pypi%20(stable))](https://pypi.org/project/brand.dev/)
 
-The Context Dev Python library provides convenient access to the Context Dev REST API from any Python 3.9+
+The Brand Dev Python library provides convenient access to the Brand Dev REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -11,22 +11,22 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## MCP Server
 
-Use the Context Dev MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
+Use the Brand Dev MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=context.dev-mcp&config=eyJuYW1lIjoiY29udGV4dC5kZXYtbWNwIiwidHJhbnNwb3J0IjoiaHR0cCIsInVybCI6Imh0dHBzOi8vY29udGV4dC1kZXYuc3RsbWNwLmNvbSIsImhlYWRlcnMiOnsieC1jb250ZXh0LWRldi1hcGkta2V5IjoiTXkgQVBJIEtleSJ9fQ)
-[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22context.dev-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fcontext-dev.stlmcp.com%22%2C%22headers%22%3A%7B%22x-context-dev-api-key%22%3A%22My%20API%20Key%22%7D%7D)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=brand.dev-mcp&config=eyJuYW1lIjoiYnJhbmQuZGV2LW1jcCIsInRyYW5zcG9ydCI6Imh0dHAiLCJ1cmwiOiJodHRwczovL2JyYW5kLWRldi5zdGxtY3AuY29tIiwiaGVhZGVycyI6eyJ4LWJyYW5kLWRldi1hcGkta2V5IjoiTXkgQVBJIEtleSJ9fQ)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22brand.dev-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fbrand-dev.stlmcp.com%22%2C%22headers%22%3A%7B%22x-brand-dev-api-key%22%3A%22My%20API%20Key%22%7D%7D)
 
 > Note: You may need to set environment variables in your MCP client.
 
 ## Documentation
 
-The REST API documentation can be found on [docs.context.dev](https://docs.context.dev/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.brand.dev](https://docs.brand.dev/). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
 # install from PyPI
-pip install context.dev
+pip install brand.dev
 ```
 
 ## Usage
@@ -35,10 +35,10 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from context.dev import ContextDev
+from brand.dev import BrandDev
 
-client = ContextDev(
-    api_key=os.environ.get("CONTEXT_DEV_API_KEY"),  # This is the default and can be omitted
+client = BrandDev(
+    api_key=os.environ.get("BRAND_DEV_API_KEY"),  # This is the default and can be omitted
 )
 
 brand = client.brand.retrieve(
@@ -49,20 +49,20 @@ print(brand.brand)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `CONTEXT_DEV_API_KEY="My API Key"` to your `.env` file
+to add `BRAND_DEV_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncContextDev` instead of `ContextDev` and use `await` with each API call:
+Simply import `AsyncBrandDev` instead of `BrandDev` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from context.dev import AsyncContextDev
+from brand.dev import AsyncBrandDev
 
-client = AsyncContextDev(
-    api_key=os.environ.get("CONTEXT_DEV_API_KEY"),  # This is the default and can be omitted
+client = AsyncBrandDev(
+    api_key=os.environ.get("BRAND_DEV_API_KEY"),  # This is the default and can be omitted
 )
 
 
@@ -86,7 +86,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install context.dev[aiohttp]
+pip install brand.dev[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -94,13 +94,13 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 ```python
 import os
 import asyncio
-from context.dev import DefaultAioHttpClient
-from context.dev import AsyncContextDev
+from brand.dev import DefaultAioHttpClient
+from brand.dev import AsyncBrandDev
 
 
 async def main() -> None:
-    async with AsyncContextDev(
-        api_key=os.environ.get("CONTEXT_DEV_API_KEY"),  # This is the default and can be omitted
+    async with AsyncBrandDev(
+        api_key=os.environ.get("BRAND_DEV_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         brand = await client.brand.retrieve(
@@ -126,11 +126,11 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from context.dev import ContextDev
+from brand.dev import BrandDev
 
-client = ContextDev()
+client = BrandDev()
 
-response = client.ai.ai_query(
+response = client.brand.ai_query(
     data_to_extract=[
         {
             "datapoint_description": "datapoint_description",
@@ -147,29 +147,29 @@ print(response.specific_pages)
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `context.dev.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `brand.dev.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `context.dev.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `brand.dev.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `context.dev.APIError`.
+All errors inherit from `brand.dev.APIError`.
 
 ```python
-import context.dev
-from context.dev import ContextDev
+import brand.dev
+from brand.dev import BrandDev
 
-client = ContextDev()
+client = BrandDev()
 
 try:
     client.brand.retrieve(
         domain="REPLACE_ME",
     )
-except context.dev.APIConnectionError as e:
+except brand.dev.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except context.dev.RateLimitError as e:
+except brand.dev.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except context.dev.APIStatusError as e:
+except brand.dev.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -197,10 +197,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from context.dev import ContextDev
+from brand.dev import BrandDev
 
 # Configure the default for all requests:
-client = ContextDev(
+client = BrandDev(
     # default is 2
     max_retries=0,
 )
@@ -217,16 +217,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from context.dev import ContextDev
+from brand.dev import BrandDev
 
 # Configure the default for all requests:
-client = ContextDev(
+client = BrandDev(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = ContextDev(
+client = BrandDev(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -246,10 +246,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `CONTEXT_DEV_LOG` to `info`.
+You can enable logging by setting the environment variable `BRAND_DEV_LOG` to `info`.
 
 ```shell
-$ export CONTEXT_DEV_LOG=info
+$ export BRAND_DEV_LOG=info
 ```
 
 Or to `debug` for more verbose logging.
@@ -271,9 +271,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from context.dev import ContextDev
+from brand.dev import BrandDev
 
-client = ContextDev()
+client = BrandDev()
 response = client.brand.with_raw_response.retrieve(
     domain="REPLACE_ME",
 )
@@ -283,9 +283,9 @@ brand = response.parse()  # get the object that `brand.retrieve()` would have re
 print(brand.brand)
 ```
 
-These methods return an [`APIResponse`](https://github.com/context-dot-dev/python-sdk/tree/main/src/context/dev/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/context-dot-dev/deprecated-brand-python-sdk/tree/main/src/brand/dev/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/context-dot-dev/python-sdk/tree/main/src/context/dev/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/context-dot-dev/deprecated-brand-python-sdk/tree/main/src/brand/dev/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -349,10 +349,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from context.dev import ContextDev, DefaultHttpxClient
+from brand.dev import BrandDev, DefaultHttpxClient
 
-client = ContextDev(
-    # Or use the `CONTEXT_DEV_BASE_URL` env var
+client = BrandDev(
+    # Or use the `BRAND_DEV_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxy="http://my.test.proxy.example.com",
@@ -372,9 +372,9 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from context.dev import ContextDev
+from brand.dev import BrandDev
 
-with ContextDev() as client:
+with BrandDev() as client:
   # make requests here
   ...
 
@@ -391,7 +391,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/context-dot-dev/python-sdk/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/context-dot-dev/deprecated-brand-python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
@@ -400,8 +400,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import context.dev
-print(context.dev.__version__)
+import brand.dev
+print(brand.dev.__version__)
 ```
 
 ## Requirements

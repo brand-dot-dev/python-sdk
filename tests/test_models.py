@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from context.dev._utils import PropertyInfo
-from context.dev._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from context.dev._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
+from brand.dev._utils import PropertyInfo
+from brand.dev._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from brand.dev._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
 
 
 class BasicModel(BaseModel):
