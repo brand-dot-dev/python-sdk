@@ -961,6 +961,15 @@ class TestBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_web_scrape_sitemap_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_sitemap(
+            domain="domain",
+            max_links=1,
+        )
+        assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_web_scrape_sitemap(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.web_scrape_sitemap(
             domain="domain",
@@ -1909,6 +1918,15 @@ class TestAsyncBrand:
     async def test_method_web_scrape_sitemap(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_sitemap(
             domain="domain",
+        )
+        assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_sitemap_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_sitemap(
+            domain="domain",
+            max_links=1,
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 

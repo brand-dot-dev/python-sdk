@@ -2122,6 +2122,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        max_links: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2138,6 +2139,9 @@ class BrandResource(SyncAPIResource):
           domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
               automatically normalized and validated.
 
+          max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
+              Minimum is 1, maximum is 100,000.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2153,7 +2157,13 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"domain": domain}, brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams),
+                query=maybe_transform(
+                    {
+                        "domain": domain,
+                        "max_links": max_links,
+                    },
+                    brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
+                ),
             ),
             cast_to=BrandWebScrapeSitemapResponse,
         )
@@ -4219,6 +4229,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        max_links: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4234,6 +4245,9 @@ class AsyncBrandResource(AsyncAPIResource):
         Args:
           domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
               automatically normalized and validated.
+
+          max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
+              Minimum is 1, maximum is 100,000.
 
           extra_headers: Send extra headers
 
@@ -4251,7 +4265,11 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"domain": domain}, brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams
+                    {
+                        "domain": domain,
+                        "max_links": max_links,
+                    },
+                    brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
             ),
             cast_to=BrandWebScrapeSitemapResponse,
