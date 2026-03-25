@@ -18,53 +18,47 @@ jobs:
   lint:
     timeout-minutes: 10
     name: lint
-    runs-on: ${{ github.repository == 'stainless-sdks/brand.dev-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
+    runs-on: ${{ github.repository == 'stainless-sdks/context.dev-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install Rye
-        run: |
-          curl -sSf https://rye.astral.sh/get | bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
-        env:
-          RYE_VERSION: '0.44.0'
-          RYE_INSTALL_OPTION: '--yes'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.10.2'
 
       - name: Install dependencies
-        run: rye sync --all-features
+        run: uv sync --all-extras
 
       - name: Run lints
         run: ./scripts/lint
 
   build:
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
+    if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
     timeout-minutes: 10
     name: build
     permissions:
       contents: read
       id-token: write
-    runs-on: ${{ github.repository == 'stainless-sdks/brand.dev-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/context.dev-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install Rye
-        run: |
-          curl -sSf https://rye.astral.sh/get | bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
-        env:
-          RYE_VERSION: '0.44.0'
-          RYE_INSTALL_OPTION: '--yes'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.10.2'
 
       - name: Install dependencies
-        run: rye sync --all-features
+        run: uv sync --all-extras
 
       - name: Run build
-        run: rye build
+        run: uv build
 
       - name: Get GitHub OIDC Token
         if: |-
-          github.repository == 'stainless-sdks/brand.dev-python' &&
+          github.repository == 'stainless-sdks/context.dev-python' &&
           !startsWith(github.ref, 'refs/heads/stl/')
         id: github-oidc
         uses: actions/github-script@v8
@@ -73,7 +67,7 @@ jobs:
 
       - name: Upload tarball
         if: |-
-          github.repository == 'stainless-sdks/brand.dev-python' &&
+          github.repository == 'stainless-sdks/context.dev-python' &&
           !startsWith(github.ref, 'refs/heads/stl/')
         env:
           URL: https://pkg.stainless.com/s
@@ -84,18 +78,15 @@ jobs:
   test:
     timeout-minutes: 10
     name: test
-    runs-on: ${{ github.repository == 'stainless-sdks/brand.dev-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/context.dev-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install Rye
-        run: |
-          curl -sSf https://rye.astral.sh/get | bash
-          echo "$HOME/.rye/shims" >> $GITHUB_PATH
-        env:
-          RYE_VERSION: '0.44.0'
-          RYE_INSTALL_OPTION: '--yes'
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.10.2'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
