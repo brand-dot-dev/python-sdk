@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.40.0 (2026-03-25)
+
+Full Changelog: [v1.39.0...v1.40.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.39.0...v1.40.0)
+
+### Features
+
+* **api:** manual updates ([bd25191](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bd25191e6a2badda5431dd2cd4672738fbb6b2d5))
+
 ## 1.39.0 (2026-03-25)
 
 Full Changelog: [v1.38.0...v1.39.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.38.0...v1.39.0)
