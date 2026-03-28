@@ -12,7 +12,7 @@ class Image(BaseModel):
     alt: Optional[str] = None
     """Alt text of the image, or null if not present"""
 
-    element: Literal["img", "svg", "link", "source", "video"]
+    element: Literal["img", "svg", "link", "source", "video", "css", "object", "meta", "background"]
     """The HTML element the image was found in"""
 
     src: str

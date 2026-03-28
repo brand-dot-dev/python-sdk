@@ -24,3 +24,9 @@ class BrandWebScrapeMdParams(TypedDict, total=False):
 
     shorten_base64_images: Annotated[bool, PropertyInfo(alias="shortenBase64Images")]
     """Shorten base64-encoded image data in the Markdown output"""
+
+    use_main_content_only: Annotated[bool, PropertyInfo(alias="useMainContentOnly")]
+    """
+    Extract only the main content of the page, excluding headers, footers, sidebars,
+    and navigation
+    """

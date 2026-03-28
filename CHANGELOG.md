@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.42.0 (2026-03-28)
+
+Full Changelog: [v1.41.0...v1.42.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.41.0...v1.42.0)
+
+### Features
+
+* **api:** api update ([390760b](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/390760b95536c4c33df15159da8d5376971461c1))
+* **api:** api update ([6e85f32](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/6e85f322b7317b82f7d400263f8980434351a8cd))
+* **internal:** implement indices array format for query and form serialization ([6e12fab](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/6e12fab6f4d3a77719729ad86207903e600adcef))
+
 ## 1.41.0 (2026-03-25)
 
 Full Changelog: [v1.40.0...v1.41.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.40.0...v1.41.0)
