@@ -811,7 +811,6 @@ class TestBrand:
         brand = client.brand.styleguide(
             direct_url="https://example.com",
             domain="domain",
-            prioritize="speed",
             timeout_ms=1000,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
@@ -1774,7 +1773,6 @@ class TestAsyncBrand:
         brand = await async_client.brand.styleguide(
             direct_url="https://example.com",
             domain="domain",
-            prioritize="speed",
             timeout_ms=1000,
         )
         assert_matches_type(BrandStyleguideResponse, brand, path=["response"])

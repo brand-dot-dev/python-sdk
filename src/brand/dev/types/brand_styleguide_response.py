@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -32,131 +32,198 @@ __all__ = [
 class StyleguideColors(BaseModel):
     """Primary colors used on the website"""
 
-    accent: Optional[str] = None
-    """Accent color of the website (hex format)"""
+    accent: str
+    """Accent color (hex format)"""
 
-    background: Optional[str] = None
-    """Background color of the website (hex format)"""
+    background: str
+    """Background color (hex format)"""
 
-    text: Optional[str] = None
-    """Text color of the website (hex format)"""
+    text: str
+    """Text color (hex format)"""
 
 
 class StyleguideComponentsButtonLink(BaseModel):
-    """Link button style"""
+    background_color: str = FieldInfo(alias="backgroundColor")
 
-    background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
+    border_color: str = FieldInfo(alias="borderColor")
+    """
+    Border color as CSS hex (#RRGGBB or #RRGGBBAA when computed border-color has
+    alpha)
+    """
 
-    border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
+    border_radius: str = FieldInfo(alias="borderRadius")
 
-    border_radius: Optional[str] = FieldInfo(alias="borderRadius", default=None)
+    border_style: str = FieldInfo(alias="borderStyle")
 
-    border_style: Optional[str] = FieldInfo(alias="borderStyle", default=None)
+    border_width: str = FieldInfo(alias="borderWidth")
 
-    border_width: Optional[str] = FieldInfo(alias="borderWidth", default=None)
+    box_shadow: str = FieldInfo(alias="boxShadow")
+    """Computed box-shadow (comma-separated layers when present)"""
 
-    box_shadow: Optional[str] = FieldInfo(alias="boxShadow", default=None)
+    color: str
 
-    color: Optional[str] = None
+    css: str
+    """Ready-to-use CSS declaration block for this component style"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    padding: Optional[str] = None
+    min_height: str = FieldInfo(alias="minHeight")
+    """Sampled minimum height of the button box (typically px)"""
 
-    text_decoration: Optional[str] = FieldInfo(alias="textDecoration", default=None)
+    min_width: str = FieldInfo(alias="minWidth")
+    """Sampled minimum width of the button box (typically px)"""
+
+    padding: str
+
+    text_decoration: str = FieldInfo(alias="textDecoration")
+
+    font_fallbacks: Optional[List[str]] = FieldInfo(alias="fontFallbacks", default=None)
+    """Full ordered font list from computed font-family"""
+
+    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    """Primary button typeface (first in fontFallbacks)"""
+
+    text_decoration_color: Optional[str] = FieldInfo(alias="textDecorationColor", default=None)
+    """Hex color of the underline when it differs from the text color"""
 
 
 class StyleguideComponentsButtonPrimary(BaseModel):
-    """Primary button style"""
+    background_color: str = FieldInfo(alias="backgroundColor")
 
-    background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
+    border_color: str = FieldInfo(alias="borderColor")
+    """
+    Border color as CSS hex (#RRGGBB or #RRGGBBAA when computed border-color has
+    alpha)
+    """
 
-    border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
+    border_radius: str = FieldInfo(alias="borderRadius")
 
-    border_radius: Optional[str] = FieldInfo(alias="borderRadius", default=None)
+    border_style: str = FieldInfo(alias="borderStyle")
 
-    border_style: Optional[str] = FieldInfo(alias="borderStyle", default=None)
+    border_width: str = FieldInfo(alias="borderWidth")
 
-    border_width: Optional[str] = FieldInfo(alias="borderWidth", default=None)
+    box_shadow: str = FieldInfo(alias="boxShadow")
+    """Computed box-shadow (comma-separated layers when present)"""
 
-    box_shadow: Optional[str] = FieldInfo(alias="boxShadow", default=None)
+    color: str
 
-    color: Optional[str] = None
+    css: str
+    """Ready-to-use CSS declaration block for this component style"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    padding: Optional[str] = None
+    min_height: str = FieldInfo(alias="minHeight")
+    """Sampled minimum height of the button box (typically px)"""
 
-    text_decoration: Optional[str] = FieldInfo(alias="textDecoration", default=None)
+    min_width: str = FieldInfo(alias="minWidth")
+    """Sampled minimum width of the button box (typically px)"""
+
+    padding: str
+
+    text_decoration: str = FieldInfo(alias="textDecoration")
+
+    font_fallbacks: Optional[List[str]] = FieldInfo(alias="fontFallbacks", default=None)
+    """Full ordered font list from computed font-family"""
+
+    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    """Primary button typeface (first in fontFallbacks)"""
+
+    text_decoration_color: Optional[str] = FieldInfo(alias="textDecorationColor", default=None)
+    """Hex color of the underline when it differs from the text color"""
 
 
 class StyleguideComponentsButtonSecondary(BaseModel):
-    """Secondary button style"""
+    background_color: str = FieldInfo(alias="backgroundColor")
 
-    background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
+    border_color: str = FieldInfo(alias="borderColor")
+    """
+    Border color as CSS hex (#RRGGBB or #RRGGBBAA when computed border-color has
+    alpha)
+    """
 
-    border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
+    border_radius: str = FieldInfo(alias="borderRadius")
 
-    border_radius: Optional[str] = FieldInfo(alias="borderRadius", default=None)
+    border_style: str = FieldInfo(alias="borderStyle")
 
-    border_style: Optional[str] = FieldInfo(alias="borderStyle", default=None)
+    border_width: str = FieldInfo(alias="borderWidth")
 
-    border_width: Optional[str] = FieldInfo(alias="borderWidth", default=None)
+    box_shadow: str = FieldInfo(alias="boxShadow")
+    """Computed box-shadow (comma-separated layers when present)"""
 
-    box_shadow: Optional[str] = FieldInfo(alias="boxShadow", default=None)
+    color: str
 
-    color: Optional[str] = None
+    css: str
+    """Ready-to-use CSS declaration block for this component style"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    padding: Optional[str] = None
+    min_height: str = FieldInfo(alias="minHeight")
+    """Sampled minimum height of the button box (typically px)"""
 
-    text_decoration: Optional[str] = FieldInfo(alias="textDecoration", default=None)
+    min_width: str = FieldInfo(alias="minWidth")
+    """Sampled minimum width of the button box (typically px)"""
+
+    padding: str
+
+    text_decoration: str = FieldInfo(alias="textDecoration")
+
+    font_fallbacks: Optional[List[str]] = FieldInfo(alias="fontFallbacks", default=None)
+    """Full ordered font list from computed font-family"""
+
+    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    """Primary button typeface (first in fontFallbacks)"""
+
+    text_decoration_color: Optional[str] = FieldInfo(alias="textDecorationColor", default=None)
+    """Hex color of the underline when it differs from the text color"""
 
 
 class StyleguideComponentsButton(BaseModel):
     """Button component styles"""
 
     link: Optional[StyleguideComponentsButtonLink] = None
-    """Link button style"""
 
     primary: Optional[StyleguideComponentsButtonPrimary] = None
-    """Primary button style"""
 
     secondary: Optional[StyleguideComponentsButtonSecondary] = None
-    """Secondary button style"""
 
 
 class StyleguideComponentsCard(BaseModel):
     """Card component style"""
 
-    background_color: Optional[str] = FieldInfo(alias="backgroundColor", default=None)
+    background_color: str = FieldInfo(alias="backgroundColor")
 
-    border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
+    border_color: str = FieldInfo(alias="borderColor")
+    """
+    Border color as CSS hex (#RRGGBB or #RRGGBBAA when computed border-color has
+    alpha)
+    """
 
-    border_radius: Optional[str] = FieldInfo(alias="borderRadius", default=None)
+    border_radius: str = FieldInfo(alias="borderRadius")
 
-    border_style: Optional[str] = FieldInfo(alias="borderStyle", default=None)
+    border_style: str = FieldInfo(alias="borderStyle")
 
-    border_width: Optional[str] = FieldInfo(alias="borderWidth", default=None)
+    border_width: str = FieldInfo(alias="borderWidth")
 
-    box_shadow: Optional[str] = FieldInfo(alias="boxShadow", default=None)
+    box_shadow: str = FieldInfo(alias="boxShadow")
 
-    padding: Optional[str] = None
+    css: str
+    """Ready-to-use CSS declaration block for this component style"""
 
-    text_color: Optional[str] = FieldInfo(alias="textColor", default=None)
+    padding: str
+
+    text_color: str = FieldInfo(alias="textColor")
 
 
 class StyleguideComponents(BaseModel):
     """UI component styles"""
 
-    button: Optional[StyleguideComponentsButton] = None
+    button: StyleguideComponentsButton
     """Button component styles"""
 
     card: Optional[StyleguideComponentsCard] = None
@@ -166,87 +233,93 @@ class StyleguideComponents(BaseModel):
 class StyleguideElementSpacing(BaseModel):
     """Spacing system used on the website"""
 
-    lg: Optional[str] = None
-    """Large spacing value"""
+    lg: str
 
-    md: Optional[str] = None
-    """Medium spacing value"""
+    md: str
 
-    sm: Optional[str] = None
-    """Small spacing value"""
+    sm: str
 
-    xl: Optional[str] = None
-    """Extra large spacing value"""
+    xl: str
 
-    xs: Optional[str] = None
-    """Extra small spacing value"""
+    xs: str
 
 
 class StyleguideShadows(BaseModel):
     """Shadow styles used on the website"""
 
-    inner: Optional[str] = None
-    """Inner shadow value"""
+    inner: str
 
-    lg: Optional[str] = None
-    """Large shadow value"""
+    lg: str
 
-    md: Optional[str] = None
-    """Medium shadow value"""
+    md: str
 
-    sm: Optional[str] = None
-    """Small shadow value"""
+    sm: str
 
-    xl: Optional[str] = None
-    """Extra large shadow value"""
+    xl: str
 
 
 class StyleguideTypographyHeadingsH1(BaseModel):
-    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    font_fallbacks: List[str] = FieldInfo(alias="fontFallbacks")
+    """Full ordered font list from resolved computed font-family"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_family: str = FieldInfo(alias="fontFamily")
+    """Primary face (first family in the computed stack)"""
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    letter_spacing: Optional[str] = FieldInfo(alias="letterSpacing", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    line_height: Optional[str] = FieldInfo(alias="lineHeight", default=None)
+    letter_spacing: str = FieldInfo(alias="letterSpacing")
+
+    line_height: str = FieldInfo(alias="lineHeight")
 
 
 class StyleguideTypographyHeadingsH2(BaseModel):
-    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    font_fallbacks: List[str] = FieldInfo(alias="fontFallbacks")
+    """Full ordered font list from resolved computed font-family"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_family: str = FieldInfo(alias="fontFamily")
+    """Primary face (first family in the computed stack)"""
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    letter_spacing: Optional[str] = FieldInfo(alias="letterSpacing", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    line_height: Optional[str] = FieldInfo(alias="lineHeight", default=None)
+    letter_spacing: str = FieldInfo(alias="letterSpacing")
+
+    line_height: str = FieldInfo(alias="lineHeight")
 
 
 class StyleguideTypographyHeadingsH3(BaseModel):
-    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    font_fallbacks: List[str] = FieldInfo(alias="fontFallbacks")
+    """Full ordered font list from resolved computed font-family"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_family: str = FieldInfo(alias="fontFamily")
+    """Primary face (first family in the computed stack)"""
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    letter_spacing: Optional[str] = FieldInfo(alias="letterSpacing", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    line_height: Optional[str] = FieldInfo(alias="lineHeight", default=None)
+    letter_spacing: str = FieldInfo(alias="letterSpacing")
+
+    line_height: str = FieldInfo(alias="lineHeight")
 
 
 class StyleguideTypographyHeadingsH4(BaseModel):
-    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    font_fallbacks: List[str] = FieldInfo(alias="fontFallbacks")
+    """Full ordered font list from resolved computed font-family"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_family: str = FieldInfo(alias="fontFamily")
+    """Primary face (first family in the computed stack)"""
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    letter_spacing: Optional[str] = FieldInfo(alias="letterSpacing", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    line_height: Optional[str] = FieldInfo(alias="lineHeight", default=None)
+    letter_spacing: str = FieldInfo(alias="letterSpacing")
+
+    line_height: str = FieldInfo(alias="lineHeight")
 
 
 class StyleguideTypographyHeadings(BaseModel):
@@ -262,48 +335,49 @@ class StyleguideTypographyHeadings(BaseModel):
 
 
 class StyleguideTypographyP(BaseModel):
-    """Paragraph text styles"""
+    font_fallbacks: List[str] = FieldInfo(alias="fontFallbacks")
+    """Full ordered font list from resolved computed font-family"""
 
-    font_family: Optional[str] = FieldInfo(alias="fontFamily", default=None)
+    font_family: str = FieldInfo(alias="fontFamily")
+    """Primary face (first family in the computed stack)"""
 
-    font_size: Optional[str] = FieldInfo(alias="fontSize", default=None)
+    font_size: str = FieldInfo(alias="fontSize")
 
-    font_weight: Optional[float] = FieldInfo(alias="fontWeight", default=None)
+    font_weight: float = FieldInfo(alias="fontWeight")
 
-    letter_spacing: Optional[str] = FieldInfo(alias="letterSpacing", default=None)
+    letter_spacing: str = FieldInfo(alias="letterSpacing")
 
-    line_height: Optional[str] = FieldInfo(alias="lineHeight", default=None)
+    line_height: str = FieldInfo(alias="lineHeight")
 
 
 class StyleguideTypography(BaseModel):
     """Typography styles used on the website"""
 
-    headings: Optional[StyleguideTypographyHeadings] = None
+    headings: StyleguideTypographyHeadings
     """Heading styles"""
 
     p: Optional[StyleguideTypographyP] = None
-    """Paragraph text styles"""
 
 
 class Styleguide(BaseModel):
     """Comprehensive styleguide data extracted from the website"""
 
-    colors: Optional[StyleguideColors] = None
+    colors: StyleguideColors
     """Primary colors used on the website"""
 
-    components: Optional[StyleguideComponents] = None
+    components: StyleguideComponents
     """UI component styles"""
 
-    element_spacing: Optional[StyleguideElementSpacing] = FieldInfo(alias="elementSpacing", default=None)
+    element_spacing: StyleguideElementSpacing = FieldInfo(alias="elementSpacing")
     """Spacing system used on the website"""
 
-    mode: Optional[Literal["light", "dark"]] = None
+    mode: Literal["light", "dark"]
     """The primary color mode of the website design"""
 
-    shadows: Optional[StyleguideShadows] = None
+    shadows: StyleguideShadows
     """Shadow styles used on the website"""
 
-    typography: Optional[StyleguideTypography] = None
+    typography: StyleguideTypography
     """Typography styles used on the website"""
 
 
