@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -20,14 +20,6 @@ class BrandStyleguideParams(TypedDict, total=False):
     """Domain name to extract styleguide from (e.g., 'example.com', 'google.com').
 
     The domain will be automatically normalized and validated.
-    """
-
-    prioritize: Literal["speed", "quality"]
-    """Optional parameter to prioritize screenshot capture for styleguide extraction.
-
-    If 'speed', optimizes for faster capture with basic quality. If 'quality',
-    optimizes for higher quality with longer wait times. Defaults to 'quality' if
-    not provided.
     """
 
     timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
