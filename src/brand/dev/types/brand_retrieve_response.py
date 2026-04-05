@@ -415,8 +415,42 @@ class BrandLogo(BaseModel):
 
 
 class BrandSocial(BaseModel):
-    type: Optional[str] = None
-    """Type of social media, e.g., 'facebook', 'twitter'"""
+    type: Optional[
+        Literal[
+            "x",
+            "facebook",
+            "instagram",
+            "linkedin",
+            "youtube",
+            "pinterest",
+            "tiktok",
+            "dribbble",
+            "github",
+            "behance",
+            "snapchat",
+            "whatsapp",
+            "telegram",
+            "line",
+            "discord",
+            "twitch",
+            "vimeo",
+            "imdb",
+            "tumblr",
+            "flickr",
+            "giphy",
+            "medium",
+            "spotify",
+            "soundcloud",
+            "tripadvisor",
+            "yelp",
+            "producthunt",
+            "reddit",
+            "crunchbase",
+            "appstore",
+            "playstore",
+        ]
+    ] = None
+    """Type of social media platform"""
 
     url: Optional[str] = None
     """URL of the social media page"""
