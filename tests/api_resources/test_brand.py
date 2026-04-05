@@ -51,7 +51,7 @@ class TestBrand:
     def test_method_retrieve_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve(
             domain="domain",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -363,7 +363,7 @@ class TestBrand:
             transaction_info="transaction_info",
             city="city",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
             high_confidence_only=True,
             max_speed=True,
             mcc="mcc",
@@ -497,7 +497,7 @@ class TestBrand:
     def test_method_retrieve_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_email(
             email="dev@stainless.com",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -542,7 +542,7 @@ class TestBrand:
     def test_method_retrieve_by_isin_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_isin(
             isin="SE60513A9993",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -588,7 +588,7 @@ class TestBrand:
         brand = client.brand.retrieve_by_name(
             name="xxx",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -633,7 +633,7 @@ class TestBrand:
     def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_ticker(
             ticker="ticker",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             ticker_exchange="AMEX",
             timeout_ms=1000,
@@ -1013,7 +1013,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve(
             domain="domain",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1325,7 +1325,7 @@ class TestAsyncBrand:
             transaction_info="transaction_info",
             city="city",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
             high_confidence_only=True,
             max_speed=True,
             mcc="mcc",
@@ -1459,7 +1459,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_email(
             email="dev@stainless.com",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1504,7 +1504,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_isin_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_isin(
             isin="SE60513A9993",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1550,7 +1550,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve_by_name(
             name="xxx",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1595,7 +1595,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_ticker(
             ticker="ticker",
-            force_language="albanian",
+            force_language="afrikaans",
             max_speed=True,
             ticker_exchange="AMEX",
             timeout_ms=1000,
