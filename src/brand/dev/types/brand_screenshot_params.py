@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,7 +10,14 @@ __all__ = ["BrandScreenshotParams"]
 
 
 class BrandScreenshotParams(TypedDict, total=False):
-    domain: Required[str]
+    direct_url: Annotated[str, PropertyInfo(alias="directUrl")]
+    """
+    A specific URL to screenshot directly, bypassing domain resolution (e.g.,
+    'https://example.com/pricing'). When provided, the screenshot is taken of this
+    exact URL.
+    """
+
+    domain: str
     """Domain name to take screenshot of (e.g., 'example.com', 'google.com').
 
     The domain will be automatically normalized and validated.
@@ -28,7 +35,8 @@ class BrandScreenshotParams(TypedDict, total=False):
 
     If provided, the system will scrape the domain's links and use heuristics to
     find the most appropriate URL for the specified page type (30 supported
-    languages). If not provided, screenshots the main domain landing page.
+    languages). If not provided, screenshots the main domain landing page. Only
+    applicable when using 'domain', not 'directUrl'.
     """
 
     prioritize: Literal["speed", "quality"]
