@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
@@ -18,6 +18,7 @@ __all__ = [
     "StyleguideComponentsButtonSecondary",
     "StyleguideComponentsCard",
     "StyleguideElementSpacing",
+    "StyleguideFontLinks",
     "StyleguideShadows",
     "StyleguideTypography",
     "StyleguideTypographyHeadings",
@@ -244,6 +245,30 @@ class StyleguideElementSpacing(BaseModel):
     xs: str
 
 
+class StyleguideFontLinks(BaseModel):
+    files: Dict[str, str]
+    """Upright font files keyed by weight string (e.g.
+
+    "400" for regular, "500", "700"). Values are absolute URLs.
+    """
+
+    type: Literal["google", "custom"]
+
+    category: Optional[str] = None
+    """Google Fonts category when type is google (e.g.
+
+    sans-serif, serif, monospace, display, handwriting). Omitted for custom fonts
+    when unknown.
+    """
+
+    display_name: Optional[str] = FieldInfo(alias="displayName", default=None)
+    """
+    Present when type is custom: human-readable name derived from the fontLinks key
+    (strip build/hash suffixes, split camelCase / PascalCase, normalize separators).
+    Google entries omit this.
+    """
+
+
 class StyleguideShadows(BaseModel):
     """Shadow styles used on the website"""
 
@@ -370,6 +395,13 @@ class Styleguide(BaseModel):
 
     element_spacing: StyleguideElementSpacing = FieldInfo(alias="elementSpacing")
     """Spacing system used on the website"""
+
+    font_links: Dict[str, StyleguideFontLinks] = FieldInfo(alias="fontLinks")
+    """
+    Font assets keyed by family name as it appears in fontFamily/fontFallbacks
+    (non-generic names only). Clients match typography.fontFamily / fontWeight or
+    button styles to pick a file URL from files.
+    """
 
     mode: Literal["light", "dark"]
     """The primary color mode of the website design"""
