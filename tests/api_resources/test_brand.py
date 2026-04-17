@@ -15,7 +15,6 @@ from brand.dev.types import (
     BrandRetrieveResponse,
     BrandAIProductResponse,
     BrandAIProductsResponse,
-    BrandScreenshotResponse,
     BrandStyleguideResponse,
     BrandWebScrapeMdResponse,
     BrandRetrieveNaicsResponse,
@@ -707,46 +706,6 @@ class TestBrand:
 
             brand = response.parse()
             assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_screenshot(self, client: BrandDev) -> None:
-        brand = client.brand.screenshot()
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_screenshot_with_all_params(self, client: BrandDev) -> None:
-        brand = client.brand.screenshot(
-            direct_url="https://example.com",
-            domain="domain",
-            full_screenshot="true",
-            page="login",
-            prioritize="speed",
-        )
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_screenshot(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.screenshot()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = response.parse()
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_screenshot(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.screenshot() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = response.parse()
-            assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1631,46 +1590,6 @@ class TestAsyncBrand:
 
             brand = await response.parse()
             assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_screenshot(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.screenshot()
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_screenshot_with_all_params(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.screenshot(
-            direct_url="https://example.com",
-            domain="domain",
-            full_screenshot="true",
-            page="login",
-            prioritize="speed",
-        )
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_screenshot(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.screenshot()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = await response.parse()
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_screenshot(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.screenshot() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = await response.parse()
-            assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
