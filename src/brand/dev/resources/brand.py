@@ -2376,6 +2376,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2388,6 +2389,10 @@ class BrandResource(SyncAPIResource):
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Set to 0 to always scrape fresh.
 
           extra_headers: Send extra headers
 
@@ -2404,7 +2409,13 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"url": url}, brand_web_scrape_html_params.BrandWebScrapeHTMLParams),
+                query=maybe_transform(
+                    {
+                        "url": url,
+                        "max_age_ms": max_age_ms,
+                    },
+                    brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
+                ),
             ),
             cast_to=BrandWebScrapeHTMLResponse,
         )
@@ -2455,6 +2466,7 @@ class BrandResource(SyncAPIResource):
         url: str,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        max_age_ms: int | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2475,6 +2487,10 @@ class BrandResource(SyncAPIResource):
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Set to 0 to always scrape fresh.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -2501,6 +2517,7 @@ class BrandResource(SyncAPIResource):
                         "url": url,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "max_age_ms": max_age_ms,
                         "shorten_base64_images": shorten_base64_images,
                         "use_main_content_only": use_main_content_only,
                     },
@@ -4873,6 +4890,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4885,6 +4903,10 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Set to 0 to always scrape fresh.
 
           extra_headers: Send extra headers
 
@@ -4901,7 +4923,13 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"url": url}, brand_web_scrape_html_params.BrandWebScrapeHTMLParams),
+                query=await async_maybe_transform(
+                    {
+                        "url": url,
+                        "max_age_ms": max_age_ms,
+                    },
+                    brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
+                ),
             ),
             cast_to=BrandWebScrapeHTMLResponse,
         )
@@ -4954,6 +4982,7 @@ class AsyncBrandResource(AsyncAPIResource):
         url: str,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        max_age_ms: int | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -4974,6 +5003,10 @@ class AsyncBrandResource(AsyncAPIResource):
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Set to 0 to always scrape fresh.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -5000,6 +5033,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "url": url,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "max_age_ms": max_age_ms,
                         "shorten_base64_images": shorten_base64_images,
                         "use_main_content_only": use_main_content_only,
                     },

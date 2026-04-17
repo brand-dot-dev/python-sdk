@@ -842,6 +842,15 @@ class TestBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_html(
+            url="https://example.com",
+            max_age_ms=0,
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_web_scrape_html(self, client: BrandDev) -> None:
         response = client.brand.with_raw_response.web_scrape_html(
             url="https://example.com",
@@ -915,6 +924,7 @@ class TestBrand:
             url="https://example.com",
             include_images=True,
             include_links=True,
+            max_age_ms=0,
             shorten_base64_images=True,
             use_main_content_only=True,
         )
@@ -1799,6 +1809,15 @@ class TestAsyncBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_html(
+            url="https://example.com",
+            max_age_ms=0,
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_web_scrape_html(self, async_client: AsyncBrandDev) -> None:
         response = await async_client.brand.with_raw_response.web_scrape_html(
             url="https://example.com",
@@ -1872,6 +1891,7 @@ class TestAsyncBrand:
             url="https://example.com",
             include_images=True,
             include_links=True,
+            max_age_ms=0,
             shorten_base64_images=True,
             use_main_content_only=True,
         )
