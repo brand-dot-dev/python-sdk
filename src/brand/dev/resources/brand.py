@@ -12,7 +12,6 @@ from ..types import (
     brand_prefetch_params,
     brand_retrieve_params,
     brand_ai_product_params,
-    brand_screenshot_params,
     brand_styleguide_params,
     brand_ai_products_params,
     brand_web_scrape_md_params,
@@ -43,7 +42,6 @@ from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_ai_product_response import BrandAIProductResponse
-from ..types.brand_screenshot_response import BrandScreenshotResponse
 from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_ai_products_response import BrandAIProductsResponse
 from ..types.brand_web_scrape_md_response import BrandWebScrapeMdResponse
@@ -2187,80 +2185,6 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveSimplifiedResponse,
-        )
-
-    def screenshot(
-        self,
-        *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
-        full_screenshot: Literal["true", "false"] | Omit = omit,
-        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
-        prioritize: Literal["speed", "quality"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandScreenshotResponse:
-        """Capture a screenshot of a website.
-
-        Supports both viewport (standard browser
-        view) and full-page screenshots. Can also screenshot specific page types (login,
-        pricing, etc.) by using heuristics to find the appropriate URL. Either 'domain'
-        or 'directUrl' must be provided as a query parameter, but not both. Returns a
-        URL to the uploaded screenshot image hosted on our CDN.
-
-        Args:
-          direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
-              'https://example.com/pricing'). When provided, the screenshot is taken of this
-              exact URL.
-
-          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
-              screenshot capturing all content. If 'false' or not provided, takes a viewport
-              screenshot (standard browser view).
-
-          page: Optional parameter to specify which page type to screenshot. If provided, the
-              system will scrape the domain's links and use heuristics to find the most
-              appropriate URL for the specified page type (30 supported languages). If not
-              provided, screenshots the main domain landing page. Only applicable when using
-              'domain', not 'directUrl'.
-
-          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
-              faster capture with basic quality. If 'quality', optimizes for higher quality
-              with longer wait times. Defaults to 'quality' if not provided.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/screenshot",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "direct_url": direct_url,
-                        "domain": domain,
-                        "full_screenshot": full_screenshot,
-                        "page": page,
-                        "prioritize": prioritize,
-                    },
-                    brand_screenshot_params.BrandScreenshotParams,
-                ),
-            ),
-            cast_to=BrandScreenshotResponse,
         )
 
     def styleguide(
@@ -4649,80 +4573,6 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveSimplifiedResponse,
         )
 
-    async def screenshot(
-        self,
-        *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
-        full_screenshot: Literal["true", "false"] | Omit = omit,
-        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
-        prioritize: Literal["speed", "quality"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandScreenshotResponse:
-        """Capture a screenshot of a website.
-
-        Supports both viewport (standard browser
-        view) and full-page screenshots. Can also screenshot specific page types (login,
-        pricing, etc.) by using heuristics to find the appropriate URL. Either 'domain'
-        or 'directUrl' must be provided as a query parameter, but not both. Returns a
-        URL to the uploaded screenshot image hosted on our CDN.
-
-        Args:
-          direct_url: A specific URL to screenshot directly, bypassing domain resolution (e.g.,
-              'https://example.com/pricing'). When provided, the screenshot is taken of this
-              exact URL.
-
-          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
-              screenshot capturing all content. If 'false' or not provided, takes a viewport
-              screenshot (standard browser view).
-
-          page: Optional parameter to specify which page type to screenshot. If provided, the
-              system will scrape the domain's links and use heuristics to find the most
-              appropriate URL for the specified page type (30 supported languages). If not
-              provided, screenshots the main domain landing page. Only applicable when using
-              'domain', not 'directUrl'.
-
-          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
-              faster capture with basic quality. If 'quality', optimizes for higher quality
-              with longer wait times. Defaults to 'quality' if not provided.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/screenshot",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "direct_url": direct_url,
-                        "domain": domain,
-                        "full_screenshot": full_screenshot,
-                        "page": page,
-                        "prioritize": prioritize,
-                    },
-                    brand_screenshot_params.BrandScreenshotParams,
-                ),
-            ),
-            cast_to=BrandScreenshotResponse,
-        )
-
     async def styleguide(
         self,
         *,
@@ -5027,9 +4877,6 @@ class BrandResourceWithRawResponse:
         self.retrieve_simplified = to_raw_response_wrapper(
             brand.retrieve_simplified,
         )
-        self.screenshot = to_raw_response_wrapper(
-            brand.screenshot,
-        )
         self.styleguide = to_raw_response_wrapper(
             brand.styleguide,
         )
@@ -5089,9 +4936,6 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.retrieve_simplified = async_to_raw_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.screenshot = async_to_raw_response_wrapper(
-            brand.screenshot,
         )
         self.styleguide = async_to_raw_response_wrapper(
             brand.styleguide,
@@ -5153,9 +4997,6 @@ class BrandResourceWithStreamingResponse:
         self.retrieve_simplified = to_streamed_response_wrapper(
             brand.retrieve_simplified,
         )
-        self.screenshot = to_streamed_response_wrapper(
-            brand.screenshot,
-        )
         self.styleguide = to_streamed_response_wrapper(
             brand.styleguide,
         )
@@ -5215,9 +5056,6 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.retrieve_simplified = async_to_streamed_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.screenshot = async_to_streamed_response_wrapper(
-            brand.screenshot,
         )
         self.styleguide = async_to_streamed_response_wrapper(
             brand.styleguide,

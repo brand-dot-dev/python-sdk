@@ -9,11 +9,9 @@ from .brand_ai_product_params import BrandAIProductParams as BrandAIProductParam
 from .brand_ai_query_response import BrandAIQueryResponse as BrandAIQueryResponse
 from .brand_prefetch_response import BrandPrefetchResponse as BrandPrefetchResponse
 from .brand_retrieve_response import BrandRetrieveResponse as BrandRetrieveResponse
-from .brand_screenshot_params import BrandScreenshotParams as BrandScreenshotParams
 from .brand_styleguide_params import BrandStyleguideParams as BrandStyleguideParams
 from .brand_ai_products_params import BrandAIProductsParams as BrandAIProductsParams
 from .brand_ai_product_response import BrandAIProductResponse as BrandAIProductResponse
-from .brand_screenshot_response import BrandScreenshotResponse as BrandScreenshotResponse
 from .brand_styleguide_response import BrandStyleguideResponse as BrandStyleguideResponse
 from .brand_ai_products_response import BrandAIProductsResponse as BrandAIProductsResponse
 from .brand_web_scrape_md_params import BrandWebScrapeMdParams as BrandWebScrapeMdParams
