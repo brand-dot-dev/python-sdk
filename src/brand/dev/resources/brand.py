@@ -2477,11 +2477,10 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeMdResponse:
         """
-        Scrapes the given URL, converts the HTML content to Markdown, and returns the
-        result.
+        Scrapes the given URL into LLM usable Markdown.
 
         Args:
-          url: Full URL to scrape and convert to markdown (must include http:// or https://
+          url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
 
           include_images: Include image references in Markdown output
@@ -2490,7 +2489,7 @@ class BrandResource(SyncAPIResource):
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
-              omitted. Set to 0 to always scrape fresh.
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -4993,11 +4992,10 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeMdResponse:
         """
-        Scrapes the given URL, converts the HTML content to Markdown, and returns the
-        result.
+        Scrapes the given URL into LLM usable Markdown.
 
         Args:
-          url: Full URL to scrape and convert to markdown (must include http:// or https://
+          url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
 
           include_images: Include image references in Markdown output
@@ -5006,7 +5004,7 @@ class AsyncBrandResource(AsyncAPIResource):
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
-              omitted. Set to 0 to always scrape fresh.
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
