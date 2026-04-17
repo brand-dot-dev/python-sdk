@@ -12,7 +12,6 @@ from ..types import (
     brand_prefetch_params,
     brand_retrieve_params,
     brand_ai_product_params,
-    brand_styleguide_params,
     brand_ai_products_params,
     brand_web_scrape_md_params,
     brand_retrieve_naics_params,
@@ -42,7 +41,6 @@ from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_ai_product_response import BrandAIProductResponse
-from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_ai_products_response import BrandAIProductsResponse
 from ..types.brand_web_scrape_md_response import BrandWebScrapeMdResponse
 from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
@@ -2185,63 +2183,6 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveSimplifiedResponse,
-        )
-
-    def styleguide(
-        self,
-        *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandStyleguideResponse:
-        """
-        Automatically extract comprehensive design system information from a brand's
-        website including colors, typography, spacing, shadows, and UI components.
-        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
-        both.
-
-        Args:
-          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
-              resolution (e.g., 'https://example.com/design-system').
-
-          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/styleguide",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "direct_url": direct_url,
-                        "domain": domain,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_styleguide_params.BrandStyleguideParams,
-                ),
-            ),
-            cast_to=BrandStyleguideResponse,
         )
 
     def web_scrape_html(
@@ -4573,63 +4514,6 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveSimplifiedResponse,
         )
 
-    async def styleguide(
-        self,
-        *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandStyleguideResponse:
-        """
-        Automatically extract comprehensive design system information from a brand's
-        website including colors, typography, spacing, shadows, and UI components.
-        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
-        both.
-
-        Args:
-          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
-              resolution (e.g., 'https://example.com/design-system').
-
-          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/styleguide",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "direct_url": direct_url,
-                        "domain": domain,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_styleguide_params.BrandStyleguideParams,
-                ),
-            ),
-            cast_to=BrandStyleguideResponse,
-        )
-
     async def web_scrape_html(
         self,
         *,
@@ -4877,9 +4761,6 @@ class BrandResourceWithRawResponse:
         self.retrieve_simplified = to_raw_response_wrapper(
             brand.retrieve_simplified,
         )
-        self.styleguide = to_raw_response_wrapper(
-            brand.styleguide,
-        )
         self.web_scrape_html = to_raw_response_wrapper(
             brand.web_scrape_html,
         )
@@ -4936,9 +4817,6 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.retrieve_simplified = async_to_raw_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.styleguide = async_to_raw_response_wrapper(
-            brand.styleguide,
         )
         self.web_scrape_html = async_to_raw_response_wrapper(
             brand.web_scrape_html,
@@ -4997,9 +4875,6 @@ class BrandResourceWithStreamingResponse:
         self.retrieve_simplified = to_streamed_response_wrapper(
             brand.retrieve_simplified,
         )
-        self.styleguide = to_streamed_response_wrapper(
-            brand.styleguide,
-        )
         self.web_scrape_html = to_streamed_response_wrapper(
             brand.web_scrape_html,
         )
@@ -5056,9 +4931,6 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.retrieve_simplified = async_to_streamed_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.styleguide = async_to_streamed_response_wrapper(
-            brand.styleguide,
         )
         self.web_scrape_html = async_to_streamed_response_wrapper(
             brand.web_scrape_html,
