@@ -11,10 +11,7 @@ __all__ = ["BrandWebScrapeSitemapParams"]
 
 class BrandWebScrapeSitemapParams(TypedDict, total=False):
     domain: Required[str]
-    """Domain name to crawl sitemaps for (e.g., 'example.com').
-
-    The domain will be automatically normalized and validated.
-    """
+    """Domain to build a sitemap for"""
 
     max_links: Annotated[int, PropertyInfo(alias="maxLinks")]
     """Maximum number of links to return from the sitemap crawl.
