@@ -257,9 +257,9 @@ class BrandRetrieveByNameParams(TypedDict, total=False):
         "zm",
         "zw",
     ]
-    """Optional country code (GL parameter) to specify the country.
-
-    This affects the geographic location used for search queries.
+    """
+    Optional country code hint (GL parameter) to specify the country for the company
+    name.
     """
 
     force_language: Literal[

@@ -869,7 +869,6 @@ class BrandResource(SyncAPIResource):
 
           high_confidence_only: When set to true, the API will perform an additional verification steps to
               ensure the identified brand matches the transaction with high confidence.
-              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -1155,9 +1154,8 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveByEmailResponse:
         """
         Retrieve brand information using an email address while detecting disposable and
-        free email addresses. This endpoint extracts the domain from the email address
-        and returns brand data for that domain. Disposable and free email addresses
-        (like gmail.com, yahoo.com) will throw a 422 error.
+        free email addresses. Disposable and free email addresses (like gmail.com,
+        yahoo.com) will throw a 422 error.
 
         Args:
           email: Email address to retrieve brand data for (e.g., 'contact@example.com'). The
@@ -1340,8 +1338,7 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveByIsinResponse:
         """
         Retrieve brand information using an ISIN (International Securities
-        Identification Number). This endpoint looks up the company associated with the
-        ISIN and returns its brand data.
+        Identification Number).
 
         Args:
           isin: ISIN (International Securities Identification Number) to retrieve brand data for
@@ -1764,17 +1761,15 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByNameResponse:
-        """Retrieve brand information using a company name.
-
-        This endpoint searches for the
-        company by name and returns its brand data.
+        """
+        Retrieve brand information using a company name.
 
         Args:
           name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
               Corporation'). Must be 3-30 characters.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Optional country code hint (GL parameter) to specify the country for the company
+              name.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
 
@@ -2026,10 +2021,8 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand information using a stock ticker symbol.
-
-        This endpoint looks up
-        the company associated with the ticker and returns its brand data.
+        """
+        Retrieve brand information using a stock ticker symbol.
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
@@ -2149,8 +2142,8 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
-        information: domain, title, colors, logos, and backdrops. This endpoint is
-        optimized for faster responses and reduced data transfer.
+        information: domain, title, colors, logos, and backdrops. Optimized for faster
+        responses and reduced data transfer.
 
         Args:
           domain: Domain name to retrieve simplified brand data for
@@ -2352,7 +2345,7 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
         """
-        Crawl an entire website's sitemap and return all discovered page URLs
+        Crawl an entire website's sitemap and return all discovered page URLs.
 
         Args:
           domain: Domain to build a sitemap for
@@ -3198,7 +3191,6 @@ class AsyncBrandResource(AsyncAPIResource):
 
           high_confidence_only: When set to true, the API will perform an additional verification steps to
               ensure the identified brand matches the transaction with high confidence.
-              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -3484,9 +3476,8 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveByEmailResponse:
         """
         Retrieve brand information using an email address while detecting disposable and
-        free email addresses. This endpoint extracts the domain from the email address
-        and returns brand data for that domain. Disposable and free email addresses
-        (like gmail.com, yahoo.com) will throw a 422 error.
+        free email addresses. Disposable and free email addresses (like gmail.com,
+        yahoo.com) will throw a 422 error.
 
         Args:
           email: Email address to retrieve brand data for (e.g., 'contact@example.com'). The
@@ -3669,8 +3660,7 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveByIsinResponse:
         """
         Retrieve brand information using an ISIN (International Securities
-        Identification Number). This endpoint looks up the company associated with the
-        ISIN and returns its brand data.
+        Identification Number).
 
         Args:
           isin: ISIN (International Securities Identification Number) to retrieve brand data for
@@ -4093,17 +4083,15 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByNameResponse:
-        """Retrieve brand information using a company name.
-
-        This endpoint searches for the
-        company by name and returns its brand data.
+        """
+        Retrieve brand information using a company name.
 
         Args:
           name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
               Corporation'). Must be 3-30 characters.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Optional country code hint (GL parameter) to specify the country for the company
+              name.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
 
@@ -4355,10 +4343,8 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand information using a stock ticker symbol.
-
-        This endpoint looks up
-        the company associated with the ticker and returns its brand data.
+        """
+        Retrieve brand information using a stock ticker symbol.
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
@@ -4478,8 +4464,8 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
-        information: domain, title, colors, logos, and backdrops. This endpoint is
-        optimized for faster responses and reduced data transfer.
+        information: domain, title, colors, logos, and backdrops. Optimized for faster
+        responses and reduced data transfer.
 
         Args:
           domain: Domain name to retrieve simplified brand data for
@@ -4683,7 +4669,7 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
         """
-        Crawl an entire website's sitemap and return all discovered page URLs
+        Crawl an entire website's sitemap and return all discovered page URLs.
 
         Args:
           domain: Domain to build a sitemap for

@@ -390,7 +390,6 @@ class BrandIdentifyFromTransactionParams(TypedDict, total=False):
     """
     When set to true, the API will perform an additional verification steps to
     ensure the identified brand matches the transaction with high confidence.
-    Defaults to false.
     """
 
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
