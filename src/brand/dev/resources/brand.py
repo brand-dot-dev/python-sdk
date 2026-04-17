@@ -2539,13 +2539,10 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
         """
-        Crawls the sitemap of the given domain and returns all discovered page URLs.
-        Supports sitemap index files (recursive), parallel fetching with concurrency
-        control, deduplication, and filters out non-page resources (images, PDFs, etc.).
+        Crawl an entire website's sitemap and return all discovered page URLs
 
         Args:
-          domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
-              automatically normalized and validated.
+          domain: Domain to build a sitemap for
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
@@ -5054,13 +5051,10 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
         """
-        Crawls the sitemap of the given domain and returns all discovered page URLs.
-        Supports sitemap index files (recursive), parallel fetching with concurrency
-        control, deduplication, and filters out non-page resources (images, PDFs, etc.).
+        Crawl an entire website's sitemap and return all discovered page URLs
 
         Args:
-          domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
-              automatically normalized and validated.
+          domain: Domain to build a sitemap for
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
