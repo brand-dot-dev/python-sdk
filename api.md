@@ -8,7 +8,6 @@ from brand.dev.types import (
     BrandAIProductResponse,
     BrandAIProductsResponse,
     BrandAIQueryResponse,
-    BrandFontsResponse,
     BrandIdentifyFromTransactionResponse,
     BrandPrefetchResponse,
     BrandPrefetchByEmailResponse,
@@ -33,7 +32,6 @@ Methods:
 - <code title="post /brand/ai/product">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_product</a>(\*\*<a href="src/brand/dev/types/brand_ai_product_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_product_response.py">BrandAIProductResponse</a></code>
 - <code title="post /brand/ai/products">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_products</a>(\*\*<a href="src/brand/dev/types/brand_ai_products_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_products_response.py">BrandAIProductsResponse</a></code>
 - <code title="post /brand/ai/query">client.brand.<a href="./src/brand/dev/resources/brand.py">ai_query</a>(\*\*<a href="src/brand/dev/types/brand_ai_query_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_ai_query_response.py">BrandAIQueryResponse</a></code>
-- <code title="get /brand/fonts">client.brand.<a href="./src/brand/dev/resources/brand.py">fonts</a>(\*\*<a href="src/brand/dev/types/brand_fonts_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_fonts_response.py">BrandFontsResponse</a></code>
 - <code title="get /brand/transaction_identifier">client.brand.<a href="./src/brand/dev/resources/brand.py">identify_from_transaction</a>(\*\*<a href="src/brand/dev/types/brand_identify_from_transaction_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_identify_from_transaction_response.py">BrandIdentifyFromTransactionResponse</a></code>
 - <code title="post /brand/prefetch">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_response.py">BrandPrefetchResponse</a></code>
 - <code title="post /brand/prefetch-by-email">client.brand.<a href="./src/brand/dev/resources/brand.py">prefetch_by_email</a>(\*\*<a href="src/brand/dev/types/brand_prefetch_by_email_params.py">params</a>) -> <a href="./src/brand/dev/types/brand_prefetch_by_email_response.py">BrandPrefetchByEmailResponse</a></code>
