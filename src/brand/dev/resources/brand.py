@@ -14,7 +14,6 @@ from ..types import (
     brand_ai_product_params,
     brand_ai_products_params,
     brand_web_scrape_md_params,
-    brand_retrieve_naics_params,
     brand_web_scrape_html_params,
     brand_retrieve_by_isin_params,
     brand_retrieve_by_name_params,
@@ -43,7 +42,6 @@ from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_ai_product_response import BrandAIProductResponse
 from ..types.brand_ai_products_response import BrandAIProductsResponse
 from ..types.brand_web_scrape_md_response import BrandWebScrapeMdResponse
-from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_web_scrape_html_response import BrandWebScrapeHTMLResponse
 from ..types.brand_retrieve_by_isin_response import BrandRetrieveByIsinResponse
 from ..types.brand_retrieve_by_name_response import BrandRetrieveByNameResponse
@@ -2067,65 +2065,6 @@ class BrandResource(SyncAPIResource):
                 ),
             ),
             cast_to=BrandRetrieveByTickerResponse,
-        )
-
-    def retrieve_naics(
-        self,
-        *,
-        input: str,
-        max_results: int | Omit = omit,
-        min_results: int | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandRetrieveNaicsResponse:
-        """
-        Endpoint to classify any brand into a 2022 NAICS code.
-
-        Args:
-          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
-              in `input`, it will be used for classification, otherwise, we will search for
-              the brand using the provided title.
-
-          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
-              to 5.
-
-          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/naics",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "input": input,
-                        "max_results": max_results,
-                        "min_results": min_results,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
-                ),
-            ),
-            cast_to=BrandRetrieveNaicsResponse,
         )
 
     def retrieve_simplified(
@@ -4391,65 +4330,6 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveByTickerResponse,
         )
 
-    async def retrieve_naics(
-        self,
-        *,
-        input: str,
-        max_results: int | Omit = omit,
-        min_results: int | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandRetrieveNaicsResponse:
-        """
-        Endpoint to classify any brand into a 2022 NAICS code.
-
-        Args:
-          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
-              in `input`, it will be used for classification, otherwise, we will search for
-              the brand using the provided title.
-
-          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
-              to 5.
-
-          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/naics",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "input": input,
-                        "max_results": max_results,
-                        "min_results": min_results,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
-                ),
-            ),
-            cast_to=BrandRetrieveNaicsResponse,
-        )
-
     async def retrieve_simplified(
         self,
         *,
@@ -4741,9 +4621,6 @@ class BrandResourceWithRawResponse:
         self.retrieve_by_ticker = to_raw_response_wrapper(
             brand.retrieve_by_ticker,
         )
-        self.retrieve_naics = to_raw_response_wrapper(
-            brand.retrieve_naics,
-        )
         self.retrieve_simplified = to_raw_response_wrapper(
             brand.retrieve_simplified,
         )
@@ -4797,9 +4674,6 @@ class AsyncBrandResourceWithRawResponse:
         )
         self.retrieve_by_ticker = async_to_raw_response_wrapper(
             brand.retrieve_by_ticker,
-        )
-        self.retrieve_naics = async_to_raw_response_wrapper(
-            brand.retrieve_naics,
         )
         self.retrieve_simplified = async_to_raw_response_wrapper(
             brand.retrieve_simplified,
@@ -4855,9 +4729,6 @@ class BrandResourceWithStreamingResponse:
         self.retrieve_by_ticker = to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
         )
-        self.retrieve_naics = to_streamed_response_wrapper(
-            brand.retrieve_naics,
-        )
         self.retrieve_simplified = to_streamed_response_wrapper(
             brand.retrieve_simplified,
         )
@@ -4911,9 +4782,6 @@ class AsyncBrandResourceWithStreamingResponse:
         )
         self.retrieve_by_ticker = async_to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
-        )
-        self.retrieve_naics = async_to_streamed_response_wrapper(
-            brand.retrieve_naics,
         )
         self.retrieve_simplified = async_to_streamed_response_wrapper(
             brand.retrieve_simplified,
