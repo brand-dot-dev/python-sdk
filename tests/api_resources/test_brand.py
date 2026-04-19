@@ -800,6 +800,7 @@ class TestBrand:
         brand = client.brand.web_scrape_sitemap(
             domain="domain",
             max_links=1,
+            url_regex="^https?://[^/]+/blog/",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -1601,6 +1602,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.web_scrape_sitemap(
             domain="domain",
             max_links=1,
+            url_regex="^https?://[^/]+/blog/",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 

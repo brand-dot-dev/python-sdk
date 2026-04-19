@@ -18,3 +18,9 @@ class BrandWebScrapeSitemapParams(TypedDict, total=False):
 
     Defaults to 10,000. Minimum is 1, maximum is 100,000.
     """
+
+    url_regex: Annotated[str, PropertyInfo(alias="urlRegex")]
+    """Optional RE2-compatible regex pattern.
+
+    Only URLs matching this pattern are returned and counted against maxLinks.
+    """

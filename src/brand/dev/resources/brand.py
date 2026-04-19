@@ -2276,6 +2276,7 @@ class BrandResource(SyncAPIResource):
         *,
         domain: str,
         max_links: int | Omit = omit,
+        url_regex: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2291,6 +2292,9 @@ class BrandResource(SyncAPIResource):
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
+              returned and counted against maxLinks.
 
           extra_headers: Send extra headers
 
@@ -2311,6 +2315,7 @@ class BrandResource(SyncAPIResource):
                     {
                         "domain": domain,
                         "max_links": max_links,
+                        "url_regex": url_regex,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
@@ -4541,6 +4546,7 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         domain: str,
         max_links: int | Omit = omit,
+        url_regex: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4556,6 +4562,9 @@ class AsyncBrandResource(AsyncAPIResource):
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
+              returned and counted against maxLinks.
 
           extra_headers: Send extra headers
 
@@ -4576,6 +4585,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "domain": domain,
                         "max_links": max_links,
+                        "url_regex": url_regex,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
