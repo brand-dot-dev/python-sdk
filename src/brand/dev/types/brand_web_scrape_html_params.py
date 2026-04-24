@@ -19,3 +19,10 @@ class BrandWebScrapeHTMLParams(TypedDict, total=False):
     younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
     omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
     """
+
+    parse_pdf: Annotated[bool, PropertyInfo(alias="parsePDF")]
+    """
+    When true (default), PDF URLs are fetched and their text layer is extracted and
+    returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
+    and a 400 WEBSITE_ACCESS_ERROR is returned.
+    """

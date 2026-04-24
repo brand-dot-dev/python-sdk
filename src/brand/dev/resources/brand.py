@@ -2122,6 +2122,7 @@ class BrandResource(SyncAPIResource):
         *,
         url: str,
         max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2138,6 +2139,10 @@ class BrandResource(SyncAPIResource):
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
+              and a 400 WEBSITE_ACCESS_ERROR is returned.
 
           extra_headers: Send extra headers
 
@@ -2158,6 +2163,7 @@ class BrandResource(SyncAPIResource):
                     {
                         "url": url,
                         "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
                     },
                     brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
                 ),
@@ -2212,6 +2218,7 @@ class BrandResource(SyncAPIResource):
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2235,6 +2242,10 @@ class BrandResource(SyncAPIResource):
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              converted to Markdown. When false, PDF URLs are skipped and a 400
+              WEBSITE_ACCESS_ERROR is returned.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -2262,6 +2273,7 @@ class BrandResource(SyncAPIResource):
                         "include_images": include_images,
                         "include_links": include_links,
                         "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
                         "shorten_base64_images": shorten_base64_images,
                         "use_main_content_only": use_main_content_only,
                     },
@@ -4390,6 +4402,7 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         url: str,
         max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4406,6 +4419,10 @@ class AsyncBrandResource(AsyncAPIResource):
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
+              and a 400 WEBSITE_ACCESS_ERROR is returned.
 
           extra_headers: Send extra headers
 
@@ -4426,6 +4443,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "url": url,
                         "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
                     },
                     brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
                 ),
@@ -4482,6 +4500,7 @@ class AsyncBrandResource(AsyncAPIResource):
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -4505,6 +4524,10 @@ class AsyncBrandResource(AsyncAPIResource):
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              converted to Markdown. When false, PDF URLs are skipped and a 400
+              WEBSITE_ACCESS_ERROR is returned.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -4532,6 +4555,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "include_images": include_images,
                         "include_links": include_links,
                         "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
                         "shorten_base64_images": shorten_base64_images,
                         "use_main_content_only": use_main_content_only,
                     },

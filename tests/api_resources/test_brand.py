@@ -676,6 +676,7 @@ class TestBrand:
         brand = client.brand.web_scrape_html(
             url="https://example.com",
             max_age_ms=0,
+            parse_pdf=True,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -755,6 +756,7 @@ class TestBrand:
             include_images=True,
             include_links=True,
             max_age_ms=0,
+            parse_pdf=True,
             shorten_base64_images=True,
             use_main_content_only=True,
         )
@@ -1478,6 +1480,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.web_scrape_html(
             url="https://example.com",
             max_age_ms=0,
+            parse_pdf=True,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -1557,6 +1560,7 @@ class TestAsyncBrand:
             include_images=True,
             include_links=True,
             max_age_ms=0,
+            parse_pdf=True,
             shorten_base64_images=True,
             use_main_content_only=True,
         )
