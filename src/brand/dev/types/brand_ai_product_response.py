@@ -24,12 +24,7 @@ class Product(BaseModel):
     """Name of the product"""
 
     sku: Optional[str] = None
-    """Stock Keeping Unit (product identifier).
-
-    Extracted from structured data (JSON-LD Product.sku), microdata, meta tags,
-    platform-specific identifiers (e.g. Amazon ASIN, Etsy listing ID), or visible
-    SKU/Model/Item # text. Null if no identifier is found.
-    """
+    """Stock Keeping Unit (product identifier). Null if no identifier is found."""
 
     tags: List[str]
     """Tags associated with the product"""
