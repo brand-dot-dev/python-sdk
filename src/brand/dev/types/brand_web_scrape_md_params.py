@@ -29,6 +29,13 @@ class BrandWebScrapeMdParams(TypedDict, total=False):
     omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
     """
 
+    parse_pdf: Annotated[bool, PropertyInfo(alias="parsePDF")]
+    """
+    When true (default), PDF URLs are fetched and their text layer is extracted and
+    converted to Markdown. When false, PDF URLs are skipped and a 400
+    WEBSITE_ACCESS_ERROR is returned.
+    """
+
     shorten_base64_images: Annotated[bool, PropertyInfo(alias="shortenBase64Images")]
     """Shorten base64-encoded image data in the Markdown output"""
 
