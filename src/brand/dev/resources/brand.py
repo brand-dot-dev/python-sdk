@@ -271,9 +271,8 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductResponse:
         """
-        Beta feature: Given a single URL, determines if it is a product detail page,
-        classifies the platform/product type, and extracts the product information.
-        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+        Given a single URL, determines if it is a product page and extracts the product
+        information.
 
         Args:
           url: The product page URL to extract product data from.
@@ -318,11 +317,11 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           domain: The domain name to analyze.
@@ -356,11 +355,11 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
@@ -928,9 +927,7 @@ class BrandResource(SyncAPIResource):
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
+        latency.
 
         Args:
           domain: Domain name to prefetch brand data for
@@ -978,9 +975,7 @@ class BrandResource(SyncAPIResource):
         Signal that you may fetch brand data for a particular domain soon to improve
         latency. This endpoint accepts an email address, extracts the domain from it,
         validates that it's not a disposable or free email provider, and queues the
-        domain for prefetching. This endpoint does not charge credits and is available
-        for paid customers to optimize future requests. [You must be on a paid plan to
-        use this endpoint]
+        domain for prefetching.
 
         Args:
           email: Email address to prefetch brand data for. The domain will be extracted from the
@@ -2551,9 +2546,8 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductResponse:
         """
-        Beta feature: Given a single URL, determines if it is a product detail page,
-        classifies the platform/product type, and extracts the product information.
-        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+        Given a single URL, determines if it is a product page and extracts the product
+        information.
 
         Args:
           url: The product page URL to extract product data from.
@@ -2598,11 +2592,11 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           domain: The domain name to analyze.
@@ -2636,11 +2630,11 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
@@ -3208,9 +3202,7 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
+        latency.
 
         Args:
           domain: Domain name to prefetch brand data for
@@ -3258,9 +3250,7 @@ class AsyncBrandResource(AsyncAPIResource):
         Signal that you may fetch brand data for a particular domain soon to improve
         latency. This endpoint accepts an email address, extracts the domain from it,
         validates that it's not a disposable or free email provider, and queues the
-        domain for prefetching. This endpoint does not charge credits and is available
-        for paid customers to optimize future requests. [You must be on a paid plan to
-        use this endpoint]
+        domain for prefetching.
 
         Args:
           email: Email address to prefetch brand data for. The domain will be extracted from the
