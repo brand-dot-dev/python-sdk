@@ -92,6 +92,7 @@ class TestBrand:
     def test_method_ai_product_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_product(
             url="https://example.com",
+            max_age_ms=0,
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -135,6 +136,7 @@ class TestBrand:
     def test_method_ai_products_with_all_params_overload_1(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
             domain="domain",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -179,6 +181,7 @@ class TestBrand:
     def test_method_ai_products_with_all_params_overload_2(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
             direct_url="https://example.com",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -896,6 +899,7 @@ class TestAsyncBrand:
     async def test_method_ai_product_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_product(
             url="https://example.com",
+            max_age_ms=0,
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -939,6 +943,7 @@ class TestAsyncBrand:
     async def test_method_ai_products_with_all_params_overload_1(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
             domain="domain",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -983,6 +988,7 @@ class TestAsyncBrand:
     async def test_method_ai_products_with_all_params_overload_2(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
             direct_url="https://example.com",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
