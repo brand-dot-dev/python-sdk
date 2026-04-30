@@ -23,6 +23,9 @@ class Product(BaseModel):
     name: str
     """Name of the product"""
 
+    sku: Optional[str] = None
+    """Stock Keeping Unit (product identifier). Null if no identifier is found."""
+
     tags: List[str]
     """Tags associated with the product"""
 

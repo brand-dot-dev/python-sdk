@@ -8,16 +8,12 @@ from typing_extensions import Literal, overload
 import httpx
 
 from ..types import (
-    brand_fonts_params,
     brand_ai_query_params,
     brand_prefetch_params,
     brand_retrieve_params,
     brand_ai_product_params,
-    brand_screenshot_params,
-    brand_styleguide_params,
     brand_ai_products_params,
     brand_web_scrape_md_params,
-    brand_retrieve_naics_params,
     brand_web_scrape_html_params,
     brand_retrieve_by_isin_params,
     brand_retrieve_by_name_params,
@@ -40,16 +36,12 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.brand_fonts_response import BrandFontsResponse
 from ..types.brand_ai_query_response import BrandAIQueryResponse
 from ..types.brand_prefetch_response import BrandPrefetchResponse
 from ..types.brand_retrieve_response import BrandRetrieveResponse
 from ..types.brand_ai_product_response import BrandAIProductResponse
-from ..types.brand_screenshot_response import BrandScreenshotResponse
-from ..types.brand_styleguide_response import BrandStyleguideResponse
 from ..types.brand_ai_products_response import BrandAIProductsResponse
 from ..types.brand_web_scrape_md_response import BrandWebScrapeMdResponse
-from ..types.brand_retrieve_naics_response import BrandRetrieveNaicsResponse
 from ..types.brand_web_scrape_html_response import BrandWebScrapeHTMLResponse
 from ..types.brand_retrieve_by_isin_response import BrandRetrieveByIsinResponse
 from ..types.brand_retrieve_by_name_response import BrandRetrieveByNameResponse
@@ -89,61 +81,126 @@ class BrandResource(SyncAPIResource):
         *,
         domain: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -163,8 +220,7 @@ class BrandResource(SyncAPIResource):
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
               Cannot be used with name or ticker parameters.
 
-          force_language: Optional parameter to force the language of the retrieved brand data. Works with
-              all three lookup methods.
+          force_language: Optional parameter to force the language of the retrieved brand data.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -206,6 +262,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -215,12 +272,15 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductResponse:
         """
-        Beta feature: Given a single URL, determines if it is a product detail page,
-        classifies the platform/product type, and extracts the product information.
-        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+        Given a single URL, determines if it is a product page and extracts the product
+        information.
 
         Args:
           url: The product page URL to extract product data from.
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
               300000ms (5 minutes).
@@ -238,6 +298,7 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
+                    "max_age_ms": max_age_ms,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_product_params.BrandAIProductParams,
@@ -253,6 +314,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -262,14 +324,18 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           domain: The domain name to analyze.
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           max_products: Maximum number of products to extract.
 
@@ -291,6 +357,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         direct_url: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -300,15 +367,19 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
               domain resolution.
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           max_products: Maximum number of products to extract.
 
@@ -330,6 +401,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         domain: str | Omit = omit,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         direct_url: str | Omit = omit,
@@ -345,6 +417,7 @@ class BrandResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "domain": domain,
+                    "max_age_ms": max_age_ms,
                     "max_products": max_products,
                     "timeout_ms": timeout_ms,
                     "direct_url": direct_url,
@@ -411,56 +484,6 @@ class BrandResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandAIQueryResponse,
-        )
-
-    def fonts(
-        self,
-        *,
-        domain: str,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandFontsResponse:
-        """
-        Extract font information from a brand's website including font families, usage
-        statistics, fallbacks, and element/word counts.
-
-        Args:
-          domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/fonts",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "domain": domain,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_fonts_params.BrandFontsParams,
-                ),
-            ),
-            cast_to=BrandFontsResponse,
         )
 
     def identify_from_transaction(
@@ -711,61 +734,126 @@ class BrandResource(SyncAPIResource):
         ]
         | Omit = omit,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         high_confidence_only: bool | Omit = omit,
@@ -796,7 +884,6 @@ class BrandResource(SyncAPIResource):
 
           high_confidence_only: When set to true, the API will perform an additional verification steps to
               ensure the identified brand matches the transaction with high confidence.
-              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -858,9 +945,7 @@ class BrandResource(SyncAPIResource):
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
+        latency.
 
         Args:
           domain: Domain name to prefetch brand data for
@@ -908,9 +993,7 @@ class BrandResource(SyncAPIResource):
         Signal that you may fetch brand data for a particular domain soon to improve
         latency. This endpoint accepts an email address, extracts the domain from it,
         validates that it's not a disposable or free email provider, and queues the
-        domain for prefetching. This endpoint does not charge credits and is available
-        for paid customers to optimize future requests. [You must be on a paid plan to
-        use this endpoint]
+        domain for prefetching.
 
         Args:
           email: Email address to prefetch brand data for. The domain will be extracted from the
@@ -949,61 +1032,126 @@ class BrandResource(SyncAPIResource):
         *,
         email: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -1017,9 +1165,8 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveByEmailResponse:
         """
         Retrieve brand information using an email address while detecting disposable and
-        free email addresses. This endpoint extracts the domain from the email address
-        and returns brand data for that domain. Disposable and free email addresses
-        (like gmail.com, yahoo.com) will throw a 422 error.
+        free email addresses. Disposable and free email addresses (like gmail.com,
+        yahoo.com) will throw a 422 error.
 
         Args:
           email: Email address to retrieve brand data for (e.g., 'contact@example.com'). The
@@ -1069,61 +1216,126 @@ class BrandResource(SyncAPIResource):
         *,
         isin: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -1137,8 +1349,7 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveByIsinResponse:
         """
         Retrieve brand information using an ISIN (International Securities
-        Identification Number). This endpoint looks up the company associated with the
-        ISIN and returns its brand data.
+        Identification Number).
 
         Args:
           isin: ISIN (International Securities Identification Number) to retrieve brand data for
@@ -1430,61 +1641,126 @@ class BrandResource(SyncAPIResource):
         ]
         | Omit = omit,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -1496,17 +1772,15 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByNameResponse:
-        """Retrieve brand information using a company name.
-
-        This endpoint searches for the
-        company by name and returns its brand data.
+        """
+        Retrieve brand information using a company name.
 
         Args:
           name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
               Corporation'). Must be 3-30 characters.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Optional country code hint (GL parameter) to specify the country for the company
+              name.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
 
@@ -1552,61 +1826,126 @@ class BrandResource(SyncAPIResource):
         *,
         ticker: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -1693,10 +2032,8 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand information using a stock ticker symbol.
-
-        This endpoint looks up
-        the company associated with the ticker and returns its brand data.
+        """
+        Retrieve brand information using a stock ticker symbol.
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
@@ -1743,65 +2080,6 @@ class BrandResource(SyncAPIResource):
             cast_to=BrandRetrieveByTickerResponse,
         )
 
-    def retrieve_naics(
-        self,
-        *,
-        input: str,
-        max_results: int | Omit = omit,
-        min_results: int | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandRetrieveNaicsResponse:
-        """
-        Endpoint to classify any brand into a 2022 NAICS code.
-
-        Args:
-          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
-              in `input`, it will be used for classification, otherwise, we will search for
-              the brand using the provided title.
-
-          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
-              to 5.
-
-          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/naics",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "input": input,
-                        "max_results": max_results,
-                        "min_results": min_results,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
-                ),
-            ),
-            cast_to=BrandRetrieveNaicsResponse,
-        )
-
     def retrieve_simplified(
         self,
         *,
@@ -1816,8 +2094,8 @@ class BrandResource(SyncAPIResource):
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
-        information: domain, title, colors, logos, and backdrops. This endpoint is
-        optimized for faster responses and reduced data transfer.
+        information: domain, title, colors, logos, and backdrops. Optimized for faster
+        responses and reduced data transfer.
 
         Args:
           domain: Domain name to retrieve simplified brand data for
@@ -1852,133 +2130,12 @@ class BrandResource(SyncAPIResource):
             cast_to=BrandRetrieveSimplifiedResponse,
         )
 
-    def screenshot(
-        self,
-        *,
-        domain: str,
-        full_screenshot: Literal["true", "false"] | Omit = omit,
-        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
-        prioritize: Literal["speed", "quality"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandScreenshotResponse:
-        """Capture a screenshot of a website.
-
-        Supports both viewport (standard browser
-        view) and full-page screenshots. Can also screenshot specific page types (login,
-        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
-        the uploaded screenshot image hosted on our CDN.
-
-        Args:
-          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
-              screenshot capturing all content. If 'false' or not provided, takes a viewport
-              screenshot (standard browser view).
-
-          page: Optional parameter to specify which page type to screenshot. If provided, the
-              system will scrape the domain's links and use heuristics to find the most
-              appropriate URL for the specified page type (30 supported languages). If not
-              provided, screenshots the main domain landing page.
-
-          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
-              faster capture with basic quality. If 'quality', optimizes for higher quality
-              with longer wait times. Defaults to 'quality' if not provided.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/screenshot",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "domain": domain,
-                        "full_screenshot": full_screenshot,
-                        "page": page,
-                        "prioritize": prioritize,
-                    },
-                    brand_screenshot_params.BrandScreenshotParams,
-                ),
-            ),
-            cast_to=BrandScreenshotResponse,
-        )
-
-    def styleguide(
-        self,
-        *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandStyleguideResponse:
-        """
-        Automatically extract comprehensive design system information from a brand's
-        website including colors, typography, spacing, shadows, and UI components.
-        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
-        both.
-
-        Args:
-          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
-              resolution (e.g., 'https://example.com/design-system').
-
-          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/brand/styleguide",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "direct_url": direct_url,
-                        "domain": domain,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_styleguide_params.BrandStyleguideParams,
-                ),
-            ),
-            cast_to=BrandStyleguideResponse,
-        )
-
     def web_scrape_html(
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1991,6 +2148,14 @@ class BrandResource(SyncAPIResource):
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
+              and a 400 WEBSITE_ACCESS_ERROR is returned.
 
           extra_headers: Send extra headers
 
@@ -2007,7 +2172,14 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"url": url}, brand_web_scrape_html_params.BrandWebScrapeHTMLParams),
+                query=maybe_transform(
+                    {
+                        "url": url,
+                        "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
+                    },
+                    brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
+                ),
             ),
             cast_to=BrandWebScrapeHTMLResponse,
         )
@@ -2058,6 +2230,8 @@ class BrandResource(SyncAPIResource):
         url: str,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2068,16 +2242,23 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeMdResponse:
         """
-        Scrapes the given URL, converts the HTML content to Markdown, and returns the
-        result.
+        Scrapes the given URL into LLM usable Markdown.
 
         Args:
-          url: Full URL to scrape and convert to markdown (must include http:// or https://
+          url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
 
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              converted to Markdown. When false, PDF URLs are skipped and a 400
+              WEBSITE_ACCESS_ERROR is returned.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -2104,6 +2285,8 @@ class BrandResource(SyncAPIResource):
                         "url": url,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
                         "shorten_base64_images": shorten_base64_images,
                         "use_main_content_only": use_main_content_only,
                     },
@@ -2118,6 +2301,7 @@ class BrandResource(SyncAPIResource):
         *,
         domain: str,
         max_links: int | Omit = omit,
+        url_regex: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2126,16 +2310,16 @@ class BrandResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
         """
-        Crawls the sitemap of the given domain and returns all discovered page URLs.
-        Supports sitemap index files (recursive), parallel fetching with concurrency
-        control, deduplication, and filters out non-page resources (images, PDFs, etc.).
+        Crawl an entire website's sitemap and return all discovered page URLs.
 
         Args:
-          domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
-              automatically normalized and validated.
+          domain: Domain to build a sitemap for
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
+              returned and counted against maxLinks.
 
           extra_headers: Send extra headers
 
@@ -2156,6 +2340,7 @@ class BrandResource(SyncAPIResource):
                     {
                         "domain": domain,
                         "max_links": max_links,
+                        "url_regex": url_regex,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
@@ -2189,61 +2374,126 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         domain: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -2263,8 +2513,7 @@ class AsyncBrandResource(AsyncAPIResource):
           domain: Domain name to retrieve brand data for (e.g., 'example.com', 'google.com').
               Cannot be used with name or ticker parameters.
 
-          force_language: Optional parameter to force the language of the retrieved brand data. Works with
-              all three lookup methods.
+          force_language: Optional parameter to force the language of the retrieved brand data.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -2306,6 +2555,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -2315,12 +2565,15 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductResponse:
         """
-        Beta feature: Given a single URL, determines if it is a product detail page,
-        classifies the platform/product type, and extracts the product information.
-        Supports Amazon, TikTok Shop, Etsy, and generic ecommerce sites.
+        Given a single URL, determines if it is a product page and extracts the product
+        information.
 
         Args:
           url: The product page URL to extract product data from.
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           timeout_ms: Optional timeout in milliseconds for the request. Maximum allowed value is
               300000ms (5 minutes).
@@ -2338,6 +2591,7 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "max_age_ms": max_age_ms,
                     "timeout_ms": timeout_ms,
                 },
                 brand_ai_product_params.BrandAIProductParams,
@@ -2353,6 +2607,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2362,14 +2617,18 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           domain: The domain name to analyze.
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           max_products: Maximum number of products to extract.
 
@@ -2391,6 +2650,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         direct_url: str,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2400,15 +2660,19 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandAIProductsResponse:
-        """Beta feature: Extract product information from a brand's website.
+        """Extract product information from a brand's website.
 
-        We will
-        analyze the website and return a list of products with details such as name,
-        description, image, pricing, features, and more.
+        We will analyze the website
+        and return a list of products with details such as name, description, image,
+        pricing, features, and more.
 
         Args:
           direct_url: A specific URL to use directly as the starting point for extraction without
               domain resolution.
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
           max_products: Maximum number of products to extract.
 
@@ -2430,6 +2694,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         domain: str | Omit = omit,
+        max_age_ms: int | Omit = omit,
         max_products: int | Omit = omit,
         timeout_ms: int | Omit = omit,
         direct_url: str | Omit = omit,
@@ -2445,6 +2710,7 @@ class AsyncBrandResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "domain": domain,
+                    "max_age_ms": max_age_ms,
                     "max_products": max_products,
                     "timeout_ms": timeout_ms,
                     "direct_url": direct_url,
@@ -2511,56 +2777,6 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=BrandAIQueryResponse,
-        )
-
-    async def fonts(
-        self,
-        *,
-        domain: str,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandFontsResponse:
-        """
-        Extract font information from a brand's website including font families, usage
-        statistics, fallbacks, and element/word counts.
-
-        Args:
-          domain: Domain name to extract fonts from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/fonts",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "domain": domain,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_fonts_params.BrandFontsParams,
-                ),
-            ),
-            cast_to=BrandFontsResponse,
         )
 
     async def identify_from_transaction(
@@ -2811,61 +3027,126 @@ class AsyncBrandResource(AsyncAPIResource):
         ]
         | Omit = omit,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         high_confidence_only: bool | Omit = omit,
@@ -2896,7 +3177,6 @@ class AsyncBrandResource(AsyncAPIResource):
 
           high_confidence_only: When set to true, the API will perform an additional verification steps to
               ensure the identified brand matches the transaction with high confidence.
-              Defaults to false.
 
           max_speed: Optional parameter to optimize the API call for maximum speed. When set to true,
               the API will skip time-consuming operations for faster response at the cost of
@@ -2958,9 +3238,7 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandPrefetchResponse:
         """
         Signal that you may fetch brand data for a particular domain soon to improve
-        latency. This endpoint does not charge credits and is available for paid
-        customers to optimize future requests. [You must be on a paid plan to use this
-        endpoint]
+        latency.
 
         Args:
           domain: Domain name to prefetch brand data for
@@ -3008,9 +3286,7 @@ class AsyncBrandResource(AsyncAPIResource):
         Signal that you may fetch brand data for a particular domain soon to improve
         latency. This endpoint accepts an email address, extracts the domain from it,
         validates that it's not a disposable or free email provider, and queues the
-        domain for prefetching. This endpoint does not charge credits and is available
-        for paid customers to optimize future requests. [You must be on a paid plan to
-        use this endpoint]
+        domain for prefetching.
 
         Args:
           email: Email address to prefetch brand data for. The domain will be extracted from the
@@ -3049,61 +3325,126 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         email: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -3117,9 +3458,8 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveByEmailResponse:
         """
         Retrieve brand information using an email address while detecting disposable and
-        free email addresses. This endpoint extracts the domain from the email address
-        and returns brand data for that domain. Disposable and free email addresses
-        (like gmail.com, yahoo.com) will throw a 422 error.
+        free email addresses. Disposable and free email addresses (like gmail.com,
+        yahoo.com) will throw a 422 error.
 
         Args:
           email: Email address to retrieve brand data for (e.g., 'contact@example.com'). The
@@ -3169,61 +3509,126 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         isin: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -3237,8 +3642,7 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveByIsinResponse:
         """
         Retrieve brand information using an ISIN (International Securities
-        Identification Number). This endpoint looks up the company associated with the
-        ISIN and returns its brand data.
+        Identification Number).
 
         Args:
           isin: ISIN (International Securities Identification Number) to retrieve brand data for
@@ -3530,61 +3934,126 @@ class AsyncBrandResource(AsyncAPIResource):
         ]
         | Omit = omit,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -3596,17 +4065,15 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByNameResponse:
-        """Retrieve brand information using a company name.
-
-        This endpoint searches for the
-        company by name and returns its brand data.
+        """
+        Retrieve brand information using a company name.
 
         Args:
           name: Company name to retrieve brand data for (e.g., 'Apple Inc', 'Microsoft
               Corporation'). Must be 3-30 characters.
 
-          country_gl: Optional country code (GL parameter) to specify the country. This affects the
-              geographic location used for search queries.
+          country_gl: Optional country code hint (GL parameter) to specify the country for the company
+              name.
 
           force_language: Optional parameter to force the language of the retrieved brand data.
 
@@ -3652,61 +4119,126 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         ticker: str,
         force_language: Literal[
+            "afrikaans",
             "albanian",
+            "amharic",
             "arabic",
+            "armenian",
+            "assamese",
+            "aymara",
             "azeri",
+            "basque",
+            "belarusian",
             "bengali",
+            "bosnian",
             "bulgarian",
+            "burmese",
             "cantonese",
+            "catalan",
             "cebuano",
+            "chinese",
+            "corsican",
             "croatian",
             "czech",
             "danish",
             "dutch",
             "english",
+            "esperanto",
             "estonian",
             "farsi",
+            "fijian",
             "finnish",
             "french",
+            "galician",
+            "georgian",
             "german",
+            "greek",
+            "guarani",
+            "gujarati",
+            "haitian-creole",
             "hausa",
             "hawaiian",
+            "hebrew",
             "hindi",
+            "hmong",
             "hungarian",
             "icelandic",
+            "igbo",
             "indonesian",
+            "irish",
             "italian",
+            "japanese",
+            "javanese",
+            "kannada",
             "kazakh",
+            "khmer",
+            "kinyarwanda",
             "korean",
+            "kurdish",
             "kyrgyz",
+            "lao",
             "latin",
             "latvian",
+            "lingala",
             "lithuanian",
+            "luxembourgish",
             "macedonian",
+            "malagasy",
+            "malay",
+            "malayalam",
+            "maltese",
+            "maori",
+            "marathi",
             "mongolian",
             "nepali",
             "norwegian",
+            "odia",
+            "oromo",
             "pashto",
             "pidgin",
             "polish",
             "portuguese",
+            "punjabi",
+            "quechua",
             "romanian",
             "russian",
+            "samoan",
+            "scottish-gaelic",
             "serbian",
+            "sesotho",
+            "shona",
+            "sindhi",
+            "sinhala",
             "slovak",
             "slovene",
             "somali",
             "spanish",
+            "sundanese",
             "swahili",
             "swedish",
             "tagalog",
+            "tajik",
+            "tamil",
+            "tatar",
+            "telugu",
             "thai",
+            "tibetan",
+            "tigrinya",
+            "tongan",
+            "tswana",
             "turkish",
+            "turkmen",
             "ukrainian",
             "urdu",
+            "uyghur",
             "uzbek",
             "vietnamese",
             "welsh",
+            "wolof",
+            "xhosa",
+            "yiddish",
+            "yoruba",
+            "zulu",
         ]
         | Omit = omit,
         max_speed: bool | Omit = omit,
@@ -3793,10 +4325,8 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandRetrieveByTickerResponse:
-        """Retrieve brand information using a stock ticker symbol.
-
-        This endpoint looks up
-        the company associated with the ticker and returns its brand data.
+        """
+        Retrieve brand information using a stock ticker symbol.
 
         Args:
           ticker: Stock ticker symbol to retrieve brand data for (e.g., 'AAPL', 'GOOGL', 'BRK.A').
@@ -3843,65 +4373,6 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveByTickerResponse,
         )
 
-    async def retrieve_naics(
-        self,
-        *,
-        input: str,
-        max_results: int | Omit = omit,
-        min_results: int | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandRetrieveNaicsResponse:
-        """
-        Endpoint to classify any brand into a 2022 NAICS code.
-
-        Args:
-          input: Brand domain or title to retrieve NAICS code for. If a valid domain is provided
-              in `input`, it will be used for classification, otherwise, we will search for
-              the brand using the provided title.
-
-          max_results: Maximum number of NAICS codes to return. Must be between 1 and 10. Defaults
-              to 5.
-
-          min_results: Minimum number of NAICS codes to return. Must be at least 1. Defaults to 1.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/naics",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "input": input,
-                        "max_results": max_results,
-                        "min_results": min_results,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_retrieve_naics_params.BrandRetrieveNaicsParams,
-                ),
-            ),
-            cast_to=BrandRetrieveNaicsResponse,
-        )
-
     async def retrieve_simplified(
         self,
         *,
@@ -3916,8 +4387,8 @@ class AsyncBrandResource(AsyncAPIResource):
     ) -> BrandRetrieveSimplifiedResponse:
         """
         Returns a simplified version of brand data containing only essential
-        information: domain, title, colors, logos, and backdrops. This endpoint is
-        optimized for faster responses and reduced data transfer.
+        information: domain, title, colors, logos, and backdrops. Optimized for faster
+        responses and reduced data transfer.
 
         Args:
           domain: Domain name to retrieve simplified brand data for
@@ -3952,133 +4423,12 @@ class AsyncBrandResource(AsyncAPIResource):
             cast_to=BrandRetrieveSimplifiedResponse,
         )
 
-    async def screenshot(
-        self,
-        *,
-        domain: str,
-        full_screenshot: Literal["true", "false"] | Omit = omit,
-        page: Literal["login", "signup", "blog", "careers", "pricing", "terms", "privacy", "contact"] | Omit = omit,
-        prioritize: Literal["speed", "quality"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandScreenshotResponse:
-        """Capture a screenshot of a website.
-
-        Supports both viewport (standard browser
-        view) and full-page screenshots. Can also screenshot specific page types (login,
-        pricing, etc.) by using heuristics to find the appropriate URL. Returns a URL to
-        the uploaded screenshot image hosted on our CDN.
-
-        Args:
-          domain: Domain name to take screenshot of (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          full_screenshot: Optional parameter to determine screenshot type. If 'true', takes a full page
-              screenshot capturing all content. If 'false' or not provided, takes a viewport
-              screenshot (standard browser view).
-
-          page: Optional parameter to specify which page type to screenshot. If provided, the
-              system will scrape the domain's links and use heuristics to find the most
-              appropriate URL for the specified page type (30 supported languages). If not
-              provided, screenshots the main domain landing page.
-
-          prioritize: Optional parameter to prioritize screenshot capture. If 'speed', optimizes for
-              faster capture with basic quality. If 'quality', optimizes for higher quality
-              with longer wait times. Defaults to 'quality' if not provided.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/screenshot",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "domain": domain,
-                        "full_screenshot": full_screenshot,
-                        "page": page,
-                        "prioritize": prioritize,
-                    },
-                    brand_screenshot_params.BrandScreenshotParams,
-                ),
-            ),
-            cast_to=BrandScreenshotResponse,
-        )
-
-    async def styleguide(
-        self,
-        *,
-        direct_url: str | Omit = omit,
-        domain: str | Omit = omit,
-        timeout_ms: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BrandStyleguideResponse:
-        """
-        Automatically extract comprehensive design system information from a brand's
-        website including colors, typography, spacing, shadows, and UI components.
-        Either 'domain' or 'directUrl' must be provided as a query parameter, but not
-        both.
-
-        Args:
-          direct_url: A specific URL to fetch the styleguide from directly, bypassing domain
-              resolution (e.g., 'https://example.com/design-system').
-
-          domain: Domain name to extract styleguide from (e.g., 'example.com', 'google.com'). The
-              domain will be automatically normalized and validated.
-
-          timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
-              than this value, it will be aborted with a 408 status code. Maximum allowed
-              value is 300000ms (5 minutes).
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/brand/styleguide",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "direct_url": direct_url,
-                        "domain": domain,
-                        "timeout_ms": timeout_ms,
-                    },
-                    brand_styleguide_params.BrandStyleguideParams,
-                ),
-            ),
-            cast_to=BrandStyleguideResponse,
-        )
-
     async def web_scrape_html(
         self,
         *,
         url: str,
+        max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4091,6 +4441,14 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
+              and a 400 WEBSITE_ACCESS_ERROR is returned.
 
           extra_headers: Send extra headers
 
@@ -4107,7 +4465,14 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"url": url}, brand_web_scrape_html_params.BrandWebScrapeHTMLParams),
+                query=await async_maybe_transform(
+                    {
+                        "url": url,
+                        "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
+                    },
+                    brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
+                ),
             ),
             cast_to=BrandWebScrapeHTMLResponse,
         )
@@ -4160,6 +4525,8 @@ class AsyncBrandResource(AsyncAPIResource):
         url: str,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
+        max_age_ms: int | Omit = omit,
+        parse_pdf: bool | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         use_main_content_only: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -4170,16 +4537,23 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeMdResponse:
         """
-        Scrapes the given URL, converts the HTML content to Markdown, and returns the
-        result.
+        Scrapes the given URL into LLM usable Markdown.
 
         Args:
-          url: Full URL to scrape and convert to markdown (must include http:// or https://
+          url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
 
           include_images: Include image references in Markdown output
 
           include_links: Preserve hyperlinks in Markdown output
+
+          max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
+              younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
+              omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+
+          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
+              converted to Markdown. When false, PDF URLs are skipped and a 400
+              WEBSITE_ACCESS_ERROR is returned.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -4206,6 +4580,8 @@ class AsyncBrandResource(AsyncAPIResource):
                         "url": url,
                         "include_images": include_images,
                         "include_links": include_links,
+                        "max_age_ms": max_age_ms,
+                        "parse_pdf": parse_pdf,
                         "shorten_base64_images": shorten_base64_images,
                         "use_main_content_only": use_main_content_only,
                     },
@@ -4220,6 +4596,7 @@ class AsyncBrandResource(AsyncAPIResource):
         *,
         domain: str,
         max_links: int | Omit = omit,
+        url_regex: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4228,16 +4605,16 @@ class AsyncBrandResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeSitemapResponse:
         """
-        Crawls the sitemap of the given domain and returns all discovered page URLs.
-        Supports sitemap index files (recursive), parallel fetching with concurrency
-        control, deduplication, and filters out non-page resources (images, PDFs, etc.).
+        Crawl an entire website's sitemap and return all discovered page URLs.
 
         Args:
-          domain: Domain name to crawl sitemaps for (e.g., 'example.com'). The domain will be
-              automatically normalized and validated.
+          domain: Domain to build a sitemap for
 
           max_links: Maximum number of links to return from the sitemap crawl. Defaults to 10,000.
               Minimum is 1, maximum is 100,000.
+
+          url_regex: Optional RE2-compatible regex pattern. Only URLs matching this pattern are
+              returned and counted against maxLinks.
 
           extra_headers: Send extra headers
 
@@ -4258,6 +4635,7 @@ class AsyncBrandResource(AsyncAPIResource):
                     {
                         "domain": domain,
                         "max_links": max_links,
+                        "url_regex": url_regex,
                     },
                     brand_web_scrape_sitemap_params.BrandWebScrapeSitemapParams,
                 ),
@@ -4282,9 +4660,6 @@ class BrandResourceWithRawResponse:
         self.ai_query = to_raw_response_wrapper(
             brand.ai_query,
         )
-        self.fonts = to_raw_response_wrapper(
-            brand.fonts,
-        )
         self.identify_from_transaction = to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -4306,17 +4681,8 @@ class BrandResourceWithRawResponse:
         self.retrieve_by_ticker = to_raw_response_wrapper(
             brand.retrieve_by_ticker,
         )
-        self.retrieve_naics = to_raw_response_wrapper(
-            brand.retrieve_naics,
-        )
         self.retrieve_simplified = to_raw_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.screenshot = to_raw_response_wrapper(
-            brand.screenshot,
-        )
-        self.styleguide = to_raw_response_wrapper(
-            brand.styleguide,
         )
         self.web_scrape_html = to_raw_response_wrapper(
             brand.web_scrape_html,
@@ -4348,9 +4714,6 @@ class AsyncBrandResourceWithRawResponse:
         self.ai_query = async_to_raw_response_wrapper(
             brand.ai_query,
         )
-        self.fonts = async_to_raw_response_wrapper(
-            brand.fonts,
-        )
         self.identify_from_transaction = async_to_raw_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -4372,17 +4735,8 @@ class AsyncBrandResourceWithRawResponse:
         self.retrieve_by_ticker = async_to_raw_response_wrapper(
             brand.retrieve_by_ticker,
         )
-        self.retrieve_naics = async_to_raw_response_wrapper(
-            brand.retrieve_naics,
-        )
         self.retrieve_simplified = async_to_raw_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.screenshot = async_to_raw_response_wrapper(
-            brand.screenshot,
-        )
-        self.styleguide = async_to_raw_response_wrapper(
-            brand.styleguide,
         )
         self.web_scrape_html = async_to_raw_response_wrapper(
             brand.web_scrape_html,
@@ -4414,9 +4768,6 @@ class BrandResourceWithStreamingResponse:
         self.ai_query = to_streamed_response_wrapper(
             brand.ai_query,
         )
-        self.fonts = to_streamed_response_wrapper(
-            brand.fonts,
-        )
         self.identify_from_transaction = to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -4438,17 +4789,8 @@ class BrandResourceWithStreamingResponse:
         self.retrieve_by_ticker = to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
         )
-        self.retrieve_naics = to_streamed_response_wrapper(
-            brand.retrieve_naics,
-        )
         self.retrieve_simplified = to_streamed_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.screenshot = to_streamed_response_wrapper(
-            brand.screenshot,
-        )
-        self.styleguide = to_streamed_response_wrapper(
-            brand.styleguide,
         )
         self.web_scrape_html = to_streamed_response_wrapper(
             brand.web_scrape_html,
@@ -4480,9 +4822,6 @@ class AsyncBrandResourceWithStreamingResponse:
         self.ai_query = async_to_streamed_response_wrapper(
             brand.ai_query,
         )
-        self.fonts = async_to_streamed_response_wrapper(
-            brand.fonts,
-        )
         self.identify_from_transaction = async_to_streamed_response_wrapper(
             brand.identify_from_transaction,
         )
@@ -4504,17 +4843,8 @@ class AsyncBrandResourceWithStreamingResponse:
         self.retrieve_by_ticker = async_to_streamed_response_wrapper(
             brand.retrieve_by_ticker,
         )
-        self.retrieve_naics = async_to_streamed_response_wrapper(
-            brand.retrieve_naics,
-        )
         self.retrieve_simplified = async_to_streamed_response_wrapper(
             brand.retrieve_simplified,
-        )
-        self.screenshot = async_to_streamed_response_wrapper(
-            brand.screenshot,
-        )
-        self.styleguide = async_to_streamed_response_wrapper(
-            brand.styleguide,
         )
         self.web_scrape_html = async_to_streamed_response_wrapper(
             brand.web_scrape_html,

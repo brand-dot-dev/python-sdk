@@ -14,6 +14,13 @@ class ByDomain(TypedDict, total=False):
     domain: Required[str]
     """The domain name to analyze."""
 
+    max_age_ms: Annotated[int, PropertyInfo(alias="maxAgeMs")]
+    """
+    Return a cached result if a prior scrape for the same parameters exists and is
+    younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+    omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
+    """
+
     max_products: Annotated[int, PropertyInfo(alias="maxProducts")]
     """Maximum number of products to extract."""
 
@@ -29,6 +36,13 @@ class ByDirectURL(TypedDict, total=False):
     """
     A specific URL to use directly as the starting point for extraction without
     domain resolution.
+    """
+
+    max_age_ms: Annotated[int, PropertyInfo(alias="maxAgeMs")]
+    """
+    Return a cached result if a prior scrape for the same parameters exists and is
+    younger than this many milliseconds. Defaults to 7 days (604800000 ms) when
+    omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
     """
 
     max_products: Annotated[int, PropertyInfo(alias="maxProducts")]
