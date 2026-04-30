@@ -1,5 +1,49 @@
 # Changelog
 
+## 1.44.0 (2026-04-30)
+
+Full Changelog: [v1.43.0...v1.44.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.43.0...v1.44.0)
+
+### Features
+
+* **api:** api update ([5573ee7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/5573ee7e42f5018a95e85e66460bfccc3d695a2a))
+* **api:** api update ([e4f1307](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/e4f1307a639a0c14467bd4c6af34eafe96b86033))
+* **api:** api update ([3e783d9](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/3e783d9ad471999f34ed2cbc92a58099f15ce9cb))
+* **api:** api update ([f9047c7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f9047c77841d0b1707cdeab18880d93dd2e6a115))
+* **api:** api update ([390e85c](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/390e85cad5c6199e1a3d03de72e77d54f0108234))
+* **api:** api update ([74f22a5](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/74f22a55a3d82b5adcc63d5f12218a162180ae95))
+* **api:** api update ([a04e938](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a04e9389794725781408dc53d635226406d89cb2))
+* **api:** api update ([b4672ab](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b4672ab67f11664113177977497c75e6c5ce82f8))
+* **api:** api update ([b494e66](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b494e66bdee0f1c447ee587836aa74c7955da0aa))
+* **api:** api update ([af4c2fa](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/af4c2fa317c4a5cd2ef86e6562fe41ff7436daed))
+* **api:** api update ([9d4a64e](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9d4a64e28b1321eda8463d8c86ec8a130c78c318))
+* **api:** api update ([f13cc2b](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/f13cc2be3ce7c3355168ba62bb3bd5ec5aaf4105))
+* **api:** api update ([93a9472](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/93a9472c495a1d34afa82ff7a6889e32ff706e3f))
+* **api:** api update ([bf48ceb](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bf48ceb8693e734ab3da2b89e80f394d351215e6))
+* **api:** api update ([b5e8905](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/b5e8905b3e8554890bda8c7eb9e4255c363f1a81))
+* **api:** api update ([04fafa1](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/04fafa1b94a4047cc9fb3825ab84e6f517baefc4))
+* **api:** api update ([bd0f93f](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/bd0f93f4df85dc1e822ca6b59fb7ce594976ad49))
+* **api:** api update ([a388d39](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a388d39c93b50ec075a553957081a45f64b73d39))
+* **api:** api update ([9213463](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9213463afaf5d76d3b706a5aef49082c72409189))
+* support setting headers via env ([0ce56bb](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/0ce56bbd77bbb7170a90b838c9dff09616dea488))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([a92d7b7](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/a92d7b7c66f52b259cbf31d938c8a70565190b5c))
+* ensure file data are only sent as 1 parameter ([9b72a51](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/9b72a51afe0d9992f3c52ee727c1ffc1ec76312f))
+* use correct field name format for multipart file arrays ([c74c369](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/c74c3699de55fd58f298fa9a9d378db7f677a344))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([d7e4a18](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/d7e4a181dd0e9146f98bb51bb977300eac439c6e))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([28007d9](https://github.com/context-dot-dev/deprecated-brand-python-sdk/commit/28007d91dbe45b20fc33670466006d9934ac7c5a))
+
 ## 1.43.0 (2026-04-03)
 
 Full Changelog: [v1.42.0...v1.43.0](https://github.com/context-dot-dev/deprecated-brand-python-sdk/compare/v1.42.0...v1.43.0)
