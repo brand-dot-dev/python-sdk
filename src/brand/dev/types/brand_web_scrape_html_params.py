@@ -13,6 +13,9 @@ class BrandWebScrapeHTMLParams(TypedDict, total=False):
     url: Required[str]
     """Full URL to scrape (must include http:// or https:// protocol)"""
 
+    include_frames: Annotated[bool, PropertyInfo(alias="includeFrames")]
+    """When true, iframes are rendered inline into the returned HTML."""
+
     max_age_ms: Annotated[int, PropertyInfo(alias="maxAgeMs")]
     """
     Return a cached result if a prior scrape for the same parameters exists and is

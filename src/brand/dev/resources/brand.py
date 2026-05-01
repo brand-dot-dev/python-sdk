@@ -2134,6 +2134,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        include_frames: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
         parse_pdf: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2148,6 +2149,8 @@ class BrandResource(SyncAPIResource):
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          include_frames: When true, iframes are rendered inline into the returned HTML.
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
@@ -2175,6 +2178,7 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "url": url,
+                        "include_frames": include_frames,
                         "max_age_ms": max_age_ms,
                         "parse_pdf": parse_pdf,
                     },
@@ -2228,6 +2232,7 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        include_frames: bool | Omit = omit,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
@@ -2247,6 +2252,8 @@ class BrandResource(SyncAPIResource):
         Args:
           url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
+
+          include_frames: When true, the contents of iframes are rendered to Markdown.
 
           include_images: Include image references in Markdown output
 
@@ -2283,6 +2290,7 @@ class BrandResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "url": url,
+                        "include_frames": include_frames,
                         "include_images": include_images,
                         "include_links": include_links,
                         "max_age_ms": max_age_ms,
@@ -4427,6 +4435,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        include_frames: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
         parse_pdf: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -4441,6 +4450,8 @@ class AsyncBrandResource(AsyncAPIResource):
 
         Args:
           url: Full URL to scrape (must include http:// or https:// protocol)
+
+          include_frames: When true, iframes are rendered inline into the returned HTML.
 
           max_age_ms: Return a cached result if a prior scrape for the same parameters exists and is
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
@@ -4468,6 +4479,7 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "url": url,
+                        "include_frames": include_frames,
                         "max_age_ms": max_age_ms,
                         "parse_pdf": parse_pdf,
                     },
@@ -4523,6 +4535,7 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        include_frames: bool | Omit = omit,
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
@@ -4542,6 +4555,8 @@ class AsyncBrandResource(AsyncAPIResource):
         Args:
           url: Full URL to scrape into LLM usable Markdown (must include http:// or https://
               protocol)
+
+          include_frames: When true, the contents of iframes are rendered to Markdown.
 
           include_images: Include image references in Markdown output
 
@@ -4578,6 +4593,7 @@ class AsyncBrandResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "url": url,
+                        "include_frames": include_frames,
                         "include_images": include_images,
                         "include_links": include_links,
                         "max_age_ms": max_age_ms,
