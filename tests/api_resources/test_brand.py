@@ -678,6 +678,7 @@ class TestBrand:
     def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_html(
             url="https://example.com",
+            include_frames=True,
             max_age_ms=0,
             parse_pdf=True,
         )
@@ -756,6 +757,7 @@ class TestBrand:
     def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_md(
             url="https://example.com",
+            include_frames=True,
             include_images=True,
             include_links=True,
             max_age_ms=0,
@@ -1485,6 +1487,7 @@ class TestAsyncBrand:
     async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_html(
             url="https://example.com",
+            include_frames=True,
             max_age_ms=0,
             parse_pdf=True,
         )
@@ -1563,6 +1566,7 @@ class TestAsyncBrand:
     async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_md(
             url="https://example.com",
+            include_frames=True,
             include_images=True,
             include_links=True,
             max_age_ms=0,

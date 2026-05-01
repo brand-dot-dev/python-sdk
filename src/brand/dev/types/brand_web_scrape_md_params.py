@@ -16,6 +16,9 @@ class BrandWebScrapeMdParams(TypedDict, total=False):
     protocol)
     """
 
+    include_frames: Annotated[bool, PropertyInfo(alias="includeFrames")]
+    """When true, the contents of iframes are rendered to Markdown."""
+
     include_images: Annotated[bool, PropertyInfo(alias="includeImages")]
     """Include image references in Markdown output"""
 
