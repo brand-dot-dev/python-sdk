@@ -48,6 +48,7 @@ class TestBrand:
         brand = client.brand.retrieve(
             domain="domain",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -454,6 +455,7 @@ class TestBrand:
         brand = client.brand.retrieve_by_email(
             email="dev@stainless.com",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -499,6 +501,7 @@ class TestBrand:
         brand = client.brand.retrieve_by_isin(
             isin="SE60513A9993",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -545,6 +548,7 @@ class TestBrand:
             name="xxx",
             country_gl="ad",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -590,6 +594,7 @@ class TestBrand:
         brand = client.brand.retrieve_by_ticker(
             ticker="ticker",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             ticker_exchange="AMEX",
             timeout_ms=1000,
@@ -635,6 +640,7 @@ class TestBrand:
     def test_method_retrieve_simplified_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
             domain="domain",
+            max_age_ms=86400000,
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -872,6 +878,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve(
             domain="domain",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1278,6 +1285,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve_by_email(
             email="dev@stainless.com",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1323,6 +1331,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve_by_isin(
             isin="SE60513A9993",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1369,6 +1378,7 @@ class TestAsyncBrand:
             name="xxx",
             country_gl="ad",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1414,6 +1424,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve_by_ticker(
             ticker="ticker",
             force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             ticker_exchange="AMEX",
             timeout_ms=1000,
@@ -1459,6 +1470,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_simplified_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
             domain="domain",
+            max_age_ms=86400000,
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])

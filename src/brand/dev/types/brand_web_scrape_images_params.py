@@ -42,7 +42,7 @@ class Enrichment(TypedDict, total=False):
     """
 
     max_time_per_ms: Annotated[int, PropertyInfo(alias="maxTimePerMs")]
-    """Per-image enrichment timeout in milliseconds. Default: 6000. Maximum: 60000."""
+    """Per-image enrichment timeout in milliseconds. Default: 30000. Maximum: 60000."""
 
     resolution: bool
     """Measure image width and height when possible."""
