@@ -2192,6 +2192,8 @@ class BrandResource(SyncAPIResource):
         self,
         *,
         url: str,
+        enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
+        max_age_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2199,14 +2201,20 @@ class BrandResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeImagesResponse:
-        """Scrapes all images from the given URL.
-
-        Extracts images from img, svg,
-        picture/source, link, and video elements including inline SVGs, base64 data
-        URIs, and standard URLs.
+        """
+        Extract image assets from a web page, including standard URLs, inline SVGs, data
+        URIs, responsive image sources, metadata, CSS backgrounds, video posters, and
+        embeds. The base request costs 1 credit; enrichment costs 1 credit per returned
+        image.
 
         Args:
-          url: Full URL to scrape images from (must include http:// or https:// protocol)
+          url: Page URL to inspect. Must include http:// or https://.
+
+          enrichment: Optional per-image processing, sent as deep-object query params such as
+              enrichment[resolution]=true.
+
+          max_age_ms: Reuse a cached result this many milliseconds old or newer. Default: 86400000 (1
+              day). Set to 0 to bypass cache. Maximum: 2592000000 (30 days).
 
           extra_headers: Send extra headers
 
@@ -2223,7 +2231,14 @@ class BrandResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"url": url}, brand_web_scrape_images_params.BrandWebScrapeImagesParams),
+                query=maybe_transform(
+                    {
+                        "url": url,
+                        "enrichment": enrichment,
+                        "max_age_ms": max_age_ms,
+                    },
+                    brand_web_scrape_images_params.BrandWebScrapeImagesParams,
+                ),
             ),
             cast_to=BrandWebScrapeImagesResponse,
         )
@@ -4493,6 +4508,8 @@ class AsyncBrandResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
+        max_age_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4500,14 +4517,20 @@ class AsyncBrandResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandWebScrapeImagesResponse:
-        """Scrapes all images from the given URL.
-
-        Extracts images from img, svg,
-        picture/source, link, and video elements including inline SVGs, base64 data
-        URIs, and standard URLs.
+        """
+        Extract image assets from a web page, including standard URLs, inline SVGs, data
+        URIs, responsive image sources, metadata, CSS backgrounds, video posters, and
+        embeds. The base request costs 1 credit; enrichment costs 1 credit per returned
+        image.
 
         Args:
-          url: Full URL to scrape images from (must include http:// or https:// protocol)
+          url: Page URL to inspect. Must include http:// or https://.
+
+          enrichment: Optional per-image processing, sent as deep-object query params such as
+              enrichment[resolution]=true.
+
+          max_age_ms: Reuse a cached result this many milliseconds old or newer. Default: 86400000 (1
+              day). Set to 0 to bypass cache. Maximum: 2592000000 (30 days).
 
           extra_headers: Send extra headers
 
@@ -4525,7 +4548,12 @@ class AsyncBrandResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"url": url}, brand_web_scrape_images_params.BrandWebScrapeImagesParams
+                    {
+                        "url": url,
+                        "enrichment": enrichment,
+                        "max_age_ms": max_age_ms,
+                    },
+                    brand_web_scrape_images_params.BrandWebScrapeImagesParams,
                 ),
             ),
             cast_to=BrandWebScrapeImagesResponse,
