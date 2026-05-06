@@ -5,29 +5,53 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["BrandWebScrapeImagesResponse", "Image"]
+__all__ = ["BrandWebScrapeImagesResponse", "Image", "ImageEnrichment"]
+
+
+class ImageEnrichment(BaseModel):
+    """Requested metadata for images that could be processed."""
+
+    height: Optional[int] = None
+    """Image height in pixels, when measured."""
+
+    mimetype: Optional[str] = None
+    """Detected MIME type, when hosted."""
+
+    type: Optional[
+        Literal["photography", "illustration", "logo", "wordmark", "icon", "pattern", "graphic", "other"]
+    ] = None
+    """Visual asset category, when classified."""
+
+    url: Optional[str] = None
+    """Brand.dev CDN URL, when hosted."""
+
+    width: Optional[int] = None
+    """Image width in pixels, when measured."""
 
 
 class Image(BaseModel):
     alt: Optional[str] = None
-    """Alt text of the image, or null if not present"""
+    """Image alt text, or null when unavailable."""
 
     element: Literal["img", "svg", "link", "source", "video", "css", "object", "meta", "background"]
-    """The HTML element the image was found in"""
+    """Where the image was found."""
 
     src: str
-    """The image source - can be a URL, inline HTML (for SVGs), or a base64 data URI"""
+    """Original image value: URL, inline SVG or HTML, or base64 data URI."""
 
     type: Literal["url", "html", "base64"]
-    """The type/format of the src value"""
+    """Format of src."""
+
+    enrichment: Optional[ImageEnrichment] = None
+    """Requested metadata for images that could be processed."""
 
 
 class BrandWebScrapeImagesResponse(BaseModel):
     images: List[Image]
-    """Array of scraped images"""
+    """Images found on the page."""
 
     success: Literal[True]
-    """Indicates success"""
+    """Always true on success."""
 
     url: str
-    """The URL that was scraped"""
+    """Page URL that was scraped."""
