@@ -386,6 +386,14 @@ class BrandRetrieveByNameParams(TypedDict, total=False):
     ]
     """Optional parameter to force the language of the retrieved brand data."""
 
+    max_age_ms: Annotated[int, PropertyInfo(alias="maxAgeMs")]
+    """
+    Maximum age in milliseconds for cached brand data before the API performs a hard
+    refresh. Defaults to 3 months (7776000000 ms). Values below 1 day (86400000 ms)
+    are clamped to 1 day; values above 1 year (31536000000 ms) are clamped to 1
+    year.
+    """
+
     max_speed: Annotated[bool, PropertyInfo(alias="maxSpeed")]
     """Optional parameter to optimize the API call for maximum speed.
 
