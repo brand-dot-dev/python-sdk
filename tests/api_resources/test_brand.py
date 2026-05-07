@@ -687,6 +687,7 @@ class TestBrand:
             include_frames=True,
             max_age_ms=0,
             parse_pdf=True,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -736,6 +737,7 @@ class TestBrand:
                 "resolution": True,
             },
             max_age_ms=0,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -784,6 +786,7 @@ class TestBrand:
             max_age_ms=0,
             parse_pdf=True,
             shorten_base64_images=True,
+            timeout_ms=1000,
             use_main_content_only=True,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
@@ -828,6 +831,7 @@ class TestBrand:
         brand = client.brand.web_scrape_sitemap(
             domain="domain",
             max_links=1,
+            timeout_ms=1000,
             url_regex="^https?://[^/]+/blog/",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
@@ -1517,6 +1521,7 @@ class TestAsyncBrand:
             include_frames=True,
             max_age_ms=0,
             parse_pdf=True,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -1566,6 +1571,7 @@ class TestAsyncBrand:
                 "resolution": True,
             },
             max_age_ms=0,
+            timeout_ms=1000,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -1614,6 +1620,7 @@ class TestAsyncBrand:
             max_age_ms=0,
             parse_pdf=True,
             shorten_base64_images=True,
+            timeout_ms=1000,
             use_main_content_only=True,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
@@ -1658,6 +1665,7 @@ class TestAsyncBrand:
         brand = await async_client.brand.web_scrape_sitemap(
             domain="domain",
             max_links=1,
+            timeout_ms=1000,
             url_regex="^https?://[^/]+/blog/",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])

@@ -19,6 +19,13 @@ class BrandWebScrapeSitemapParams(TypedDict, total=False):
     Defaults to 10,000. Minimum is 1, maximum is 100,000.
     """
 
+    timeout_ms: Annotated[int, PropertyInfo(alias="timeoutMS")]
+    """Optional timeout in milliseconds for the request.
+
+    If the request takes longer than this value, it will be aborted with a 408
+    status code. Maximum allowed value is 300000ms (5 minutes).
+    """
+
     url_regex: Annotated[str, PropertyInfo(alias="urlRegex")]
     """Optional RE2-compatible regex pattern.
 
