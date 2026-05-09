@@ -688,6 +688,7 @@ class TestBrand:
             max_age_ms=0,
             parse_pdf=True,
             timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -738,6 +739,7 @@ class TestBrand:
             },
             max_age_ms=0,
             timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -788,6 +790,7 @@ class TestBrand:
             shorten_base64_images=True,
             timeout_ms=1000,
             use_main_content_only=True,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -1522,6 +1525,7 @@ class TestAsyncBrand:
             max_age_ms=0,
             parse_pdf=True,
             timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -1572,6 +1576,7 @@ class TestAsyncBrand:
             },
             max_age_ms=0,
             timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -1622,6 +1627,7 @@ class TestAsyncBrand:
             shorten_base64_images=True,
             timeout_ms=1000,
             use_main_content_only=True,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 

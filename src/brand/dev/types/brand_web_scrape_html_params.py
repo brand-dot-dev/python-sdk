@@ -36,3 +36,9 @@ class BrandWebScrapeHTMLParams(TypedDict, total=False):
     If the request takes longer than this value, it will be aborted with a 408
     status code. Maximum allowed value is 300000ms (5 minutes).
     """
+
+    wait_for_ms: Annotated[int, PropertyInfo(alias="waitForMs")]
+    """Optional browser wait time in milliseconds after initial page load.
+
+    Min: 0. Max: 30000 (30 seconds).
+    """

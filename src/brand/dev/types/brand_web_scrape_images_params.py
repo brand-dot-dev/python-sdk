@@ -33,6 +33,12 @@ class BrandWebScrapeImagesParams(TypedDict, total=False):
     status code. Maximum allowed value is 300000ms (5 minutes).
     """
 
+    wait_for_ms: Annotated[int, PropertyInfo(alias="waitForMs")]
+    """
+    Optional browser wait time in milliseconds after initial page load before
+    collecting images. Min: 0. Max: 30000 (30 seconds).
+    """
+
 
 class Enrichment(TypedDict, total=False):
     """
