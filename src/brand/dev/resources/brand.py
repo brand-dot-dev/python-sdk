@@ -2183,6 +2183,7 @@ class BrandResource(SyncAPIResource):
         max_age_ms: int | Omit = omit,
         parse_pdf: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
+        wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2210,6 +2211,10 @@ class BrandResource(SyncAPIResource):
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
 
+          wait_for_ms:
+              Optional browser wait time in milliseconds after initial page load. Min: 0. Max:
+              30000 (30 seconds).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2232,6 +2237,7 @@ class BrandResource(SyncAPIResource):
                         "max_age_ms": max_age_ms,
                         "parse_pdf": parse_pdf,
                         "timeout_ms": timeout_ms,
+                        "wait_for_ms": wait_for_ms,
                     },
                     brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
                 ),
@@ -2246,6 +2252,7 @@ class BrandResource(SyncAPIResource):
         enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
         max_age_ms: int | Omit = omit,
         timeout_ms: int | Omit = omit,
+        wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2272,6 +2279,9 @@ class BrandResource(SyncAPIResource):
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
 
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              collecting images. Min: 0. Max: 30000 (30 seconds).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2293,6 +2303,7 @@ class BrandResource(SyncAPIResource):
                         "enrichment": enrichment,
                         "max_age_ms": max_age_ms,
                         "timeout_ms": timeout_ms,
+                        "wait_for_ms": wait_for_ms,
                     },
                     brand_web_scrape_images_params.BrandWebScrapeImagesParams,
                 ),
@@ -2312,6 +2323,7 @@ class BrandResource(SyncAPIResource):
         shorten_base64_images: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
+        wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2349,6 +2361,9 @@ class BrandResource(SyncAPIResource):
           use_main_content_only: Extract only the main content of the page, excluding headers, footers, sidebars,
               and navigation
 
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -2375,6 +2390,7 @@ class BrandResource(SyncAPIResource):
                         "shorten_base64_images": shorten_base64_images,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
+                        "wait_for_ms": wait_for_ms,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),
@@ -4568,6 +4584,7 @@ class AsyncBrandResource(AsyncAPIResource):
         max_age_ms: int | Omit = omit,
         parse_pdf: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
+        wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4595,6 +4612,10 @@ class AsyncBrandResource(AsyncAPIResource):
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
 
+          wait_for_ms:
+              Optional browser wait time in milliseconds after initial page load. Min: 0. Max:
+              30000 (30 seconds).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -4617,6 +4638,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "max_age_ms": max_age_ms,
                         "parse_pdf": parse_pdf,
                         "timeout_ms": timeout_ms,
+                        "wait_for_ms": wait_for_ms,
                     },
                     brand_web_scrape_html_params.BrandWebScrapeHTMLParams,
                 ),
@@ -4631,6 +4653,7 @@ class AsyncBrandResource(AsyncAPIResource):
         enrichment: brand_web_scrape_images_params.Enrichment | Omit = omit,
         max_age_ms: int | Omit = omit,
         timeout_ms: int | Omit = omit,
+        wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4657,6 +4680,9 @@ class AsyncBrandResource(AsyncAPIResource):
               than this value, it will be aborted with a 408 status code. Maximum allowed
               value is 300000ms (5 minutes).
 
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              collecting images. Min: 0. Max: 30000 (30 seconds).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -4678,6 +4704,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "enrichment": enrichment,
                         "max_age_ms": max_age_ms,
                         "timeout_ms": timeout_ms,
+                        "wait_for_ms": wait_for_ms,
                     },
                     brand_web_scrape_images_params.BrandWebScrapeImagesParams,
                 ),
@@ -4697,6 +4724,7 @@ class AsyncBrandResource(AsyncAPIResource):
         shorten_base64_images: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
+        wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4734,6 +4762,9 @@ class AsyncBrandResource(AsyncAPIResource):
           use_main_content_only: Extract only the main content of the page, excluding headers, footers, sidebars,
               and navigation
 
+          wait_for_ms: Optional browser wait time in milliseconds after initial page load before
+              converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -4760,6 +4791,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "shorten_base64_images": shorten_base64_images,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
+                        "wait_for_ms": wait_for_ms,
                     },
                     brand_web_scrape_md_params.BrandWebScrapeMdParams,
                 ),

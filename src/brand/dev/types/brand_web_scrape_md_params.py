@@ -54,3 +54,9 @@ class BrandWebScrapeMdParams(TypedDict, total=False):
     Extract only the main content of the page, excluding headers, footers, sidebars,
     and navigation
     """
+
+    wait_for_ms: Annotated[int, PropertyInfo(alias="waitForMs")]
+    """
+    Optional browser wait time in milliseconds after initial page load before
+    converting the page to Markdown. Min: 0. Max: 30000 (30 seconds).
+    """
