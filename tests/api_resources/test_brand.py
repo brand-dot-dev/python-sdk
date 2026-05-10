@@ -686,7 +686,11 @@ class TestBrand:
             url="https://example.com",
             include_frames=True,
             max_age_ms=0,
-            parse_pdf=True,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
             timeout_ms=1000,
             wait_for_ms=0,
         )
@@ -786,7 +790,11 @@ class TestBrand:
             include_images=True,
             include_links=True,
             max_age_ms=0,
-            parse_pdf=True,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
             shorten_base64_images=True,
             timeout_ms=1000,
             use_main_content_only=True,
@@ -1523,7 +1531,11 @@ class TestAsyncBrand:
             url="https://example.com",
             include_frames=True,
             max_age_ms=0,
-            parse_pdf=True,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
             timeout_ms=1000,
             wait_for_ms=0,
         )
@@ -1623,7 +1635,11 @@ class TestAsyncBrand:
             include_images=True,
             include_links=True,
             max_age_ms=0,
-            parse_pdf=True,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
             shorten_base64_images=True,
             timeout_ms=1000,
             use_main_content_only=True,

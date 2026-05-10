@@ -2181,7 +2181,7 @@ class BrandResource(SyncAPIResource):
         url: str,
         include_frames: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
-        parse_pdf: bool | Omit = omit,
+        pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
         timeout_ms: int | Omit = omit,
         wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2203,9 +2203,8 @@ class BrandResource(SyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
-              returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
-              and a 400 WEBSITE_ACCESS_ERROR is returned.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
+              inclusive 1-based page range.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -2235,7 +2234,7 @@ class BrandResource(SyncAPIResource):
                         "url": url,
                         "include_frames": include_frames,
                         "max_age_ms": max_age_ms,
-                        "parse_pdf": parse_pdf,
+                        "pdf": pdf,
                         "timeout_ms": timeout_ms,
                         "wait_for_ms": wait_for_ms,
                     },
@@ -2319,7 +2318,7 @@ class BrandResource(SyncAPIResource):
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
-        parse_pdf: bool | Omit = omit,
+        pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
@@ -2348,9 +2347,8 @@ class BrandResource(SyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
-              converted to Markdown. When false, PDF URLs are skipped and a 400
-              WEBSITE_ACCESS_ERROR is returned.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
+              inclusive 1-based page range.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -2386,7 +2384,7 @@ class BrandResource(SyncAPIResource):
                         "include_images": include_images,
                         "include_links": include_links,
                         "max_age_ms": max_age_ms,
-                        "parse_pdf": parse_pdf,
+                        "pdf": pdf,
                         "shorten_base64_images": shorten_base64_images,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
@@ -4582,7 +4580,7 @@ class AsyncBrandResource(AsyncAPIResource):
         url: str,
         include_frames: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
-        parse_pdf: bool | Omit = omit,
+        pdf: brand_web_scrape_html_params.Pdf | Omit = omit,
         timeout_ms: int | Omit = omit,
         wait_for_ms: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -4604,9 +4602,8 @@ class AsyncBrandResource(AsyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
-              returned wrapped in <html><pdf>…</pdf></html>. When false, PDF URLs are skipped
-              and a 400 WEBSITE_ACCESS_ERROR is returned.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
+              inclusive 1-based page range.
 
           timeout_ms: Optional timeout in milliseconds for the request. If the request takes longer
               than this value, it will be aborted with a 408 status code. Maximum allowed
@@ -4636,7 +4633,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "url": url,
                         "include_frames": include_frames,
                         "max_age_ms": max_age_ms,
-                        "parse_pdf": parse_pdf,
+                        "pdf": pdf,
                         "timeout_ms": timeout_ms,
                         "wait_for_ms": wait_for_ms,
                     },
@@ -4720,7 +4717,7 @@ class AsyncBrandResource(AsyncAPIResource):
         include_images: bool | Omit = omit,
         include_links: bool | Omit = omit,
         max_age_ms: int | Omit = omit,
-        parse_pdf: bool | Omit = omit,
+        pdf: brand_web_scrape_md_params.Pdf | Omit = omit,
         shorten_base64_images: bool | Omit = omit,
         timeout_ms: int | Omit = omit,
         use_main_content_only: bool | Omit = omit,
@@ -4749,9 +4746,8 @@ class AsyncBrandResource(AsyncAPIResource):
               younger than this many milliseconds. Defaults to 1 day (86400000 ms) when
               omitted. Max is 30 days (2592000000 ms). Set to 0 to always scrape fresh.
 
-          parse_pdf: When true (default), PDF URLs are fetched and their text layer is extracted and
-              converted to Markdown. When false, PDF URLs are skipped and a 400
-              WEBSITE_ACCESS_ERROR is returned.
+          pdf: PDF parsing controls. Use start/end to limit text extraction and OCR to an
+              inclusive 1-based page range.
 
           shorten_base64_images: Shorten base64-encoded image data in the Markdown output
 
@@ -4787,7 +4783,7 @@ class AsyncBrandResource(AsyncAPIResource):
                         "include_images": include_images,
                         "include_links": include_links,
                         "max_age_ms": max_age_ms,
-                        "parse_pdf": parse_pdf,
+                        "pdf": pdf,
                         "shorten_base64_images": shorten_base64_images,
                         "timeout_ms": timeout_ms,
                         "use_main_content_only": use_main_content_only,
