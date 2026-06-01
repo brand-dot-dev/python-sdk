@@ -10,16 +10,12 @@ import pytest
 from brand.dev import BrandDev, AsyncBrandDev
 from tests.utils import assert_matches_type
 from brand.dev.types import (
-    BrandFontsResponse,
     BrandAIQueryResponse,
     BrandPrefetchResponse,
     BrandRetrieveResponse,
     BrandAIProductResponse,
     BrandAIProductsResponse,
-    BrandScreenshotResponse,
-    BrandStyleguideResponse,
     BrandWebScrapeMdResponse,
-    BrandRetrieveNaicsResponse,
     BrandWebScrapeHTMLResponse,
     BrandRetrieveByIsinResponse,
     BrandRetrieveByNameResponse,
@@ -51,7 +47,8 @@ class TestBrand:
     def test_method_retrieve_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve(
             domain="domain",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -96,6 +93,7 @@ class TestBrand:
     def test_method_ai_product_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.ai_product(
             url="https://example.com",
+            max_age_ms=0,
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -139,6 +137,7 @@ class TestBrand:
     def test_method_ai_products_with_all_params_overload_1(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
             domain="domain",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -183,6 +182,7 @@ class TestBrand:
     def test_method_ai_products_with_all_params_overload_2(self, client: BrandDev) -> None:
         brand = client.brand.ai_products(
             direct_url="https://example.com",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -307,49 +307,6 @@ class TestBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_fonts(self, client: BrandDev) -> None:
-        brand = client.brand.fonts(
-            domain="domain",
-        )
-        assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_fonts_with_all_params(self, client: BrandDev) -> None:
-        brand = client.brand.fonts(
-            domain="domain",
-            timeout_ms=1000,
-        )
-        assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_fonts(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.fonts(
-            domain="domain",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = response.parse()
-        assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_fonts(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.fonts(
-            domain="domain",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = response.parse()
-            assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_method_identify_from_transaction(self, client: BrandDev) -> None:
         brand = client.brand.identify_from_transaction(
             transaction_info="transaction_info",
@@ -363,7 +320,7 @@ class TestBrand:
             transaction_info="transaction_info",
             city="city",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
             high_confidence_only=True,
             max_speed=True,
             mcc="mcc",
@@ -497,7 +454,8 @@ class TestBrand:
     def test_method_retrieve_by_email_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_email(
             email="dev@stainless.com",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -542,7 +500,8 @@ class TestBrand:
     def test_method_retrieve_by_isin_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_isin(
             isin="SE60513A9993",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -588,7 +547,8 @@ class TestBrand:
         brand = client.brand.retrieve_by_name(
             name="xxx",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -633,7 +593,8 @@ class TestBrand:
     def test_method_retrieve_by_ticker_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_by_ticker(
             ticker="ticker",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             ticker_exchange="AMEX",
             timeout_ms=1000,
@@ -668,51 +629,6 @@ class TestBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_retrieve_naics(self, client: BrandDev) -> None:
-        brand = client.brand.retrieve_naics(
-            input="input",
-        )
-        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_retrieve_naics_with_all_params(self, client: BrandDev) -> None:
-        brand = client.brand.retrieve_naics(
-            input="input",
-            max_results=1,
-            min_results=1,
-            timeout_ms=1000,
-        )
-        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_retrieve_naics(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.retrieve_naics(
-            input="input",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = response.parse()
-        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_retrieve_naics(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.retrieve_naics(
-            input="input",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = response.parse()
-            assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_method_retrieve_simplified(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
             domain="domain",
@@ -724,6 +640,7 @@ class TestBrand:
     def test_method_retrieve_simplified_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.retrieve_simplified(
             domain="domain",
+            max_age_ms=86400000,
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -756,92 +673,26 @@ class TestBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_screenshot(self, client: BrandDev) -> None:
-        brand = client.brand.screenshot(
-            domain="domain",
-        )
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_screenshot_with_all_params(self, client: BrandDev) -> None:
-        brand = client.brand.screenshot(
-            domain="domain",
-            full_screenshot="true",
-            page="login",
-            prioritize="speed",
-        )
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_screenshot(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.screenshot(
-            domain="domain",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = response.parse()
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_screenshot(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.screenshot(
-            domain="domain",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = response.parse()
-            assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_styleguide(self, client: BrandDev) -> None:
-        brand = client.brand.styleguide()
-        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_styleguide_with_all_params(self, client: BrandDev) -> None:
-        brand = client.brand.styleguide(
-            direct_url="https://example.com",
-            domain="domain",
-            timeout_ms=1000,
-        )
-        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_styleguide(self, client: BrandDev) -> None:
-        response = client.brand.with_raw_response.styleguide()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = response.parse()
-        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_styleguide(self, client: BrandDev) -> None:
-        with client.brand.with_streaming_response.styleguide() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = response.parse()
-            assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_method_web_scrape_html(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_html(
             url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_html_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_html(
+            url="https://example.com",
+            include_frames=True,
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
+            timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -876,6 +727,23 @@ class TestBrand:
     def test_method_web_scrape_images(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_images(
             url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_web_scrape_images_with_all_params(self, client: BrandDev) -> None:
+        brand = client.brand.web_scrape_images(
+            url="https://example.com",
+            enrichment={
+                "classification": True,
+                "hosted_url": True,
+                "max_time_per_ms": 1,
+                "resolution": True,
+            },
+            max_age_ms=0,
+            timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -918,10 +786,19 @@ class TestBrand:
     def test_method_web_scrape_md_with_all_params(self, client: BrandDev) -> None:
         brand = client.brand.web_scrape_md(
             url="https://example.com",
+            include_frames=True,
             include_images=True,
             include_links=True,
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
             shorten_base64_images=True,
+            timeout_ms=1000,
             use_main_content_only=True,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -965,6 +842,8 @@ class TestBrand:
         brand = client.brand.web_scrape_sitemap(
             domain="domain",
             max_links=1,
+            timeout_ms=1000,
+            url_regex="^https?://[^/]+/blog/",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
@@ -1013,7 +892,8 @@ class TestAsyncBrand:
     async def test_method_retrieve_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve(
             domain="domain",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1058,6 +938,7 @@ class TestAsyncBrand:
     async def test_method_ai_product_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_product(
             url="https://example.com",
+            max_age_ms=0,
             timeout_ms=1000,
         )
         assert_matches_type(BrandAIProductResponse, brand, path=["response"])
@@ -1101,6 +982,7 @@ class TestAsyncBrand:
     async def test_method_ai_products_with_all_params_overload_1(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
             domain="domain",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -1145,6 +1027,7 @@ class TestAsyncBrand:
     async def test_method_ai_products_with_all_params_overload_2(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.ai_products(
             direct_url="https://example.com",
+            max_age_ms=0,
             max_products=1,
             timeout_ms=1000,
         )
@@ -1269,49 +1152,6 @@ class TestAsyncBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_fonts(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.fonts(
-            domain="domain",
-        )
-        assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_fonts_with_all_params(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.fonts(
-            domain="domain",
-            timeout_ms=1000,
-        )
-        assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_fonts(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.fonts(
-            domain="domain",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = await response.parse()
-        assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_fonts(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.fonts(
-            domain="domain",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = await response.parse()
-            assert_matches_type(BrandFontsResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     async def test_method_identify_from_transaction(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.identify_from_transaction(
             transaction_info="transaction_info",
@@ -1325,7 +1165,7 @@ class TestAsyncBrand:
             transaction_info="transaction_info",
             city="city",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
             high_confidence_only=True,
             max_speed=True,
             mcc="mcc",
@@ -1459,7 +1299,8 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_email_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_email(
             email="dev@stainless.com",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1504,7 +1345,8 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_isin_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_isin(
             isin="SE60513A9993",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1550,7 +1392,8 @@ class TestAsyncBrand:
         brand = await async_client.brand.retrieve_by_name(
             name="xxx",
             country_gl="ad",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             timeout_ms=1000,
         )
@@ -1595,7 +1438,8 @@ class TestAsyncBrand:
     async def test_method_retrieve_by_ticker_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_by_ticker(
             ticker="ticker",
-            force_language="albanian",
+            force_language="afrikaans",
+            max_age_ms=86400000,
             max_speed=True,
             ticker_exchange="AMEX",
             timeout_ms=1000,
@@ -1630,51 +1474,6 @@ class TestAsyncBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.retrieve_naics(
-            input="input",
-        )
-        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_retrieve_naics_with_all_params(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.retrieve_naics(
-            input="input",
-            max_results=1,
-            min_results=1,
-            timeout_ms=1000,
-        )
-        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.retrieve_naics(
-            input="input",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = await response.parse()
-        assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_retrieve_naics(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.retrieve_naics(
-            input="input",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = await response.parse()
-            assert_matches_type(BrandRetrieveNaicsResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     async def test_method_retrieve_simplified(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
             domain="domain",
@@ -1686,6 +1485,7 @@ class TestAsyncBrand:
     async def test_method_retrieve_simplified_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.retrieve_simplified(
             domain="domain",
+            max_age_ms=86400000,
             timeout_ms=1000,
         )
         assert_matches_type(BrandRetrieveSimplifiedResponse, brand, path=["response"])
@@ -1718,92 +1518,26 @@ class TestAsyncBrand:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_screenshot(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.screenshot(
-            domain="domain",
-        )
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_screenshot_with_all_params(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.screenshot(
-            domain="domain",
-            full_screenshot="true",
-            page="login",
-            prioritize="speed",
-        )
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_screenshot(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.screenshot(
-            domain="domain",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = await response.parse()
-        assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_screenshot(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.screenshot(
-            domain="domain",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = await response.parse()
-            assert_matches_type(BrandScreenshotResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_styleguide(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.styleguide()
-        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_styleguide_with_all_params(self, async_client: AsyncBrandDev) -> None:
-        brand = await async_client.brand.styleguide(
-            direct_url="https://example.com",
-            domain="domain",
-            timeout_ms=1000,
-        )
-        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_styleguide(self, async_client: AsyncBrandDev) -> None:
-        response = await async_client.brand.with_raw_response.styleguide()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        brand = await response.parse()
-        assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_styleguide(self, async_client: AsyncBrandDev) -> None:
-        async with async_client.brand.with_streaming_response.styleguide() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            brand = await response.parse()
-            assert_matches_type(BrandStyleguideResponse, brand, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     async def test_method_web_scrape_html(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_html(
             url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_html_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_html(
+            url="https://example.com",
+            include_frames=True,
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
+            timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeHTMLResponse, brand, path=["response"])
 
@@ -1838,6 +1572,23 @@ class TestAsyncBrand:
     async def test_method_web_scrape_images(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_images(
             url="https://example.com",
+        )
+        assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_web_scrape_images_with_all_params(self, async_client: AsyncBrandDev) -> None:
+        brand = await async_client.brand.web_scrape_images(
+            url="https://example.com",
+            enrichment={
+                "classification": True,
+                "hosted_url": True,
+                "max_time_per_ms": 1,
+                "resolution": True,
+            },
+            max_age_ms=0,
+            timeout_ms=1000,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeImagesResponse, brand, path=["response"])
 
@@ -1880,10 +1631,19 @@ class TestAsyncBrand:
     async def test_method_web_scrape_md_with_all_params(self, async_client: AsyncBrandDev) -> None:
         brand = await async_client.brand.web_scrape_md(
             url="https://example.com",
+            include_frames=True,
             include_images=True,
             include_links=True,
+            max_age_ms=0,
+            pdf={
+                "end": 1,
+                "should_parse": True,
+                "start": 1,
+            },
             shorten_base64_images=True,
+            timeout_ms=1000,
             use_main_content_only=True,
+            wait_for_ms=0,
         )
         assert_matches_type(BrandWebScrapeMdResponse, brand, path=["response"])
 
@@ -1927,6 +1687,8 @@ class TestAsyncBrand:
         brand = await async_client.brand.web_scrape_sitemap(
             domain="domain",
             max_links=1,
+            timeout_ms=1000,
+            url_regex="^https?://[^/]+/blog/",
         )
         assert_matches_type(BrandWebScrapeSitemapResponse, brand, path=["response"])
 
